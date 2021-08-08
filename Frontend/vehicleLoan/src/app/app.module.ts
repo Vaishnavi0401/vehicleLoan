@@ -8,13 +8,49 @@ import { LoanOfferComponent } from './loan-offer/loan-offer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoanDetailsComponent } from './loan-details/loan-details.component';
 
+import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { IdentityDetailsComponent } from './identity-details/identity-details.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+
+import { GetEligibilityComponent } from './get-eligibility/get-eligibility.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EmploymentDetailsComponent } from './employment-details/employment-details.component';
+import { HomeComponent } from './home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { LoginComponent } from './login/login.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
+
     PersonalDetailsComponent,
     LoanOfferComponent,
     DashboardComponent,
-    LoanDetailsComponent
+    LoanDetailsComponent,
+
+
+    EmiCalculatorComponent,
+    VehicleDetailsComponent,
+    IdentityDetailsComponent,
+    AdminDashboardComponent,
+
+
+    GetEligibilityComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    EmploymentDetailsComponent
+    HomeComponent,
+    PageNotFoundComponent,
+    AboutUsComponent,
+    LoginComponent
+
+
   ],
   imports: [
     BrowserModule,
