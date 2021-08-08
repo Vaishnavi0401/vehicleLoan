@@ -32,25 +32,19 @@ import { LoginComponent } from './login/login.component';
     LoanOfferComponent,
     DashboardComponent,
     LoanDetailsComponent,
-
-
     EmiCalculatorComponent,
     VehicleDetailsComponent,
     IdentityDetailsComponent,
     AdminDashboardComponent,
-
-
     GetEligibilityComponent,
     RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    EmploymentDetailsComponent
+    EmploymentDetailsComponent,
     HomeComponent,
     PageNotFoundComponent,
     AboutUsComponent,
     LoginComponent
-
-
   ],
   imports: [
     BrowserModule,
