@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PersonalDetailsComponent } from './personal-details/personal-details.component';
+import { LoanOfferComponent } from './loan-offer/loan-offer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoanDetailsComponent } from './loan-details/loan-details.component';
 
 import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
@@ -24,6 +28,12 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
 
+    PersonalDetailsComponent,
+    LoanOfferComponent,
+    DashboardComponent,
+    LoanDetailsComponent,
+
+
     EmiCalculatorComponent,
     VehicleDetailsComponent,
     IdentityDetailsComponent,
@@ -39,6 +49,7 @@ import { LoginComponent } from './login/login.component';
     PageNotFoundComponent,
     AboutUsComponent,
     LoginComponent
+
 
   ],
   imports: [
