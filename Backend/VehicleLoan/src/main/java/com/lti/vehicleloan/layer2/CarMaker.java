@@ -30,9 +30,9 @@ public class CarMaker implements Serializable {
 	public CarMaker() {
 	}
 
-	public Integer getCarMakerId() {
-		return this.carMakerId;
-	}
+//	public Integer getCarMakerId() {
+//		return this.carMakerId;
+//	}
 
 	public void setCarMakerId(Integer carMakerId) {
 		this.carMakerId = carMakerId;

@@ -34,15 +34,15 @@ public class UserDetail implements Serializable {
 
 	private String password;
 
-	@Column(name="\"ROLE\"")
+	@Column(name="ROLE")
 	private Integer role;
 
 	//bi-directional many-to-one association to EmploymentDetail
-	@OneToMany(mappedBy="userDetail", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="userDetail")
 	private List<EmploymentDetail> employmentDetails;
 
 	//bi-directional many-to-one association to LoanDetail
-	@OneToMany(mappedBy="userDetail", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="userDetail")
 	private List<LoanDetail> loanDetails;
 
 	//bi-directional one-to-one association to AdvancedUserDetail
@@ -142,9 +142,9 @@ public class UserDetail implements Serializable {
 		return employmentDetail;
 	}
 
-	public List<LoanDetail> getLoanDetails() {
-		return this.loanDetails;
-	}
+//	public List<LoanDetail> getLoanDetails() {
+//		return this.loanDetails;
+//	}
 
 	public void setLoanDetails(List<LoanDetail> loanDetails) {
 		this.loanDetails = loanDetails;

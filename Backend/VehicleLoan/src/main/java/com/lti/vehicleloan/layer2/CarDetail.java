@@ -100,25 +100,25 @@ public class CarDetail implements Serializable {
 		this.vehicleDomain = vehicleDomain;
 	}
 
-	public CarMaker getCarMaker() {
-		return this.carMaker;
-	}
+//	public CarMaker getCarMaker() {
+//		return this.carMaker;
+//	}
 
 	public void setCarMaker(CarMaker carMaker) {
 		this.carMaker = carMaker;
 	}
 
-	public CarType getCarType() {
-		return this.carType;
-	}
+//	public CarType getCarType() {
+//		return this.carType;
+//	}
 
 	public void setCarType(CarType carType) {
 		this.carType = carType;
 	}
 
-	public List<LoanDetail> getLoanDetails() {
-		return this.loanDetails;
-	}
+//	public List<LoanDetail> getLoanDetails() {
+//		return this.loanDetails;
+//	}
 
 	public void setLoanDetails(List<LoanDetail> loanDetails) {
 		this.loanDetails = loanDetails;
