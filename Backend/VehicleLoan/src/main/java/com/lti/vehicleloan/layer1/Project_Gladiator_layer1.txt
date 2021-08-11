@@ -1,0 +1,1150 @@
+﻿
+
+
+
+drop table offer_table cascade constraints;
+drop table type_of_employment_details cascade constraints;
+drop table account_type_details cascade constraints;
+drop table city cascade constraints;
+drop table state cascade constraints;
+drop table user_details cascade constraints;
+drop table address_details cascade constraints;
+drop table advanced_user_details cascade constraints;
+drop table employment_details cascade constraints;
+drop table car_maker cascade constraints;
+drop table car_type cascade constraints;
+drop table car_details cascade constraints;
+drop table loan_details cascade constraints;
+
+create table offer_table(
+offer_id number(8) primary key,
+offer_amount number(20),
+offer_rate float(10),
+offer_tenure number(8)
+);
+
+
+insert into offer_table values (401, 100000, 4, 10); 
+insert into offer_table values (402, 200000, 5, 13); 
+insert into offer_table values (403, 500000, 4, 8); 
+insert into offer_table values (404, 600000, 6, 22); 
+insert into offer_table values (405, 1000000, 6, 21); 
+insert into offer_table values (406, 1500000, 6.5, 24); 
+insert into offer_table values (407, 860000, 9.5, 43);
+insert into offer_table values (408, 620000, 7.5, 37);
+insert into offer_table values (409, 920000, 10, 46);
+insert into offer_table values (410, 800000, 9, 40);
+
+
+
+create table type_of_employment_details(
+type_of_emp_id number primary key,
+type_of_employment varchar2(20)
+);
+
+
+Insert into type_of_employment_details values(1300,'Self Employed');
+Insert into type_of_employment_details values(1301,'Salaried');
+
+
+
+create table account_type_details(
+account_type_id number primary key,
+account_type varchar2(20)
+);
+
+
+insert into account_type_details values (1400,'Current');
+insert into account_type_details values (1401,'Savings');
+insert into account_type_details values (1402,'NA');
+
+
+create table state(
+state_id varchar2(5) primary key,
+state_name varchar2(35) 
+);
+ 
+Insert into state VALUES('1', 'Andaman and Nicobar [AN]');
+Insert into state VALUES('2', 'Andhra Pradesh [AP]');
+Insert into state VALUES('3', 'Arunachal Pradesh [AR]');
+Insert into state VALUES('4', 'Assam [AS]');
+Insert into state VALUES('5', 'Bihar [BH]');
+Insert into state VALUES('6', 'Chandigarh [CH]');
+Insert into state VALUES('7', 'Chhattisgarh [CG]');
+Insert into state VALUES('8', 'Dadra and Nagar Haveli [DN]');
+Insert into state VALUES('9', 'Daman and Diu [DD]');
+Insert into state VALUES('10', 'Delhi [DL]');
+Insert into state VALUES('11', 'Goa [GO]');
+Insert into state VALUES('12', 'Gujarat [GU]');
+Insert into state VALUES('13', 'Haryana [HR]');
+Insert into state VALUES('14', 'Himachal Pradesh [HP]');
+Insert into state VALUES('15', 'Jammu and Kashmir [JK]');
+Insert into state VALUES('16', 'Jharkhand [JH]');
+Insert into state VALUES('17', 'Karnataka [KR]');
+Insert into state VALUES('18', 'Kerala [KL]');
+Insert into state VALUES('19', 'Lakshadweep [LD]');
+Insert into state VALUES('20', 'Madhya Pradesh [MP]');
+Insert into state VALUES('21', 'Maharashtra [MH]');
+Insert into state VALUES('22', 'Manipur [MN]');
+Insert into state VALUES('23', 'Meghalaya [ML]');
+Insert into state VALUES('24', 'Mizoram [MM]');
+Insert into state VALUES('25', 'Nagaland [NL]');
+Insert into state VALUES('26', 'Orissa [OR]');
+Insert into state VALUES('27', 'Pondicherry [PC]');
+Insert into state VALUES('28', 'Punjab [PJ]');
+Insert into state VALUES('29', 'Rajasthan [RJ]');
+Insert into state VALUES('30', 'Sikkim [SK]');
+Insert into state VALUES('31', 'Tamil Nadu [TN]');
+Insert into state VALUES('32', 'Tripura [TR]');
+Insert into state VALUES('33', 'Uttar Pradesh [UP]');
+Insert into state VALUES('34', 'Uttaranchal [UT]');
+Insert into state VALUES('35', 'West Bengal [WB]');
+
+
+
+
+create table city(
+city_name varchar2(35),
+city_id varchar2(5) primary key,
+state_id varchar2(5) references state(state_id)
+);
+
+
+
+
+
+
+
+INSERT INTO city VALUES('Alipur', '101','1');
+INSERT INTO city VALUES('Andaman Island', '102','1');
+INSERT INTO city VALUES('Anderson Island', '103','1');
+INSERT INTO city VALUES('Arainj-Laka-Punga', '104','1');
+INSERT INTO city VALUES('Austinabad', '105','1');
+INSERT INTO city VALUES('Bamboo Flat', '106','1');
+INSERT INTO city VALUES('Barren Island', '107','1');
+INSERT INTO city VALUES('Beadonabad', '108','1');
+INSERT INTO city VALUES('Betapur', '109','1');
+INSERT INTO city VALUES('Bindraban', '110','1');
+INSERT INTO city VALUES('Bonington', '111','1');
+INSERT INTO city VALUES('Brookesabad', '112','1');
+INSERT INTO city VALUES('Cadell Point', '113','1');
+INSERT INTO city VALUES('Calicut', '114','1');
+INSERT INTO city VALUES('Chetamale', '115','1');
+INSERT INTO city VALUES('Cinque Islands', '116','1');
+INSERT INTO city VALUES('Defence Island', '117','1');
+INSERT INTO city VALUES('Digilpur', '118','1');
+INSERT INTO city VALUES('Dolyganj', '119','1');
+INSERT INTO city VALUES('Flat Island', '120','1');
+INSERT INTO city VALUES('Geinyale', '121','1');
+INSERT INTO city VALUES('Great Coco Island', '122','1');
+INSERT INTO city VALUES('Haddo', '123','1');
+INSERT INTO city VALUES('Havelock Island', '124','1');
+INSERT INTO city VALUES('Henry Lawrence Island', '125','1');
+INSERT INTO city VALUES('Herbertabad', '126','1');
+INSERT INTO city VALUES('Hobdaypur', '127','1');
+INSERT INTO city VALUES('Ilichar', '128','1');
+INSERT INTO city VALUES('Ingoie', '129','1');
+INSERT INTO city VALUES('Inteview Island', '130','1');
+INSERT INTO city VALUES('Jangli Ghat', '131','1');
+INSERT INTO city VALUES('Jhon Lawrence Island', '132','1');
+INSERT INTO city VALUES('Karen', '133','1');
+INSERT INTO city VALUES('Kartara', '134','1');
+INSERT INTO city VALUES('KYD Islannd', '135','1');
+INSERT INTO city VALUES('Landfall Island', '136','1');
+INSERT INTO city VALUES('Little Andmand', '137','1');
+INSERT INTO city VALUES('Little Coco Island', '138','1');
+INSERT INTO city VALUES('Long Island', '139','1');
+INSERT INTO city VALUES('Maimyo', '140','1');
+INSERT INTO city VALUES('Malappuram', '141','1');
+INSERT INTO city VALUES('Manglutan', '142','1');
+INSERT INTO city VALUES('Manpur', '143','1');
+INSERT INTO city VALUES('Mitha Khari', '144','1');
+INSERT INTO city VALUES('Neill Island', '145','1');
+INSERT INTO city VALUES('Nicobar Island', '146','1');
+INSERT INTO city VALUES('North Brother Island', '147','1');
+INSERT INTO city VALUES('North Passage Island', '148','1');
+INSERT INTO city VALUES('North Sentinel Island', '149','1');
+INSERT INTO city VALUES('Nothen Reef Island', '150','1');
+INSERT INTO city VALUES('Outram Island', '151','1');
+INSERT INTO city VALUES('Pahlagaon', '152','1');
+INSERT INTO city VALUES('Palalankwe', '153','1');
+INSERT INTO city VALUES('Passage Island', '154','1');
+INSERT INTO city VALUES('Phaiapong', '155','1');
+INSERT INTO city VALUES('Phoenix Island', '156','1');
+INSERT INTO city VALUES('Port Blair', '157','1');
+INSERT INTO city VALUES('Preparis Island', '158','1');
+INSERT INTO city VALUES('Protheroepur', '159','1');
+INSERT INTO city VALUES('Rangachang', '160','1');
+INSERT INTO city VALUES('Rongat', '161','1');
+INSERT INTO city VALUES('Rutland Island', '162','1');
+INSERT INTO city VALUES('Sabari', '163','1');
+INSERT INTO city VALUES('Saddle Peak', '164','1');
+INSERT INTO city VALUES('Shadipur', '165','1');
+INSERT INTO city VALUES('Smith Island', '166','1');
+INSERT INTO city VALUES('Sound Island', '167','1');
+INSERT INTO city VALUES('South Sentinel Island', '168','1');
+INSERT INTO city VALUES('Spike Island', '169','1');
+INSERT INTO city VALUES('Tarmugli Island', '170','1');
+INSERT INTO city VALUES('Taylerabad', '171','1');
+INSERT INTO city VALUES('Titaije', '172','1');
+INSERT INTO city VALUES('Toibalawe', '173','1');
+INSERT INTO city VALUES('Tusonabad', '174','1');
+INSERT INTO city VALUES('West Island', '175','1');
+INSERT INTO city VALUES('Wimberleyganj', '176','1');
+INSERT INTO city VALUES('Yadita', '177','1');
+
+
+
+
+INSERT INTO city VALUES('Adilabad', '200','2');
+INSERT INTO city VALUES('Anantapur', '201','2');
+INSERT INTO city VALUES('Chittoor', '203','2');
+INSERT INTO city VALUES('Cuddapah', '204','2');
+INSERT INTO city VALUES('East Godavari', '205','2');
+INSERT INTO city VALUES('Guntur', '206','2');
+INSERT INTO city VALUES('Hyderabad', '207','2');
+INSERT INTO city VALUES('Karimnagar', '208','2');
+INSERT INTO city VALUES('Khammam', '209','2');
+INSERT INTO city VALUES('Krishna', '210','2');
+INSERT INTO city VALUES('Kurnool', '211','2');
+INSERT INTO city VALUES('Mahabubnagar', '212','2');
+INSERT INTO city VALUES('Medak', '213','2');
+INSERT INTO city VALUES('Nalgonda', '214','2');
+INSERT INTO city VALUES('Nellore', '215','2');
+INSERT INTO city VALUES('Nizamabad', '216','2');
+INSERT INTO city VALUES('Prakasam', '217','2');
+INSERT INTO city VALUES('Rangareddy', '218','2');
+INSERT INTO city VALUES('Srikakulam', '219','2');
+INSERT INTO city VALUES('Visakhapatnam', '220','2');
+INSERT INTO city VALUES('Vizianagaram', '221','2');
+INSERT INTO city VALUES('Warangal', '222','2');
+INSERT INTO city VALUES('West Godavari', '223','2');
+
+
+
+
+INSERT INTO city VALUES('Anjaw', '301','3');
+INSERT INTO city VALUES('Changlang', '302','3');
+INSERT INTO city VALUES('Dibang Valley', '303','3');
+INSERT INTO city VALUES('East Kameng', '304','3');
+INSERT INTO city VALUES('East Siang', '305','3');
+INSERT INTO city VALUES('Itanagar', '306','3');
+INSERT INTO city VALUES('Kurung Kumey', '307','3');
+INSERT INTO city VALUES('Lohit', '308','3');
+INSERT INTO city VALUES('Lower Dibang Valley', '309','3');
+INSERT INTO city VALUES('Lower Subansiri', '310','3');
+INSERT INTO city VALUES('Papum Pare', '311','3');
+INSERT INTO city VALUES('Tawang', '312','3');
+INSERT INTO city VALUES('Tirap', '313','3');
+INSERT INTO city VALUES('Upper Siang', '314','3');
+INSERT INTO city VALUES('Upper Subansiri', '315','3');
+INSERT INTO city VALUES('West Kameng', '316','3');
+INSERT INTO city VALUES('West Siang', '317','3');
+
+
+
+
+INSERT INTO city VALUES('Barpeta', '401','4');
+INSERT INTO city VALUES('Bongaigaon', '402','4');
+INSERT INTO city VALUES('Cachar', '403','4');
+INSERT INTO city VALUES('Darrang', '404','4');
+INSERT INTO city VALUES('Dhemaji', '405','4');
+INSERT INTO city VALUES('Dhubri', '406','4');
+INSERT INTO city VALUES('Dibrugarh', '407','4');
+INSERT INTO city VALUES('Goalpara', '408','4');
+INSERT INTO city VALUES('Golaghat', '409','4');
+INSERT INTO city VALUES('Guwahati', '410','4');
+INSERT INTO city VALUES('Hailakandi', '411','4');
+INSERT INTO city VALUES('Jorhat', '412','4');
+INSERT INTO city VALUES('Kamrup', '413','4');
+INSERT INTO city VALUES('Karbi Anglong', '414','4');
+INSERT INTO city VALUES('Karimganj', '415','4');
+INSERT INTO city VALUES('Kokrajhar', '416','4');
+INSERT INTO city VALUES('Lakhimpur', '417','4');
+INSERT INTO city VALUES('Marigaon', '418','4');
+INSERT INTO city VALUES('Nagaon', '419','4');
+INSERT INTO city VALUES('Nalbari', '420','4');
+INSERT INTO city VALUES('North Cachar Hills', '421','4');
+INSERT INTO city VALUES('Silchar', '422','4');
+INSERT INTO city VALUES('Sivasagar', '423','4');
+INSERT INTO city VALUES('Sonitpur', '424','4');
+INSERT INTO city VALUES('Tinsukia', '425','4');
+INSERT INTO city VALUES('Udalguri', '426','4');
+
+
+
+
+INSERT INTO city VALUES('Araria', '501','5');
+INSERT INTO city VALUES('Aurangabad', '502','5');
+INSERT INTO city VALUES('Banka', '503','5');
+INSERT INTO city VALUES('Begusarai', '504','5');
+INSERT INTO city VALUES('Bhagalpur', '505','5');
+INSERT INTO city VALUES('Bhojpur', '506','5');
+INSERT INTO city VALUES('Buxar', '507','5');
+INSERT INTO city VALUES('Darbhanga', '508','5');
+INSERT INTO city VALUES('East Champaran', '509','5');
+INSERT INTO city VALUES('Gaya', '510','5');
+INSERT INTO city VALUES('Gopalganj', '511','5');
+INSERT INTO city VALUES('Jamshedpur', '512','5');
+INSERT INTO city VALUES('Jamui', '513','5');
+INSERT INTO city VALUES('Jehanabad', '514','5');
+INSERT INTO city VALUES('Kaimur (Bhabua)', '515','5');
+INSERT INTO city VALUES('Katihar', '516','5');
+INSERT INTO city VALUES('Khagaria', '517','5');
+INSERT INTO city VALUES('Kishanganj', '518','5');
+INSERT INTO city VALUES('Lakhisarai', '519','5');
+INSERT INTO city VALUES('Madhepura', '520','5');
+INSERT INTO city VALUES('Madhubani', '521','5');
+INSERT INTO city VALUES('Munger', '522','5');
+INSERT INTO city VALUES('Muzaffarpur', '523','5');
+INSERT INTO city VALUES('Nalanda', '524','5');
+INSERT INTO city VALUES('Nawada', '525','5');
+INSERT INTO city VALUES('Patna', '526','5');
+INSERT INTO city VALUES('Purnia', '527','5');
+INSERT INTO city VALUES('Rohtas', '528','5');
+INSERT INTO city VALUES('Saharsa', '529','5');
+INSERT INTO city VALUES('Samastipur', '530','5');
+INSERT INTO city VALUES('Saran', '531','5');
+INSERT INTO city VALUES('Sheikhpura', '532','5');
+INSERT INTO city VALUES('Sheohar', '533','5');
+INSERT INTO city VALUES('Sitamarhi', '534','5');
+INSERT INTO city VALUES('Siwan', '535','5');
+INSERT INTO city VALUES('Supaul', '536','5');
+INSERT INTO city VALUES('Vaishali', '537','5');
+INSERT INTO city VALUES('West Champaran', '538','5');
+
+
+
+
+INSERT INTO city VALUES('Chandigarh', '601','6');
+INSERT INTO city VALUES('Mani Marja', '602','6');
+
+
+
+
+INSERT INTO city VALUES('Bastar', '701','7');
+INSERT INTO city VALUES('Bhilai', '702','7');
+INSERT INTO city VALUES('Bijapur', '703','7');
+INSERT INTO city VALUES('Bilaspur', '704','7');
+INSERT INTO city VALUES('Dhamtari', '705','7');
+INSERT INTO city VALUES('Durg', '706','7');
+INSERT INTO city VALUES('Janjgir-Champa', '707','7');
+INSERT INTO city VALUES('Jashpur', '708','7');
+INSERT INTO city VALUES('Kabirdham-Kawardha', '709','7');
+INSERT INTO city VALUES('Korba', '710','7');
+INSERT INTO city VALUES('Korea', '711','7');
+INSERT INTO city VALUES('Mahasamund', '712','7');
+INSERT INTO city VALUES('Narayanpur', '713','7');
+INSERT INTO city VALUES('Norh Bastar-Kanker', '714','7');
+INSERT INTO city VALUES('Raigarh', '715','7');
+INSERT INTO city VALUES('Raipur', '716','7');
+INSERT INTO city VALUES('Rajnandgaon', '717','7');
+INSERT INTO city VALUES('South Bastar-Dantewada', '718','7');
+INSERT INTO city VALUES('Surguja', '719','7');
+
+
+--Dadra Nagar Haveli
+
+INSERT INTO city VALUES('Amal', '801','8');
+INSERT INTO city VALUES('Amli', '802','8');
+INSERT INTO city VALUES('Bedpa', '803','8');
+INSERT INTO city VALUES('Chikhli', '804','8');
+INSERT INTO city VALUES('Dadra and Nagar Haveli', '805','8');
+INSERT INTO city VALUES('Dahikhed', '806','8');
+INSERT INTO city VALUES('Dolara', '807','8');
+INSERT INTO city VALUES('Galonda', '808','8');
+INSERT INTO city VALUES('Kanadi', '809','8');
+INSERT INTO city VALUES('Karchond', '810','8');
+INSERT INTO city VALUES('Khadoli', '811','8');
+INSERT INTO city VALUES('Kharadpada', '812','8');
+INSERT INTO city VALUES('Kherabari', '813','8');
+INSERT INTO city VALUES('Kherdi', '814','8');
+INSERT INTO city VALUES('Kothar', '815','8');
+INSERT INTO city VALUES('Luari', '816','8');
+INSERT INTO city VALUES('Mashat', '817','8');
+INSERT INTO city VALUES('Rakholi', '818','8');
+INSERT INTO city VALUES('Rudana', '819','8');
+INSERT INTO city VALUES('Saili', '820','8');
+INSERT INTO city VALUES('Sili', '821','8');
+INSERT INTO city VALUES('Silvassa', '822','8');
+INSERT INTO city VALUES('Sindavni', '823','8');
+INSERT INTO city VALUES('Udva', '824','8');
+INSERT INTO city VALUES('Umbarkoi', '825','8');
+INSERT INTO city VALUES('Vansda', '826','8');
+INSERT INTO city VALUES('Vasona', '827','8');
+INSERT INTO city VALUES('Velugam', '828','8');
+
+
+-- Daman and Diu
+
+INSERT INTO city VALUES('Brancavare', '901','9');
+INSERT INTO city VALUES('Dagasi', '902','9');
+INSERT INTO city VALUES('Daman', '903','9');
+INSERT INTO city VALUES('Diu', '904','9');
+INSERT INTO city VALUES('Magarvara', '905','9');
+INSERT INTO city VALUES('Nagwa', '906','9');
+INSERT INTO city VALUES('Pariali', '907','9');
+INSERT INTO city VALUES('Passo Covo', '908','9');
+
+
+-- Delhi
+
+INSERT INTO city VALUES('Central Delhi', '1001','10');
+INSERT INTO city VALUES('East Delhi', '1002','10');
+INSERT INTO city VALUES('New Delhi', '1003','10');
+INSERT INTO city VALUES('North Delhi', '1004','10');
+INSERT INTO city VALUES('North East Delhi', '1005','10');
+INSERT INTO city VALUES('North West Delhi', '1006','10');
+INSERT INTO city VALUES('Old Delhi', '1007','10');
+INSERT INTO city VALUES('South Delhi', '1008','10');
+INSERT INTO city VALUES('South West Delhi', '1009','10');
+INSERT INTO city VALUES('West Delhi', '1010','10');
+
+
+--  Goa
+
+INSERT INTO city VALUES('Canacona', '1101','11');
+INSERT INTO city VALUES('Candolim', '1102','11');
+INSERT INTO city VALUES('Chinchinim', '1103','11');
+INSERT INTO city VALUES('Cortalim', '1104','11');
+INSERT INTO city VALUES('Goa', '1105','11');
+INSERT INTO city VALUES('Jua', '1106','11');
+INSERT INTO city VALUES('Madgaon', '1107','11');
+INSERT INTO city VALUES('Mahem', '1108','11');
+INSERT INTO city VALUES('Mapuca', '1109','11');
+INSERT INTO city VALUES('Marmagao', '1110','11');
+INSERT INTO city VALUES('Panji', '1111','11');
+INSERT INTO city VALUES('Ponda', '1112','11');
+INSERT INTO city VALUES('Sanvordem', '1113','11');
+INSERT INTO city VALUES('Terekhol', '1114','11');
+
+
+-- Gujarat
+
+INSERT INTO city VALUES('Ahmedabad', '1201','12');
+INSERT INTO city VALUES('Amreli', '1202','12');
+INSERT INTO city VALUES('Anand', '1203','12');
+INSERT INTO city VALUES('Banaskantha', '1204','12');
+INSERT INTO city VALUES('Baroda', '1205','12');
+INSERT INTO city VALUES('Bharuch', '1206','12');
+INSERT INTO city VALUES('Bhavnagar', '1207','12');
+INSERT INTO city VALUES('Dahod', '1208','12');
+INSERT INTO city VALUES('Dang', '1209','12');
+INSERT INTO city VALUES('Dwarka', '1210','12');
+INSERT INTO city VALUES('Gandhinagar', '1211','12');
+INSERT INTO city VALUES('Jamnagar', '1212','12');
+INSERT INTO city VALUES('Junagadh', '1213','12');
+INSERT INTO city VALUES('Kheda', '1214','12');
+INSERT INTO city VALUES('Kutch', '1215','12');
+INSERT INTO city VALUES('Mehsana', '1216','12');
+INSERT INTO city VALUES('Nadiad', '1217','12');
+INSERT INTO city VALUES('Narmada', '1218','12');
+INSERT INTO city VALUES('Navsari', '1219','12');
+INSERT INTO city VALUES('Panchmahals', '1220','12');
+INSERT INTO city VALUES('Patan', '1221','12');
+INSERT INTO city VALUES('Porbandar', '1222','12');
+INSERT INTO city VALUES('Rajkot', '1223','12');
+INSERT INTO city VALUES('Sabarkantha', '1224','12');
+INSERT INTO city VALUES('Surat', '1225','12');
+INSERT INTO city VALUES('Surendranagar', '1226','12');
+INSERT INTO city VALUES('Vadodara', '1227','12');
+INSERT INTO city VALUES('Valsad', '1228','12');
+INSERT INTO city VALUES('Vapi', '1229','12');
+
+
+-- Haryana
+
+INSERT INTO city VALUES('Ambala', '1301','13');
+INSERT INTO city VALUES('Bhiwani', '1302','13');
+INSERT INTO city VALUES('Faridabad', '1303','13');
+INSERT INTO city VALUES('Fatehabad', '1304','13');
+INSERT INTO city VALUES('Gurgaon', '1305','13');
+INSERT INTO city VALUES('Hisar', '1306','13');
+INSERT INTO city VALUES('Jhajjar', '1307','13');
+INSERT INTO city VALUES('Jind', '1308','13');
+INSERT INTO city VALUES('Kaithal', '1309','13');
+INSERT INTO city VALUES('Karnal', '1310','13');
+INSERT INTO city VALUES('Kurukshetra', '1311','13');
+INSERT INTO city VALUES('Mahendragarh', '1312','13');
+INSERT INTO city VALUES('Mewat', '1313','13');
+INSERT INTO city VALUES('Panchkula', '1314','13');
+INSERT INTO city VALUES('Panipat', '1315','13');
+INSERT INTO city VALUES('Rewari', '1316','13');
+INSERT INTO city VALUES('Rohtak', '1317','13');
+INSERT INTO city VALUES('Sirsa', '1318','13');
+INSERT INTO city VALUES('Sonipat', '1319','13');
+INSERT INTO city VALUES('Yamunanagar', '1320','13');
+
+
+-- Himachal Pradesh
+
+INSERT INTO city VALUES('Bilaspur', '1401','14');
+INSERT INTO city VALUES('Chamba', '1402','14');
+INSERT INTO city VALUES('Dalhousie', '1403','14');
+INSERT INTO city VALUES('Hamirpur', '1404','14');
+INSERT INTO city VALUES('Kangra', '1405','14');
+INSERT INTO city VALUES('Kinnaur', '1406','14');
+INSERT INTO city VALUES('Kullu', '1407','14');
+INSERT INTO city VALUES('Lahaul and Spiti', '1408','14');
+INSERT INTO city VALUES('Mandi', '1409','14');
+INSERT INTO city VALUES('Shimla', '1410','14');
+INSERT INTO city VALUES('Sirmaur', '1411','14');
+INSERT INTO city VALUES('Solan', '1412','14');
+INSERT INTO city VALUES('Una', '1413','14');
+
+
+-- Jammu and Kashmir
+
+INSERT INTO city VALUES('Anantnag', '1501','15');
+INSERT INTO city VALUES('Baramulla', '1502','15');
+INSERT INTO city VALUES('Budgam', '1503','15');
+INSERT INTO city VALUES('Doda', '1504','15');
+INSERT INTO city VALUES('Jammu', '1505','15');
+INSERT INTO city VALUES('Kargil', '1506','15');
+INSERT INTO city VALUES('Kathua', '1507','15');
+INSERT INTO city VALUES('Kupwara', '1508','15');
+INSERT INTO city VALUES('Leh', '1509','15');
+INSERT INTO city VALUES('Poonch', '1510','15');
+INSERT INTO city VALUES('Pulwama', '1511','15');
+INSERT INTO city VALUES('Rajauri', '1512','15');
+INSERT INTO city VALUES('Srinagar', '1513','15');
+INSERT INTO city VALUES('Udhampur', '1514','15');
+
+
+
+
+-- Jharkhand
+
+INSERT INTO city VALUES('Bokaro', '1601','16');
+INSERT INTO city VALUES('Chatra', '1602','16');
+INSERT INTO city VALUES('Deoghar', '1603','16');
+INSERT INTO city VALUES('Dhanbad', '1604','16');
+INSERT INTO city VALUES('Dumka', '1605','16');
+INSERT INTO city VALUES('East Singhbhum', '1606','16');
+INSERT INTO city VALUES('Garhwa', '1607','16');
+INSERT INTO city VALUES('Giridih', '1608','16');
+INSERT INTO city VALUES('Godda', '1609','16');
+INSERT INTO city VALUES('Gumla', '1610','16');
+INSERT INTO city VALUES('Hazaribag', '1611','16');
+INSERT INTO city VALUES('Jamtara', '1612','16');
+INSERT INTO city VALUES('Koderma', '1613','16');
+INSERT INTO city VALUES('Latehar', '1614','16');
+INSERT INTO city VALUES('Lohardaga', '1615','16');
+INSERT INTO city VALUES('Pakur', '1616','16');
+INSERT INTO city VALUES('Palamu', '1617','16');
+INSERT INTO city VALUES('Ranchi', '1618','16');
+INSERT INTO city VALUES('Sahibganj', '1619','16');
+INSERT INTO city VALUES('Seraikela', '1620','16');
+INSERT INTO city VALUES('Simdega', '1621','16');
+INSERT INTO city VALUES('West Singhbhum', '1622','16');
+
+
+-- Karnataka
+
+INSERT INTO city VALUES('Bagalkot', '1701','17');
+INSERT INTO city VALUES('Bangalore', '1702','17');
+INSERT INTO city VALUES('Bangalore Rural', '1703','17');
+INSERT INTO city VALUES('Belgaum', '1704','17');
+INSERT INTO city VALUES('Bellary', '1705','17');
+INSERT INTO city VALUES('Bhatkal', '1706','17');
+INSERT INTO city VALUES('Bidar', '1707','17');
+INSERT INTO city VALUES('Bijapur', '1708','17');
+INSERT INTO city VALUES('Chamrajnagar', '1709','17');
+INSERT INTO city VALUES('Chickmagalur', '1710','17');
+INSERT INTO city VALUES('Chikballapur', '1711','17');
+INSERT INTO city VALUES('Chitradurga', '1712','17');
+INSERT INTO city VALUES('Dakshina Kannada', '1713','17');
+INSERT INTO city VALUES('Davanagere', '1714','17');
+INSERT INTO city VALUES('Dharwad', '1715','17');
+INSERT INTO city VALUES('Gadag', '1716','17');
+INSERT INTO city VALUES('Gulbarga', '1717','17');
+INSERT INTO city VALUES('Hampi', '1718','17');
+INSERT INTO city VALUES('Hassan', '1719','17');
+INSERT INTO city VALUES('Haveri', '1720','17');
+INSERT INTO city VALUES('Hospet', '1721','17');
+INSERT INTO city VALUES('Karwar', '1722','17');
+INSERT INTO city VALUES('Kodagu', '1723','17');
+INSERT INTO city VALUES('Kolar', '1724','17');
+INSERT INTO city VALUES('Koppal', '1725','17');
+INSERT INTO city VALUES('Madikeri', '1726','17');
+INSERT INTO city VALUES('Mandya', '1727','17');
+INSERT INTO city VALUES('Mangalore', '1728','17');
+INSERT INTO city VALUES('Manipal', '1729','17');
+INSERT INTO city VALUES('Mysore', '1730','17');
+INSERT INTO city VALUES('Raichur', '1731','17');
+INSERT INTO city VALUES('Shimoga', '1732','17');
+INSERT INTO city VALUES('Sirsi', '1733','17');
+INSERT INTO city VALUES('Sringeri', '1734','17');
+INSERT INTO city VALUES('Srirangapatna', '1735','17');
+INSERT INTO city VALUES('Tumkur', '1736','17');
+INSERT INTO city VALUES('Udupi', '1737','17');
+INSERT INTO city VALUES('Uttara Kannada', '1738','17');
+
+
+-- Kerala
+
+INSERT INTO city VALUES('Alappuzha', '1801','18');
+INSERT INTO city VALUES('Alleppey', '1802','18');
+INSERT INTO city VALUES('Alwaye', '1803','18');
+INSERT INTO city VALUES('Ernakulam', '1804','18');
+INSERT INTO city VALUES('Idukki', '1805','18');
+INSERT INTO city VALUES('Kannur', '1806','18');
+INSERT INTO city VALUES('Kasargod', '1807','18');
+INSERT INTO city VALUES('Kochi', '1808','18');
+INSERT INTO city VALUES('Kollam', '1809','18');
+INSERT INTO city VALUES('Kottayam', '1810','18');
+INSERT INTO city VALUES('Kovalam', '1811','18');
+INSERT INTO city VALUES('Kozhikode', '1812','18');
+INSERT INTO city VALUES('Malappuram', '1813','18');
+INSERT INTO city VALUES('Palakkad', '1814','18');
+INSERT INTO city VALUES('Pathanamthitta', '1815','18');
+INSERT INTO city VALUES('Perumbavoor', '1816','18');
+INSERT INTO city VALUES('Thiruvananthapuram', '1817','18');
+INSERT INTO city VALUES('Thrissur', '1818','18');
+INSERT INTO city VALUES('Trichur', '1819','18');
+INSERT INTO city VALUES('Trivandrum', '1820','18');
+INSERT INTO city VALUES('Wayanad', '1821','18');
+
+
+-- Lakshadweep
+
+INSERT INTO city VALUES('Agatti Island', '1901','19');
+INSERT INTO city VALUES('Bingaram Island', '1902','19');
+INSERT INTO city VALUES('Bitra Island', '1903','19');
+INSERT INTO city VALUES('Chetlat Island', '1904','19');
+INSERT INTO city VALUES('Kadmat Island', '1905','19');
+INSERT INTO city VALUES('Kalpeni Island', '1906','19');
+INSERT INTO city VALUES('Kavaratti Island', '1907','19');
+INSERT INTO city VALUES('Kiltan Island', '1908','19');
+INSERT INTO city VALUES('Lakshadweep Sea', '1909','19');
+INSERT INTO city VALUES('Minicoy Island', '1910','19');
+INSERT INTO city VALUES('North Island', '1911','19');
+INSERT INTO city VALUES('South Island', '1912','19');
+
+
+-- Madhya Pradesh
+
+INSERT INTO city VALUES('Anuppur', '2001','20');
+INSERT INTO city VALUES('Ashoknagar', '2002','20');
+INSERT INTO city VALUES('Balaghat', '2003','20');
+INSERT INTO city VALUES('Barwani', '2004','20');
+INSERT INTO city VALUES('Betul', '2005','20');
+INSERT INTO city VALUES('Bhind', '2006','20');
+INSERT INTO city VALUES('Bhopal', '2007','20');
+INSERT INTO city VALUES('Burhanpur', '2008','20');
+INSERT INTO city VALUES('Chhatarpur', '2009','20');
+INSERT INTO city VALUES('Chhindwara', '2010','20');
+INSERT INTO city VALUES('Damoh', '2011','20');
+INSERT INTO city VALUES('Datia', '2012','20');
+INSERT INTO city VALUES('Dewas', '2013','20');
+INSERT INTO city VALUES('Dhar', '2014','20');
+INSERT INTO city VALUES('Dindori', '2015','20');
+INSERT INTO city VALUES('Guna', '2016','20');
+INSERT INTO city VALUES('Gwalior', '2017','20');
+INSERT INTO city VALUES('Harda', '2018','20');
+INSERT INTO city VALUES('Hoshangabad', '2019','20');
+INSERT INTO city VALUES('Indore', '2020','20');
+INSERT INTO city VALUES('Jabalpur', '2021','20');
+INSERT INTO city VALUES('Jagdalpur', '2022','20');
+INSERT INTO city VALUES('Jhabua', '2023','20');
+INSERT INTO city VALUES('Katni', '2024','20');
+INSERT INTO city VALUES('Khandwa', '2025','20');
+INSERT INTO city VALUES('Khargone', '2026','20');
+INSERT INTO city VALUES('Mandla', '2027','20');
+INSERT INTO city VALUES('Mandsaur', '2028','20');
+INSERT INTO city VALUES('Morena', '2029','20');
+INSERT INTO city VALUES('Narsinghpur', '2030','20');
+INSERT INTO city VALUES('Neemuch', '2031','20');
+INSERT INTO city VALUES('Panna', '2032','20');
+INSERT INTO city VALUES('Raisen', '2033','20');
+INSERT INTO city VALUES('Rajgarh', '2034','20');
+INSERT INTO city VALUES('Ratlam', '2035','20');
+INSERT INTO city VALUES('Rewa', '2036','20');
+INSERT INTO city VALUES('Sagar', '2037','20');
+INSERT INTO city VALUES('Satna', '2038','20');
+INSERT INTO city VALUES('Sehore', '2039','20');
+INSERT INTO city VALUES('Seoni', '2040','20');
+INSERT INTO city VALUES('Shahdol', '2041','20');
+INSERT INTO city VALUES('Shajapur', '2042','20');
+INSERT INTO city VALUES('Sheopur', '2043','20');
+INSERT INTO city VALUES('Shivpuri', '2044','20');
+INSERT INTO city VALUES('Sidhi', '2045','20');
+INSERT INTO city VALUES('Tikamgarh', '2046','20');
+INSERT INTO city VALUES('Ujjain', '2047','20');
+INSERT INTO city VALUES('Umaria', '2048','20');
+INSERT INTO city VALUES('Vidisha', '2049','20');
+
+
+-- Maharashtra
+
+INSERT INTO city VALUES('Ahmednagar', '2101','21');
+INSERT INTO city VALUES('Akola', '2102','21');
+INSERT INTO city VALUES('Amravati', '2103','21');
+INSERT INTO city VALUES('Aurangabad', '2104','21');
+INSERT INTO city VALUES('Beed', '2105','21');
+INSERT INTO city VALUES('Bhandara', '2106','21');
+INSERT INTO city VALUES('Buldhana', '2107','21');
+INSERT INTO city VALUES('Chandrapur', '2108','21');
+INSERT INTO city VALUES('Dhule', '2109','21');
+INSERT INTO city VALUES('Gadchiroli', '2110','21');
+INSERT INTO city VALUES('Gondia', '2111','21');
+INSERT INTO city VALUES('Hingoli', '2112','21');
+INSERT INTO city VALUES('Jalgaon', '2113','21');
+INSERT INTO city VALUES('Jalna', '2114','21');
+INSERT INTO city VALUES('Kolhapur', '2115','21');
+INSERT INTO city VALUES('Latur', '2116','21');
+INSERT INTO city VALUES('Mahabaleshwar', '2117','21');
+INSERT INTO city VALUES('Mumbai', '2118','21');
+INSERT INTO city VALUES('Mumbai City', '2119','21');
+INSERT INTO city VALUES('Mumbai Suburban', '2120','21');
+INSERT INTO city VALUES('Nagpur', '2121','21');
+INSERT INTO city VALUES('Nanded', '2122','21');
+INSERT INTO city VALUES('Nandurbar', '2123','21');
+INSERT INTO city VALUES('Nashik', '2124','21');
+INSERT INTO city VALUES('Osmanabad', '2125','21');
+INSERT INTO city VALUES('Parbhani', '2126','21');
+INSERT INTO city VALUES('Pune', '2127','21');
+INSERT INTO city VALUES('Raigad', '2128','21');
+INSERT INTO city VALUES('Ratnagiri', '2129','21');
+INSERT INTO city VALUES('Sangli', '2130','21');
+INSERT INTO city VALUES('Satara', '2131','21');
+INSERT INTO city VALUES('Sholapur', '2132','21');
+INSERT INTO city VALUES('Sindhudurg', '2133','21');
+INSERT INTO city VALUES('Thane', '2134','21');
+INSERT INTO city VALUES('Wardha', '2135','21');
+INSERT INTO city VALUES('Washim', '2136','21');
+INSERT INTO city VALUES('Yavatmal', '2137','21');
+
+
+-- Manipur
+
+INSERT INTO city VALUES('Bishnupur', '2201','22');
+INSERT INTO city VALUES('Chandel', '2202','22');
+INSERT INTO city VALUES('Churachandpur', '2203','22');
+INSERT INTO city VALUES('Imphal East', '2204','22');
+INSERT INTO city VALUES('Imphal West', '2205','22');
+INSERT INTO city VALUES('Senapati', '2206','22');
+INSERT INTO city VALUES('Tamenglong', '2207','22');
+INSERT INTO city VALUES('Thoubal', '2208','22');
+INSERT INTO city VALUES('Ukhrul', '2209','22');
+
+
+-- Meghalaya
+
+INSERT INTO city VALUES('East Garo Hills', '2301','23');
+INSERT INTO city VALUES('East Khasi Hills', '2302','23');
+INSERT INTO city VALUES('Jaintia Hills', '2303','23');
+INSERT INTO city VALUES('Ri Bhoi', '2304','23');
+INSERT INTO city VALUES('Shillong', '2305','23');
+INSERT INTO city VALUES('South Garo Hills', '2306','23');
+INSERT INTO city VALUES('West Garo Hills', '2307','23');
+INSERT INTO city VALUES('West Khasi Hills', '2308','23');
+
+
+-- Mizoram
+
+INSERT INTO city VALUES('Aizawl', '2401','24');
+INSERT INTO city VALUES('Champhai', '2402','24');
+INSERT INTO city VALUES('Kolasib', '2403','24');
+INSERT INTO city VALUES('Lawngtlai', '2404','24');
+INSERT INTO city VALUES('Lunglei', '2405','24');
+INSERT INTO city VALUES('Mamit', '2406','24');
+INSERT INTO city VALUES('Saiha', '2407','24');
+INSERT INTO city VALUES('Serchhip', '2408','24');
+
+
+-- Nagaland
+
+INSERT INTO city VALUES('Dimapur', '2501','25');
+INSERT INTO city VALUES('Kohima', '2502','25');
+INSERT INTO city VALUES('Mokokchung', '2503','25');
+INSERT INTO city VALUES('Mon', '2504','25');
+INSERT INTO city VALUES('Phek', '2505','25');
+INSERT INTO city VALUES('Tuensang', '2506','25');
+INSERT INTO city VALUES('Wokha', '2507','25');
+INSERT INTO city VALUES('Zunheboto', '2508','25');
+
+
+
+
+-- Orissa
+
+INSERT INTO city VALUES('Angul', '2601','26');
+INSERT INTO city VALUES('Balangir', '2602','26');
+INSERT INTO city VALUES('Balasore', '2603','26');
+INSERT INTO city VALUES('Baleswar', '2604','26');
+INSERT INTO city VALUES('Bargarh', '2605','26');
+INSERT INTO city VALUES('Berhampur', '2606','26');
+INSERT INTO city VALUES('Bhadrak', '2607','26');
+INSERT INTO city VALUES('Bhubaneswar', '2608','26');
+INSERT INTO city VALUES('Boudh', '2609','26');
+INSERT INTO city VALUES('Cuttack', '2610','26');
+INSERT INTO city VALUES('Deogarh', '2611','26');
+INSERT INTO city VALUES('Dhenkanal', '2612','26');
+INSERT INTO city VALUES('Gajapati', '2613','26');
+INSERT INTO city VALUES('Ganjam', '2614','26');
+INSERT INTO city VALUES('Jagatsinghapur', '2615','26');
+INSERT INTO city VALUES('Jajpur', '2616','26');
+INSERT INTO city VALUES('Jharsuguda', '2617','26');
+INSERT INTO city VALUES('Kalahandi', '2618','26');
+INSERT INTO city VALUES('Kandhamal', '2619','26');
+INSERT INTO city VALUES('Kendrapara', '2620','26');
+INSERT INTO city VALUES('Kendujhar', '2621','26');
+INSERT INTO city VALUES('Khordha', '2622','26');
+INSERT INTO city VALUES('Koraput', '2623','26');
+INSERT INTO city VALUES('Malkangiri', '2624','26');
+INSERT INTO city VALUES('Mayurbhanj', '2625','26');
+INSERT INTO city VALUES('Nabarangapur', '2626','26');
+INSERT INTO city VALUES('Nayagarh', '2627','26');
+INSERT INTO city VALUES('Nuapada', '2628','26');
+INSERT INTO city VALUES('Puri', '2629','26');
+INSERT INTO city VALUES('Rayagada', '2630','26');
+INSERT INTO city VALUES('Rourkela', '2631','26');
+INSERT INTO city VALUES('Sambalpur', '2632','26');
+INSERT INTO city VALUES('Subarnapur', '2633','26');
+INSERT INTO city VALUES('Sundergarh', '2634','26');
+
+
+-- Pondicherry
+
+INSERT INTO city VALUES('Bahur', '2701','27');
+INSERT INTO city VALUES('Karaikal', '2702','27');
+INSERT INTO city VALUES('Mahe', '2703','27');
+INSERT INTO city VALUES('Pondicherry', '2704','27');
+INSERT INTO city VALUES('Purnankuppam', '2705','27');
+INSERT INTO city VALUES('Valudavur', '2706','27');
+INSERT INTO city VALUES('Villianur', '2707','27');
+INSERT INTO city VALUES('Yanam', '2708','27');
+
+
+-- Punjab
+
+INSERT INTO city VALUES('Amritsar', '2801','28');
+INSERT INTO city VALUES('Barnala', '2802','28');
+INSERT INTO city VALUES('Bathinda', '2803','28');
+INSERT INTO city VALUES('Faridkot', '2804','28');
+INSERT INTO city VALUES('Fatehgarh Sahib', '2805','28');
+INSERT INTO city VALUES('Ferozepur', '2806','28');
+INSERT INTO city VALUES('Gurdaspur', '2807','28');
+INSERT INTO city VALUES('Hoshiarpur', '2808','28');
+INSERT INTO city VALUES('Jalandhar', '2809','28');
+INSERT INTO city VALUES('Kapurthala', '2810','28');
+INSERT INTO city VALUES('Ludhiana', '2811','28');
+INSERT INTO city VALUES('Mansa', '2812','28');
+INSERT INTO city VALUES('Moga', '2813','28');
+INSERT INTO city VALUES('Muktsar', '2814','28');
+INSERT INTO city VALUES('Nawanshahr', '2815','28');
+INSERT INTO city VALUES('Pathankot', '2816','28');
+INSERT INTO city VALUES('Patiala', '2817','28');
+INSERT INTO city VALUES('Rupnagar', '2818','28');
+INSERT INTO city VALUES('Sangrur', '2819','28');
+INSERT INTO city VALUES('SAS Nagar', '2820','28');
+INSERT INTO city VALUES('Tarn Taran', '2821','28');
+
+
+-- Rajasthan
+
+INSERT INTO city VALUES('Ajmer', '2901','29');
+INSERT INTO city VALUES('Alwar', '2902','29');
+INSERT INTO city VALUES('Banswara', '2903','29');
+INSERT INTO city VALUES('Baran', '2904','29');
+INSERT INTO city VALUES('Barmer', '2905','29');
+INSERT INTO city VALUES('Bharatpur', '2906','29');
+INSERT INTO city VALUES('Bhilwara', '2907','29');
+INSERT INTO city VALUES('Bikaner', '2908','29');
+INSERT INTO city VALUES('Bundi', '2909','29');
+INSERT INTO city VALUES('Chittorgarh', '2910','29');
+INSERT INTO city VALUES('Churu', '2911','29');
+INSERT INTO city VALUES('Dausa', '2912','29');
+INSERT INTO city VALUES('Dholpur', '2913','29');
+INSERT INTO city VALUES('Dungarpur', '2914','29');
+INSERT INTO city VALUES('Hanumangarh', '2915','29');
+INSERT INTO city VALUES('Jaipur', '2916','29');
+INSERT INTO city VALUES('Jaisalmer', '2917','29');
+INSERT INTO city VALUES('Jalore', '2918','29');
+INSERT INTO city VALUES('Jhalawar', '2919','29');
+INSERT INTO city VALUES('Jhunjhunu', '2920','29');
+INSERT INTO city VALUES('Jodhpur', '2921','29');
+INSERT INTO city VALUES('Karauli', '2922','29');
+INSERT INTO city VALUES('Kota', '2923','29');
+INSERT INTO city VALUES('Nagaur', '2924','29');
+INSERT INTO city VALUES('Pali', '2925','29');
+INSERT INTO city VALUES('Pilani', '2926','29');
+INSERT INTO city VALUES('Rajsamand', '2927','29');
+INSERT INTO city VALUES('Sawai Madhopur', '2928','29');
+INSERT INTO city VALUES('Sikar', '2929','29');
+INSERT INTO city VALUES('Sirohi', '2930','29');
+INSERT INTO city VALUES('Sri Ganganagar', '2931','29');
+INSERT INTO city VALUES('Tonk', '2932','29');
+INSERT INTO city VALUES('Udaipur', '2933','29');
+
+
+-- Sikkim
+
+INSERT INTO city VALUES('Barmiak', '3001','30');
+INSERT INTO city VALUES('Be', '3002','30');
+INSERT INTO city VALUES('Bhurtuk', '3003','30');
+INSERT INTO city VALUES('Chhubakha', '3004','30');
+INSERT INTO city VALUES('Chidam', '3005','30');
+INSERT INTO city VALUES('Chubha', '3006','30');
+INSERT INTO city VALUES('Chumikteng', '3007','30');
+INSERT INTO city VALUES('Dentam', '3008','30');
+INSERT INTO city VALUES('Dikchu', '3009','30');
+INSERT INTO city VALUES('Dzongri', '3010','30');
+INSERT INTO city VALUES('Gangtok', '3011','30');
+INSERT INTO city VALUES('Gauzing', '3012','30');
+INSERT INTO city VALUES('Gyalshing', '3013','30');
+INSERT INTO city VALUES('Hema', '3014','30');
+INSERT INTO city VALUES('Kerung', '3015','30');
+INSERT INTO city VALUES('Lachen', '3016','30');
+INSERT INTO city VALUES('Lachung', '3017','30');
+INSERT INTO city VALUES('Lema', '3018','30');
+INSERT INTO city VALUES('Lingtam', '3019','30');
+INSERT INTO city VALUES('Lungthu', '3020','30');
+INSERT INTO city VALUES('Mangan', '3021','30');
+INSERT INTO city VALUES('Namchi', '3022','30');
+INSERT INTO city VALUES('Namthang', '3023','30');
+INSERT INTO city VALUES('Nanga', '3024','30');
+INSERT INTO city VALUES('Nantang', '3025','30');
+INSERT INTO city VALUES('Naya Bazar', '3026','30');
+INSERT INTO city VALUES('Padamachen', '3027','30');
+INSERT INTO city VALUES('Pakhyong', '3028','30');
+INSERT INTO city VALUES('Pemayangtse', '3029','30');
+INSERT INTO city VALUES('Phensang', '3030','30');
+INSERT INTO city VALUES('Rangli', '3031','30');
+INSERT INTO city VALUES('Rinchingpong', '3032','30');
+INSERT INTO city VALUES('Sakyong', '3033','30');
+INSERT INTO city VALUES('Samdong', '3034','30');
+INSERT INTO city VALUES('Singtam', '3035','30');
+INSERT INTO city VALUES('Siniolchu', '3036','30');
+INSERT INTO city VALUES('Sombari', '3037','30');
+INSERT INTO city VALUES('Soreng', '3038','30');
+INSERT INTO city VALUES('Sosing', '3039','30');
+INSERT INTO city VALUES('Tekhug', '3040','30');
+INSERT INTO city VALUES('Temi', '3041','30');
+INSERT INTO city VALUES('Tsetang', '3042','30');
+INSERT INTO city VALUES('Tsomgo', '3043','30');
+INSERT INTO city VALUES('Tumlong', '3044','30');
+INSERT INTO city VALUES('Yangang', '3045','30');
+INSERT INTO city VALUES('Yumtang', '3046','30');
+
+
+-- Tamil Nadu
+
+INSERT INTO city VALUES('Chennai', '3101','31');
+INSERT INTO city VALUES('Chidambaram', '3102','31');
+INSERT INTO city VALUES('Chingleput', '3103','31');
+INSERT INTO city VALUES('Coimbatore', '3104','31');
+INSERT INTO city VALUES('Courtallam', '3105','31');
+INSERT INTO city VALUES('Cuddalore', '3106','31');
+INSERT INTO city VALUES('Dharmapuri', '3107','31');
+INSERT INTO city VALUES('Dindigul', '3108','31');
+INSERT INTO city VALUES('Erode', '3109','31');
+INSERT INTO city VALUES('Hosur', '3110','31');
+INSERT INTO city VALUES('Kanchipuram', '3111','31');
+INSERT INTO city VALUES('Kanyakumari', '3112','31');
+INSERT INTO city VALUES('Karaikudi', '3113','31');
+INSERT INTO city VALUES('Karur', '3114','31');
+INSERT INTO city VALUES('Kodaikanal', '3115','31');
+INSERT INTO city VALUES('Kovilpatti', '3116','31');
+INSERT INTO city VALUES('Krishnagiri', '3117','31');
+INSERT INTO city VALUES('Kumbakonam', '3118','31');
+INSERT INTO city VALUES('Madurai', '3119','31');
+INSERT INTO city VALUES('Mayiladuthurai', '3120','31');
+INSERT INTO city VALUES('Nagapattinam', '3121','31');
+INSERT INTO city VALUES('Nagarcoil', '3122','31');
+INSERT INTO city VALUES('Namakkal', '3123','31');
+INSERT INTO city VALUES('Neyveli', '3124','31');
+INSERT INTO city VALUES('Nilgiris', '3125','31');
+INSERT INTO city VALUES('Ooty', '3126','31');
+INSERT INTO city VALUES('Palani', '3127','31');
+INSERT INTO city VALUES('Perambalur', '3128','31');
+INSERT INTO city VALUES('Pollachi', '3129','31');
+INSERT INTO city VALUES('Pudukkottai', '3130','31');
+INSERT INTO city VALUES('Rajapalayam', '3131','31');
+INSERT INTO city VALUES('Ramanathapuram', '3132','31');
+INSERT INTO city VALUES('Salem', '3133','31');
+INSERT INTO city VALUES('Sivaganga', '3134','31');
+INSERT INTO city VALUES('Sivakasi', '3135','31');
+INSERT INTO city VALUES('Thanjavur', '3136','31');
+INSERT INTO city VALUES('Theni', '3137','31');
+INSERT INTO city VALUES('Thoothukudi', '3138','31');
+INSERT INTO city VALUES('Tiruchirappalli', '3139','31');
+INSERT INTO city VALUES('Tirunelveli', '3140','31');
+INSERT INTO city VALUES('Tirupur', '3141','31');
+INSERT INTO city VALUES('Tiruvallur', '3142','31');
+INSERT INTO city VALUES('Tiruvannamalai', '3143','31');
+INSERT INTO city VALUES('Tiruvarur', '3144','31');
+INSERT INTO city VALUES('Trichy', '3145','31');
+INSERT INTO city VALUES('Tuticorin', '3146','31');
+INSERT INTO city VALUES('Vellore', '3147','31');
+INSERT INTO city VALUES('Villupuram', '3148','31');
+INSERT INTO city VALUES('Virudhunagar', '3149','31');
+INSERT INTO city VALUES('Yercaud', '3150','31');
+
+
+-- Tripura
+
+INSERT INTO city VALUES('Agartala', '3201','32');
+INSERT INTO city VALUES('Ambasa', '3202','32');
+INSERT INTO city VALUES('Bampurbari', '3203','32');
+INSERT INTO city VALUES('Belonia', '3204','32');
+INSERT INTO city VALUES('Dhalai', '3205','32');
+INSERT INTO city VALUES('Dharam Nagar', '3206','32');
+INSERT INTO city VALUES('Kailashahar', '3207','32');
+INSERT INTO city VALUES('Kamal Krishnabari', '3208','32');
+INSERT INTO city VALUES('Khopaiyapara', '3209','32');
+INSERT INTO city VALUES('Khowai', '3210','32');
+INSERT INTO city VALUES('Phuldungsei', '3211','32');
+INSERT INTO city VALUES('Radha Kishore Pur', '3212','32');
+INSERT INTO city VALUES('Tripura', '3213','32');
+
+
+
+create table address_details(
+address_id number(8) primary key,
+address varchar2(30),
+pincode number(8),
+city_id varchar2(5) references city(city_id)
+);
+
+
+insert into address_details values (201,'17540 Leroy Park',400074,101);
+insert into address_details values (202,'56 Superior Plaza',400002,102);
+insert into address_details values (203,'7 Grasskamp Way',400006,103);
+insert into address_details values (204,'1023 Eggendart Drive',400150,104);
+
+
+create table user_details(
+user_id number(8) primary key,
+name varchar2(30),
+email varchar2(30),
+password varchar2(30),
+mobile_number number(10),
+gender char(2),
+age number(3),
+address_id number(8) references address_details(address_id),
+role number(2)
+);
+
+insert into user_details VALUES (301,'Krutika','krutika@gmail.com','test1234',9876543210,'F',22,201,0);
+insert into user_details VALUES(302,'Jatin','jatin@gmail.com','test1234',9998887776,'M',24,202,0);
+insert into user_details VALUES(303,'Vaishnavi','vaishnavi@gmail.com','test1234',8886664442,'F',20,203,1);
+insert into user_details VALUES(304,'Vineet','vineet@gmail.com','test1234',9075386421,'M',16,204,1);
+
+
+create table advanced_user_details(
+advanced_details_id number(8) primary key,
+aadhaar_card varchar2(20),
+pan_card varchar2(20),
+salary_slip varchar2(20),
+photo varchar2(20),
+user_id number(8) references user_details(user_id)
+);
+
+
+create table employment_details(
+employee_id number primary key,
+annual_salary number,
+type_of_emp_id number references type_of_employment_details(type_of_emp_id),
+account_type_id number references account_type_details(account_type_id),
+user_id number not null references user_details(user_id)
+);
+
+
+Insert into employment_details values(701,300000,1300,1400,301);
+Insert into employment_details values(702,500000,1301,1401,302);
+Insert into employment_details values(703,700000,1301,1401,303);
+Insert into employment_details values(704,600000,1300,1400,303);
+Insert into employment_details values(705,900000,1301,1402,301);
+
+
+
+
+create table car_maker(
+car_maker_id number primary key,
+car_maker varchar2(20) 
+);
+
+
+insert into car_maker values (1100, 'Tata');
+insert into car_maker values (1101, 'Bmw');
+insert into car_maker values (1102, 'Mahindra');
+insert into car_maker values (1103, 'Suzuki');
+insert into car_maker values (1104, 'Toyota');
+insert into car_maker values (1105, 'Mercury');
+insert into car_maker values (1106, 'Lotus');
+
+
+create table car_type(
+car_type_id number(8) primary key,
+car_type varchar2(20)
+);
+
+
+insert into car_type values (1200,'Hatchback');
+insert into car_type values (1201, 'Sedan');
+insert into car_type values (1202, 'SUV');
+insert into car_type values (1203, 'MUV');
+insert into car_type values (1204, 'Cargo');
+insert into car_type values (1205, 'Construct');
+insert into car_type values (1206,'Bus');
+insert into car_type values (1207, 'Truck');
+
+
+create table car_details(
+car_id number primary key,
+vehicle_domain varchar2(20),
+car_maker_id number references car_maker(car_maker_id),
+car_type_id number references car_type(car_type_id),
+model varchar2(20),
+showroom_price number,
+onroad_price number,
+car_model_image varchar2(30)
+);
+
+
+insert into car_details values (1001, 'PR', 1100, 1200, 'Indica', 1000000, 1100000, '*');
+insert into car_details values (1002, 'PR', 1100, 1200, 'Bolt', 750000,825000, '*');
+insert into car_details values (1003, 'CM', 1102, 1206, 'School Bus', 500000,550000, '*');
+insert into car_details values (1004, 'PR', 1101, 1201, 'X6',250000, 275000, '*');
+insert into car_details values (1005, 'PR', 1102, 1202, 'XUV500', 1000000, 330000, '*');
+insert into car_details values (1006, 'PR', 1103, 1203, 'Ertiga', 250000, 275000, '*');
+insert into car_details values (1007, 'CM', 1104, 1207, 'Ultra 912', 500000, 220000, '*');
+
+
+
+
+create table loan_details(
+loan_id number primary key,
+principal_amount number,
+tenure number,
+rate_of_interest number,
+emi number,
+existing_emi number,
+apply_date date,
+user_id number not null references user_details(user_id),
+car_id number not null references car_details(car_id),
+approval varchar2(20) default 'pending'
+);
+
+
+insert into loan_details values (501,100000,12,5,6000,0,'12-FEB-1982',301,1001,'yes');
+insert into loan_details values (502,790000,26,6.5,7000,6500,'13-MAR-1982',302,1006,'yes');
+insert into loan_details values (503,160000,10,6,8000,2000,'15-JAN-1982',303,1003,'pending');
+insert into loan_details values (504,300000,24,7,9000,4000,'26-AUG-1982',304,1004,'no');
+insert into loan_details values (505,600000,23,7.5,20000,3500,'14-DEC-1982',301,1001,'pending');
+insert into loan_details values (506,500000,15,5,10000,0,'15-NOV-1982',302,1006,'no');
+insert into loan_details values (507,200000,20,6,36000,0,'19-FEB-1982',302,1002,'yes');
+
+
+commit;
+
+
+
+
+
+
+
+
+
