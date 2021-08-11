@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
+import { ApplicationFormComponent } from './application-form/application-form.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     PageNotFoundComponent,
     AboutUsComponent,
-    LoginComponent
+    LoginComponent,
+    ApplicationFormComponent
   ],
   imports: [
     BrowserModule,

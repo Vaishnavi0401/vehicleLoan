@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ApplicationFormComponent } from './application-form/application-form.component';
 import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
 import { EmploymentDetailsComponent } from './employment-details/employment-details.component';
 import { GetEligibilityComponent } from './get-eligibility/get-eligibility.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'emi-calculator', component: EmiCalculatorComponent},
     {path: 'check-eligibility', component: GetEligibilityComponent},
     {path: 'loan-offers', component: LoanOfferComponent},
+    {path: 'application-form', component: ApplicationFormComponent},
     {path: 'personal-details', component: PersonalDetailsComponent},
     {path: 'employment-details', component: EmploymentDetailsComponent},
     {path: 'vehicle-details', component: VehicleDetailsComponent},
