@@ -1,60 +1,49 @@
-<!-- <button id="ApplyBtn">Apply Loan</button> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+</head>
 
-<h1>Check Eligibility</h1>
+<body>
 
-<button routerLink="../loan-offers" class="btn btn-primary ms-5">Check Eligibility</button>
+<div class="container">
 
-<router-outlet></router-outlet>
-<h3>Vehicle Details</h3>
+    <form>
+        <div class="mb-3">
+          <label class="form-label">Vehicle Details</label>
+          <input type="text" class="form-control" id="CarMaker" placeholder="Enter Car Maker"><br>
+          <input type="text" class="form-control" id="CarModel" placeholder="Enter Car Model"><br>
+          <input type="number" class="form-control" id="ExShowRoomPrice" placeholder="Enter ExShow Room Price"><br>
+          <input type="number" class="form-control" id="OnRoadPrice" placeholder="Enter On Road Price"><br>
+        </div>
 
-<div>
-    <div>
-        <input class="Info1" type="text" placeholder="Car Make"/>
-    </div>
-    <div>
-        <input class="Info1" type="text" placeholder="Car Model"/>
-    </div>
-    <div>
-        <input class="Info1" type="text" placeholder="ExShowroom Price"/>
-    </div>
-    <div>
-        <input class="Info1" type="text" placeholder="On Road Price"/>
-    </div>
-</div>
+        <div class="mb-3">
+            <label class="form-label">Applicant Details</label><br>
+            <input type="text" class="form-control" id="Name" placeholder="Enter Your Name" minlength="4" required><br>
+            <input type="number" class="form-control" id="Age" placeholder="Enter Your Age" [(ngModel)]="age" [ngModelOptions]="{standalone: true}"><br>
+            <input type="text" class="form-control" id="Gender" placeholder="Enter Your Gender"><br>
+            <input type="text" class="form-control" id="TypeOfEmployment" placeholder="Enter Your Type Of Employment" [(ngModel)]="typeOfEmployment" [ngModelOptions]="{standalone: true}"><br>
+            <input type="number" class="form-control" id="Salary" placeholder="Enter Your Salary" [(ngModel)]="salary" [ngModelOptions]="{standalone: true}"><br>
+            <input type="number" class="form-control" id="ExistingEMI" placeholder="Enter Your Existing EMI" [(ngModel)]="existingEMI" [ngModelOptions]="{standalone: true}"><br>
+          </div>
 
+          
+          <div class="mb-3">
+            <label class="form-label">Contact Details</label><br>
+            <input type="number" class="form-control" id="MobileNo" placeholder="Enter Your Mobile No."><br>
+            <input type="text" class="form-control" id="EmailId" placeholder="Enter Your EmailId" required
+            pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$"><br>
+          </div>
+          <button class="btn btn-primary ms-5" (click)="checkEligibility()">Check Eligibility</button>
 
-<h3>Applicant Details</h3>
+          <router-outlet></router-outlet>
+                </form>
+    </div>
 
-<div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Name"/>
-    </div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Age"/>
-    </div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Gender"/>
-    </div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Type Of Employment"/>
-    </div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Yearly Salary"/>
-    </div>
-    <div>
-        <input  class="Info2" type="text" placeholder="Existing EMI"/>
-    </div>
-</div>
-
-<h3>Contact Details</h3>
-<div>
-    <div>
-        <input class="Info3" type="text" placeholder="Mobile No"/>
-    </div>
-    <div>
-        <input class="Info3" type="text" placeholder="Email ID"/>
-    </div>
-</div>
-
-<button id="SubmitBtn"> Check Eligibility</button>
-
+</body>
+</html>
