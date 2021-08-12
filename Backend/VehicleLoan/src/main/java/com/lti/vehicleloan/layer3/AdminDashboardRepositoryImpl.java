@@ -21,7 +21,7 @@ public class AdminDashboardRepositoryImpl extends AdminDashboardBaseRepository i
 		// TODO Auto-generated method stub
 		System.out.println("Admin Dashboard Repository Impl: Layer 3");
 		EntityManager entityManager=getEntityManager();
-		Query query=entityManager.createQuery("from LoanDetail");
+		Query query=entityManager.createQuery("from LoanDetail ");
 		List<LoanDetail> loanDetailList=query.getResultList();
 		return loanDetailList;
 		

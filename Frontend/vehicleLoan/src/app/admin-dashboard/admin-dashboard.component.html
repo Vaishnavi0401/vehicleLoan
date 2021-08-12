@@ -1,9 +1,46 @@
+<div class="container">
 <p>Admin Dashboard</p>
+<br>
+<h1>All Loan Details</h1>
+<br>
+<table *ngIf="allLoanDetails && allLoanDetails.length">
+    <thead>
+        <tr>
+            <th> Loan Id </th>
+            <th> Loan ApplyDate </th>
+             <th> Car id</th>
+             <!-- <th> Car model</th> -->
+            <th>Loan Approval</th> 
+            <th>Operation </th>
+            <th>Operation </th>
+            <th>Operation </th>
+            <br>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let loan of allLoanDetails">
+        <td>{{loan.loanId}}</td>
+        <td>{{loan.applyDate}}</td>
+        <td>{{loan.carDetail.carId}}</td>
+        <!-- <td>{{loan.model}}</td> -->
+        <td>{{loan.approval}}</td>
+        <td>
+            <button type="button" (click)="approveLoanDetail(loan)" >Approve</button>
+        </td>
+        <td>
+            <button type="button" (click)="rejectLoanDetail(loan)">Reject</button>
+        </td>
+        <td>
+            <button type="button" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
+        </td>
+        </tr>
+    </tbody>
+</table>
 
+<br><br><br><br><br><br><br><br><br>
 <button name="button" type="button">Dashboard</button><br><br><br>
 <button name="button" type="button">Clients</button><br><br><br>
 <button name="button" type="button">Application</button><br><br><br>
 <button name="button" type="button">Rejected List</button><br><br><br>
 <button name="button" type="button">Settings</button>
-
-
+</div>

@@ -12,6 +12,7 @@ import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.componen
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { IdentityDetailsComponent } from './identity-details/identity-details.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 import { GetEligibilityComponent } from './get-eligibility/get-eligibility.component';
 import { RegisterComponent } from './register/register.component';
@@ -48,7 +49,9 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

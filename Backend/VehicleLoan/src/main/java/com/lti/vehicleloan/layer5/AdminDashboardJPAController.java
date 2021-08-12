@@ -45,6 +45,7 @@ public class AdminDashboardJPAController {
 			System.out.println("modify Approval().. method");
 			//return adminDashboardService.updateApprovalService(loanDetail); 
 			adminDashboardService.updateApprovalService(loanDetail);
+			
 		}
 		
 		//http://localhost:8090/admin/deleteLoan/502
