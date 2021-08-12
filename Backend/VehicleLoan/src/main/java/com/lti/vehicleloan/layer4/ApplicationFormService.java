@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
+import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -22,6 +23,8 @@ public interface ApplicationFormService {
 	
 	Integer insertCarService(CarDetail car);
 	Integer insertCarMakerService(CarMaker carMaker);
+	List<CarMaker> selectAllCarMakerService();
+	List<CarType> selectAllCarTypeService();
 	List<CarDetail> selectAllCarsService();
 	
 	List<City> selectAllCityService();

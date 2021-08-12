@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
+import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -22,12 +23,14 @@ public interface ApplicationFormRepository {
 	List<UserDetail> selectAllUsers();
 	
 	Integer insertCarMaker(CarMaker carMaker);
-	
 	Integer insertCar(CarDetail car);
+	List<CarMaker> selectAllCarMakers();
+	List<CarType> selectAllCarTypes();
 	List<CarDetail> selectAllCars();
 	
 	City selectCity(String cityId);
 	List<City> selectAllCities();
+	
 	State selectState(String stateId);
 	List<State> selectAllStates();
 }

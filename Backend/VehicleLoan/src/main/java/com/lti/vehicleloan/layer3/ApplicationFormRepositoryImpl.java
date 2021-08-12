@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
+import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -120,6 +121,20 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		entityManager.persist(carMaker);
 		System.out.println("Car Maker Successfully added: "+carMaker.getCarMakerId());
 		return carMaker.getCarMakerId();
+	}
+
+	@Override
+	public List<CarMaker> selectAllCarMakers() {
+		EntityManager entityManager = super.getEntityManager();
+		Query query = entityManager.createQuery("from CarMaker");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<CarType> selectAllCarTypes() {
+		EntityManager entityManager = super.getEntityManager();
+		Query query = entityManager.createQuery("from CarType");
+		return query.getResultList();
 	}
 
 

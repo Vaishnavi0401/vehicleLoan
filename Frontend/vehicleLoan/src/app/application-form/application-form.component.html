@@ -1,5 +1,155 @@
 <div class="application-form-wrapper">
-    <form action="">
-        
+    <form action="" [formGroup]="validateForm">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="tab">
+                    <div class="card-head center">
+                        <h1>Personal Details</h1>
+                    </div>
+                    <!-- <input type="text" class="form-control" id="Name" placeholder="Enter Your Name" minlength="4" required><br>
+                <span style="color:red" ng-show = "Name.$touched && Name.$invalid">The name is required</span> -->
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Name</label>
+                        <input id="name" formControlName="name" type="text" name="name" class="form-control" [class.is-invalid]="validateForm.get('name').hasError('required') && validateForm.get('name').touched" [(ngModel)]="userDetail.name">
+                        <!-- <span style="color:red" ng-show="userDetail.name.$touched && userDetail.name.$invalid">The name is required</span> -->
+                        <div *ngIf="validateForm.get('name').hasError('required') && validateForm.get('name').touched" style="color: red;">
+                            Name is Required
+                          </div>
+                          <!-- <div *ngIf="validateForm.get('name').hasError('minlength')" style="color: red;">
+                            Min Name Length should be 4
+                          </div> -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="age">Age</label>
+                        <input id="age" type="text" name="age" formControlName="age" class="form-control" [(ngModel)]="userDetail.age" [class.is-invalid]="validateForm.get('age').hasError('required') && validateForm.get('age').touched">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Gender</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="M" name="gender"
+                                [(ngModel)]="userDetail.gender">
+                            <label class="form-check-label">
+                                Male
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" value="F" name="gender"
+                            [(ngModel)]="userDetail.gender">
+                        <label class="form-check-label">
+                            Female
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="mobile_number">Mobile Number</label>
+                        <input id="mobile_number" name="mobileNumber" type="tel" class="form-control"
+                            [(ngModel)]="userDetail.mobileNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email Id</label>
+                        <input id="email" type="text" name="email" class="form-control" [(ngModel)]="userDetail.email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input id="password" type="password" name="password" class="form-control"
+                            [(ngModel)]="userDetail.password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Retype Password</label>
+                        <input id="password" type="password" name="password1" class="form-control"
+                            [(ngModel)]="password1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="address">Address</label>
+                        <input id="address" type="text" name="address" class="form-control"
+                            [(ngModel)]="addressDetail.address">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="state">State</label>
+                        <select class="form-select" name="state" [(ngModel)]="state.stateId"
+                            (ngModelChange)="stateSelected()">
+                            <option *ngFor="let state of allStates" value="{{state.stateId}}">{{state.stateName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="city">City</label>
+                        <select class="form-select" name="city" [(ngModel)]="city.cityId">
+                            <option *ngFor="let city of selectedCities" value="{{ city.cityId }}">{{ city.cityName }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="pin">Pin code</label>
+                        <input id="pin" type="text" name="pincode" class="form-control"
+                            [(ngModel)]="addressDetail.pincode">
+                    </div>
+                    <div class="center">
+                        <button type="submit" class="btn btn-success" (click)="personalDetails()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="tab">
+                    <div class="card-head center">
+                        <h1>Car Details</h1>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="vehicleDomain">Vehicle Domain</label>
+                        <select class="form-select" name="vehicleDomain" [(ngModel)]="carDetail.vehicleDomain">
+                            <option value="PR">Personal</option>
+                            <option value="CM">Commercial</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="carMaker">Car Maker</label>
+                        <select class="form-select" name="carMaker" [(ngModel)]="carMaker.carMakerId">
+                            <option *ngFor="let carMaker of allCarMakers" value="{{carMaker.carMakerId}}">
+                                {{carMaker.carMaker}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="carType">Car Type</label>
+                        <select class="form-select" name="carType" [(ngModel)]="carType.carTypeId">
+                            <option *ngFor="let carType of allCarTypes" value="{{carType.carTypeId}}">
+                                {{carType.carType}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Car Model</label>
+                        <input type="text" name="carModel" class="form-control" [(ngModel)]="carDetail.model">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ex-Showroom Price</label>
+                        <input type="number" name="showroomPrice" class="form-control" [(ngModel)]="carDetail.showroomPrice">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">On-RoadPrice Price</label>
+                        <input type="number" name="onroadPrice" class="form-control" [(ngModel)]="carDetail.onroadPrice">
+                    </div>
+                    <div class="center">
+                        <button type="submit" class="btn btn-success" (click)="carDetails()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>

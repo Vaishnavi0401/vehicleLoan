@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
+import com.lti.vehicleloan.layer2.CarMaker;
+import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -20,6 +22,7 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 	@Autowired
 	ApplicationFormRepositoryImpl appFormRepo;
 	
+	//Insert a new Address in the database
 	@Override
 	public Integer insertAddressService(AddressDetail add) {
 		System.out.println("Service insert address called");
@@ -27,7 +30,7 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 		return addressId;
 	}
 	
-	
+	//Insert a new User in the database
 	@Override
 	public Integer insertUserService(UserDetail user) {
 		System.out.println("Service insert User called");	
@@ -39,16 +42,19 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 		return userId;
 	}
 	
+	//Select All Users
 	@Override
 	public List<UserDetail> selectAllUsersService() {
 		return appFormRepo.selectAllUsers();
 	}
 	
+	//Select All Cities 
 	@Override
 	public List<City> selectAllCityService() {
 		return appFormRepo.selectAllCities();
 	}
 
+	//Select All States
 	@Override
 	public List<State> selectAllStateService() {
 		return appFormRepo.selectAllStates();
@@ -62,22 +68,43 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 	}
 
 
+	//Select All Cars
 	@Override
 	public List<CarDetail> selectAllCarsService() {
 		return appFormRepo.selectAllCars();
 	}
 
-
+	//Insert a New Car in the database
 	@Override
 	public Integer insertCarService(CarDetail car) {
 		System.out.println("Insert Car Service Called");
 		System.out.println(car.getCarMaker().getCarMakerId());
 		System.out.println(car.getCarType().getCarTypeId());
 		if(car.getCarMaker().getCarMakerId() == null) {
-			
+			Integer carMakerId = 0;
+			carMakerId = this.insertCarMakerService(car.getCarMaker());
+			car.getCarMaker().setCarMakerId(carMakerId);
 		}
 		Integer carId = appFormRepo.insertCar(car);
 		return carId;
+	}
+
+	//Insert a New Car Maker in the database
+	@Override
+	public Integer insertCarMakerService(CarMaker carMaker) {
+		System.out.println("Car Maker insert Service Called");
+		Integer carMakerId = appFormRepo.insertCarMaker(carMaker);
+		return carMakerId;
+	}
+
+	@Override
+	public List<CarMaker> selectAllCarMakerService() {
+		return appFormRepo.selectAllCarMakers();
+	}
+
+	@Override
+	public List<CarType> selectAllCarTypeService() {
+		return appFormRepo.selectAllCarTypes();
 	}
 
 	
