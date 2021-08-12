@@ -1,5 +1,40 @@
-<p>emi-calculator works!</p>
-Principal Amount <input type="text" name="principal"><br><br><br>
-Rate of Interest <input type="text" name="rate-of-interest"><br><br><br>
-Tenure of loan in months<input type="text" name="tenure"><br><br><br>
-<button name="button" type="button">Calculate Emi</button> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <form >
+        <div class="form-group">
+          <label for="principal">Principal</label>
+          <input type="number" class="form-control" name="principalAmount" id="principal" placeholder="Enter the Principal" [(ngModel)]="principalAmount">         
+        </div> <br> <br>
+
+
+        <div class="form-group">
+            <label for="rate">Principal</label>
+            <input type="number" class="form-control" id="rate" name="rate" placeholder="Enter the Rate of Interest" [(ngModel)]="rate">         
+        </div><br> <br>
+        
+        
+        <div class="form-group">
+            <label for="tenure">Principal</label>
+            <input type="number" class="form-control" id="tenure" name="timePeriod" placeholder="Enter the required Tenure" [(ngModel)]="timePeriod">         
+        </div><br><br>
+        
+        
+        <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI</button>
+    </form>
+</div>
+   
+</body>     
+</html>

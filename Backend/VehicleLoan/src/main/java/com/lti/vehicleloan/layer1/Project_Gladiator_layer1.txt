@@ -1,8 +1,4 @@
-﻿
-
-
-
-drop table offer_table cascade constraints;
+﻿drop table offer_table cascade constraints;
 drop table type_of_employment_details cascade constraints;
 drop table account_type_details cascade constraints;
 drop table city cascade constraints;
