@@ -65,17 +65,17 @@ public class EmploymentDetail implements Serializable {
 		this.accountTypeDetail = accountTypeDetail;
 	}
 
-	public TypeOfEmploymentDetail getTypeOfEmploymentDetail() {
-		return this.typeOfEmploymentDetail;
-	}
+//	public TypeOfEmploymentDetail getTypeOfEmploymentDetail() {
+//		return this.typeOfEmploymentDetail;
+//	}
 
 	public void setTypeOfEmploymentDetail(TypeOfEmploymentDetail typeOfEmploymentDetail) {
 		this.typeOfEmploymentDetail = typeOfEmploymentDetail;
 	}
 
-	public UserDetail getUserDetail() {
-		return this.userDetail;
-	}
+//	public UserDetail getUserDetail() {
+//		return this.userDetail;
+//	}
 
 	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;

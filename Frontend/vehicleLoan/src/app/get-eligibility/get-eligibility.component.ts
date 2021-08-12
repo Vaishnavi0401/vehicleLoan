@@ -43,10 +43,11 @@ export class GetEligibilityComponent implements OnInit {
     });
   }
 
-  submitLogin(form:FormGroup){
+  submitForm(form:FormGroup){
     console.log("Is Form Valid", form.valid);
-    console.log("Email ", form.value.EmailId);
-    console.log("Name ",form.value.Name);
+    console.log("Name ", form.value.Name);
+    console.log("Email ",form.value.EmailId);
+    console.log("Mobile No ", form.value.MobileNo);
   }
 
 }

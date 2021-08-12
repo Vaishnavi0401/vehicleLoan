@@ -117,17 +117,17 @@ public class LoanDetail implements Serializable {
 		this.tenure = tenure;
 	}
 
-	public CarDetail getCarDetail() {
-		return this.carDetail;
-	}
+//	public CarDetail getCarDetail() {
+//		return this.carDetail;
+//	}
 
 	public void setCarDetail(CarDetail carDetail) {
 		this.carDetail = carDetail;
 	}
 
-	public UserDetail getUserDetail() {
-		return this.userDetail;
-	}
+//	public UserDetail getUserDetail() {
+//		return this.userDetail;
+//	}
 
 	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;

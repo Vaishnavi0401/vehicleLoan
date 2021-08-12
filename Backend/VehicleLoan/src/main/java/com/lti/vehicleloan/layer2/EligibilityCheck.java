@@ -8,7 +8,7 @@ public class EligibilityCheck {
 	private double yearlySalary;
 	private double existingEmi;
 
-
+	
 	public int getAge() {
 		return age;
 	}

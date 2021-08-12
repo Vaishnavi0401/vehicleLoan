@@ -46,9 +46,9 @@ public class CarType implements Serializable {
 		this.carType = carType;
 	}
 
-	public List<CarDetail> getCarDetails() {
-		return this.carDetails;
-	}
+//	public List<CarDetail> getCarDetails() {
+//		return this.carDetails;
+//	}
 
 	public void setCarDetails(List<CarDetail> carDetails) {
 		this.carDetails = carDetails;

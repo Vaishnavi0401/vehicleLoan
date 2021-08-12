@@ -17,7 +17,7 @@
 
   <div class="container">
 
-    <form [formGroup]="ValidateForm" (ngSubmit)="submitLogin(ValidateForm)">
+    <form [formGroup]="ValidateForm" (ngSubmit)="submitForm(ValidateForm)">
       <div class="mb-3">
         <label class="form-label">Vehicle Details</label>
         <input type="text" class="form-control" id="CarMaker" placeholder="Enter Car Maker" required><br>
@@ -27,8 +27,7 @@
       </div>
 
       <div class="mb-3">
-        <input type="text" class="form-control" formControlName="Name" id="Name" placeholder="Enter Your Name"
-          minlength="4"><br>
+        <input type="text" class="form-control" formControlName="Name" id="Name" placeholder="Enter Your Name" minlength="4"><br>
         <div *ngIf="ValidateForm.get('Name').hasError('required')" style="color: red;">
           Name is Required
         </div>
