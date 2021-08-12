@@ -1,49 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-    <form>
-        <div class="mb-3">
-          <label class="form-label">Vehicle Details</label>
-          <input type="text" class="form-control" id="CarMaker" placeholder="Enter Car Maker"><br>
-          <input type="text" class="form-control" id="CarModel" placeholder="Enter Car Model"><br>
-          <input type="number" class="form-control" id="ExShowRoomPrice" placeholder="Enter ExShow Room Price"><br>
-          <input type="number" class="form-control" id="OnRoadPrice" placeholder="Enter On Road Price"><br>
+    <form [formGroup]="ValidateForm" (ngSubmit)="submitLogin(ValidateForm)">
+      <div class="mb-3">
+        <label class="form-label">Vehicle Details</label>
+        <input type="text" class="form-control" id="CarMaker" placeholder="Enter Car Maker" required><br>
+        <input type="text" class="form-control" id="CarModel" placeholder="Enter Car Model" required><br>
+        <input type="number" class="form-control" id="ExShowRoomPrice" placeholder="Enter ExShow Room Price" required><br>
+        <input type="number" class="form-control" id="OnRoadPrice" placeholder="Enter On Road Price" required><br>
+      </div>
+
+      <div class="mb-3">
+        <input type="text" class="form-control" formControlName="Name" id="Name" placeholder="Enter Your Name"
+          minlength="4"><br>
+        <div *ngIf="ValidateForm.get('Name').hasError('required')" style="color: red;">
+          Name is Required
+        </div>
+        <div *ngIf="ValidateForm.get('Name').hasError('minlength')" style="color: red;">
+          Min Name Length should be 4
         </div>
 
+
+
+
+        <input type="number" class="form-control" id="Age" placeholder="Enter Your Age" [(ngModel)]="age" name="Age" required [ngModelOptions]="{standalone: true}"><br>
+
+
+        <div class="form-check">
+          <input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+          <label class="form-check-label" for="flexRadioDefault1"> Male </label>
+        </div>
+
+
+        <div class="form-check">
+          <input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" [checked]="true" />
+          <label class="form-check-label" for="flexRadioDefault2"> Female </label>
+        </div><br>
+
         <div class="mb-3">
-            <label class="form-label">Applicant Details</label><br>
-            <input type="text" class="form-control" id="Name" placeholder="Enter Your Name" minlength="4" required><br>
-            <input type="number" class="form-control" id="Age" placeholder="Enter Your Age" [(ngModel)]="age" [ngModelOptions]="{standalone: true}"><br>
-            <input type="text" class="form-control" id="Gender" placeholder="Enter Your Gender"><br>
-            <input type="text" class="form-control" id="TypeOfEmployment" placeholder="Enter Your Type Of Employment" [(ngModel)]="typeOfEmployment" [ngModelOptions]="{standalone: true}"><br>
-            <input type="number" class="form-control" id="Salary" placeholder="Enter Your Salary" [(ngModel)]="salary" [ngModelOptions]="{standalone: true}"><br>
-            <input type="number" class="form-control" id="ExistingEMI" placeholder="Enter Your Existing EMI" [(ngModel)]="existingEMI" [ngModelOptions]="{standalone: true}"><br>
-          </div>
+          <label class="form-label" for="Employment">Enter Your Type Of Employment</label>
+          <select class="form-select" name="Employment" [(ngModel)]="typeOfEmployment" [ngModelOptions]="{standalone: true}">
+            <option value="Salaried">Salaried</option>
+            <option value="Self Employed">Self Employed</option>
+          </select>
+        </div><br>
 
-          
-          <div class="mb-3">
-            <label class="form-label">Contact Details</label><br>
-            <input type="number" class="form-control" id="MobileNo" placeholder="Enter Your Mobile No."><br>
-            <input type="text" class="form-control" id="EmailId" placeholder="Enter Your EmailId" required
-            pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$"><br>
-          </div>
-          <button class="btn btn-primary ms-5" (click)="checkEligibility()">Check Eligibility</button>
 
-          <router-outlet></router-outlet>
-                </form>
-    </div>
+
+        <input type="number" class="form-control" id="Salary" placeholder="Enter Your Salary" [(ngModel)]="salary" name="Salary" required [ngModelOptions]="{standalone: true}"><br>
+        <input type="number" class="form-control" id="ExistingEMI" placeholder="Enter Your Existing EMI" name="ExistingEMI" [(ngModel)]="existingEMI" required [ngModelOptions]="{standalone: true}"><br>
+      </div>
+
+
+      <div class="mb-3">
+        <label class="form-label">Contact Details</label><br>
+        <input type="number" class="form-control" formControlName="MobileNo" id="MobileNo" placeholder="Enter Your Mobile No."><br>
+        <div *ngIf="ValidateForm.get('MobileNo').hasError('required')" style="color: red;">
+          Mobile No is Required
+        </div>
+        <div *ngIf="ValidateForm.get('MobileNo').hasError('pattern')" style="color: red;">
+          Mobile No is invalid
+        </div>
+        <input type="text" class="form-control" formControlName="EmailId" id="EmailId" placeholder="Enter Your EmailId" required><br>
+        <div *ngIf="ValidateForm.get('EmailId').hasError('required')" style="color: red;">
+          Email is Required
+        </div>
+        <div *ngIf="ValidateForm.get('EmailId').hasError('pattern')" style="color: red;">
+          Email is invalid
+        </div>
+      </div>
+      
+      <button class="btn btn-primary ms-5" (click)="TestEligibility()" [disabled]="ValidateForm.invalid">Check Eligibility</button>
+
+      <router-outlet></router-outlet>
+    </form>
+  </div>
 
 </body>
+
 </html>

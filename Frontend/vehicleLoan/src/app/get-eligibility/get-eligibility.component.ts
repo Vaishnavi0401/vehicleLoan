@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators , MinLengthValidator} from '@angular/forms';
 import { EligibilityService } from '../eligibility.service';
 import { EligibilityCheck } from '../pojos/EligibilityCheck';
 
@@ -10,7 +11,9 @@ import { EligibilityCheck } from '../pojos/EligibilityCheck';
 export class GetEligibilityComponent implements OnInit {
 
 
-  eligible: EligibilityCheck = new EligibilityCheck();
+  eligibility: EligibilityCheck = new EligibilityCheck();
+
+  ValidateForm: FormGroup;
 
   age: number;
   typeOfEmployment: string;
@@ -21,19 +24,29 @@ export class GetEligibilityComponent implements OnInit {
 
   constructor(private getService: EligibilityService) { }
 
-  checkEligibility(){
+  TestEligibility(){
     console.log("Assign Parameters");
-    this.eligible.age = this.age;
-    this.eligible.typeOfEmployment = this.typeOfEmployment;
-    this.eligible.yearlySalary = this.salary;
+    this.eligibility.age = this.age;
+    this.eligibility.typeOfEmployment = this.typeOfEmployment;
+    this.eligibility.yearlySalary = this.salary;
     this.existingEMI = this.existingEMI;
-    this.getService.checkEligibilityService(this.eligible)
+    this.getService.checkEligibilityService(this.eligibility)
     .subscribe(val => alert(val.status));
 
   }
 
   ngOnInit(): void {
-   
+    this.ValidateForm = new FormGroup({
+      Name : new FormControl('', [Validators.required, Validators.minLength(4)]),
+      EmailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
+      MobileNo: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
+    });
+  }
+
+  submitLogin(form:FormGroup){
+    console.log("Is Form Valid", form.valid);
+    console.log("Email ", form.value.EmailId);
+    console.log("Name ",form.value.Name);
   }
 
 }

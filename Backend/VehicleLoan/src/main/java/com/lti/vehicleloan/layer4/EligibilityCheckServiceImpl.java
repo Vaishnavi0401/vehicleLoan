@@ -8,7 +8,7 @@ import com.lti.vehicleloan.layer2.EligibilityCheck;
 public class EligibilityCheckServiceImpl implements EligibilityCheckService {
 
 	@Override
-	public boolean checkEligibility(EligibilityCheck eligibilitycheck) {
+	public boolean checkEligibility(EligibilityCheck eligibility) {
 
 //		eligibilitycheck.setAge(30);
 //		eligibilitycheck.setTypeOfEmployment("Salaried");
@@ -23,11 +23,10 @@ public class EligibilityCheckServiceImpl implements EligibilityCheckService {
 		
 		System.out.println("Call of the fn");
 		
-		if(((eligibilitycheck.getYearlySalary()/12) >= 10000 
-				&& (eligibilitycheck.getTypeOfEmployment().equalsIgnoreCase("Salaried") 
-						&& eligibilitycheck.getAge() >= 20 && eligibilitycheck.getAge() <= 60)) 
-				|| ((eligibilitycheck.getTypeOfEmployment().equalsIgnoreCase("Self Employed") 
-						&& eligibilitycheck.getAge() >= 24 && eligibilitycheck.getAge() <= 65 )))
+		if(eligibility.getAge() >= 21 && eligibility.getAge() <= 60 
+				&& (eligibility.getTypeOfEmployment().equalsIgnoreCase("Salaried") && eligibility.getYearlySalary() >= 240000)
+				|| (eligibility.getAge() >= 18 && eligibility.getAge() <= 65 
+				&& (eligibility.getTypeOfEmployment().equalsIgnoreCase("Self Employed") && eligibility.getYearlySalary() >= 180000)))
 		{
 			return true;
 		}

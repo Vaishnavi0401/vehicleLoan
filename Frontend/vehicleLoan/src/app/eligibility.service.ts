@@ -13,12 +13,12 @@ export class EligibilityService {
    constructor(private myhttp: HttpClient) { }
 
   
-  checkEligibilityService(eligibilitycheck: EligibilityCheck): Observable<any>{
+  checkEligibilityService(check: EligibilityCheck): Observable<any>{
     console.log("From Service");  
-    console.log(eligibilitycheck.age);
+    console.log(check.age);
     
 
-    return this.myhttp.post<any>("http://localhost:8085/CheckEligibility", eligibilitycheck);                    
+    return this.myhttp.post<any>("http://localhost:8085/CheckEligibility", check);                    
     
   }
 }
