@@ -1,8 +1,49 @@
-<div class="container">
-<p>Admin Dashboard</p>
-<br>
-<h1>All Loan Details</h1>
-<br>
+<html>
+<body>
+    <div class="container">
+        <p>Admin Dashboard</p>
+        <br>
+        <h1>All Loan Details</h1>
+        <br>
+
+    <div>
+        <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId"   >
+        <button type="button" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)" >Search </button>
+        <table *ngIf="getLoanDetailArray && getLoanDetailArray.length">
+            <thead>
+                <tr>
+                    <th> Loan Id </th>
+                    <th> Loan ApplyDate </th>
+                    <th> Car id</th>
+                    <th>Loan Approval</th> 
+                    <th>Operation </th>
+                    <th>Operation </th>
+                    <th>Operation </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let loan of getLoanDetailArray">
+                    <td>{{loan.loanId}}</td>
+                    <td>{{loan.applyDate}}</td>
+                    <td>{{loan.carDetail.carId}}</td>
+                    <!-- <td>{{loan.model}}</td> -->
+                    <td>{{loan.approval}}</td>
+                    <td>
+                        <button type="button" (click)="approveLoanDetail(loan)" >Approve</button>
+                    </td>
+                    <td>
+                        <button type="button" (click)="rejectLoanDetail(loan)">Reject</button>
+                    </td>
+                    <td>
+                        <button type="button" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
+                    </td>  
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+    <!-- [(ngModel)]="getLoanbyLoanId"  (ngModelChange)="selectLoanDetailByLoanId()" -->
+
 <table *ngIf="allLoanDetails && allLoanDetails.length">
     <thead>
         <tr>
@@ -44,3 +85,5 @@
 <button name="button" type="button">Rejected List</button><br><br><br>
 <button name="button" type="button">Settings</button>
 </div>
+</body>
+</html>

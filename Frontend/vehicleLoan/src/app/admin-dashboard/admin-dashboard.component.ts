@@ -11,7 +11,11 @@ export class AdminDashboardComponent implements OnInit {
 
   allLoanDetails: AdminDashboardLoanDetail[]=[];
   tempLoanDetails:AdminDashboardLoanDetail[]=[];
-
+  getLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  getLoanbyLoanId: number=0;
+  l1: number=0;
+  getLoanDetail:AdminDashboardLoanDetail;
+  
 
   constructor(private adminDashboardService: AdminDashboardService) { }
 
@@ -28,6 +32,7 @@ export class AdminDashboardComponent implements OnInit {
 
   );
   }
+
   xdata:any;
   deleted:boolean;
   deleteLoanDetail(deleteLoanId:number)
@@ -50,14 +55,9 @@ export class AdminDashboardComponent implements OnInit {
     },(err)=>{
       console.log(err+'error'+this.xdata);
     }
-
-
-
     );
 
   }// end of delete loan detail 
-
-  //approveLoan: AdminDashboardLoanDetail=new AdminDashboardLoanDetail(); 
 
   ydata:any;
   approved:boolean;
@@ -107,14 +107,59 @@ export class AdminDashboardComponent implements OnInit {
     (err)=>{
       console.log(err+'error'+this.zdata);
     }
-
     );
-
-  }
-
+  } //end of reject
 
 
+  // selectLoanDetailByLoanId(){
+  //   if(this.getLoanbyLoanId==0){
+  //     console.log('loan id chosen is zero'+this.getLoanbyLoanId);
+  //     this.tempLoanDetails=this.allLoanDetails;
+  //   }
+  //   else
+  //   {
+  //     console.log('loan Id chosen is: '+this.getLoanbyLoanId);
+  //     this.tempLoanDetails=this.allLoanDetails.filter(l=>{l.loanId==this.getLoanbyLoanId});
+  //     //this.allLoanDetails=this.tempLoanDetails;
+  //     console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
+  //     
+  //   }
+  // }
+  adata:any;
+  searched:boolean;
+  selectLoanDetailByLoanId(getLoanbyLoanId:number)
+  {
+    console.log('loan id chosen is'+this.getLoanbyLoanId);
+    this.adminDashboardService.getLoanDetailsbyloanIdService(getLoanbyLoanId).
+    subscribe((data:AdminDashboardLoanDetail)=>
+    {
 
+      this.getLoanDetail=data;
+      console.log(this.getLoanDetail);
+      this.tempLoanDetails=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      this.getLoanDetailArray=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      console.log('length of getLoanDetailArray'+ this.getLoanDetailArray.length);
+      console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
+      console.log('length of allLoanDetails: '+this.allLoanDetails.length);      
+    },(err) => {
+      console.log(err + 'error'+this.adata);
+      }
+    );
+  } //end of search
+
+ //this.allLoanDetails=this.tempLoanDetails;
+        //   console.log('from searchLoan() '+data);
+      //   console.log(this.tempLoanDetails);
+         
+      //   console.log('Employee Searched'+getLoanbyLoanId);
+      
+      // this.adata=data;
+      // console.log('log is'+ data);
+      // if(data==null)
+      // {
+      //   this.searched=true;
+      
+      // }
 
 
 

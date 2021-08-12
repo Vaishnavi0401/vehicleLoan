@@ -30,9 +30,9 @@ public class CarMaker implements Serializable {
 	public CarMaker() {
 	}
 
-//	public Integer getCarMakerId() {
-//		return this.carMakerId;
-//	}
+	public Integer getCarMakerId() {
+		return this.carMakerId;
+	}
 
 	public void setCarMakerId(Integer carMakerId) {
 		this.carMakerId = carMakerId;
@@ -46,26 +46,26 @@ public class CarMaker implements Serializable {
 		this.carMaker = carMaker;
 	}
 
-	public List<CarDetail> getCarDetails() {
-		return this.carDetails;
-	}
+//	public List<CarDetail> getCarDetails() {
+//		return this.carDetails;
+//	}
 
 	public void setCarDetails(List<CarDetail> carDetails) {
 		this.carDetails = carDetails;
 	}
 
-	public CarDetail addCarDetail(CarDetail carDetail) {
-		getCarDetails().add(carDetail);
-		carDetail.setCarMaker(this);
+//	public CarDetail addCarDetail(CarDetail carDetail) {
+//		getCarDetails().add(carDetail);
+//		carDetail.setCarMaker(this);
+//
+//		return carDetail;
+//	}
 
-		return carDetail;
-	}
-
-	public CarDetail removeCarDetail(CarDetail carDetail) {
-		getCarDetails().remove(carDetail);
-		carDetail.setCarMaker(null);
-
-		return carDetail;
-	}
+//	public CarDetail removeCarDetail(CarDetail carDetail) {
+//		getCarDetails().remove(carDetail);
+//		carDetail.setCarMaker(null);
+//
+//		return carDetail;
+//	}
 
 }

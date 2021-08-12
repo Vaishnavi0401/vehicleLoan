@@ -23,7 +23,6 @@ export class AdminDashboardService {
   {
     return this.myhttp.delete<string>(this.baseUrl+"deleteLoan/"+loanId);
   }
-
   approveLoanDetailService(adminDashboardLoanDetail:AdminDashboardLoanDetail):Observable<AdminDashboardLoanDetail>
   {
     console.log("From service");
@@ -41,4 +40,12 @@ export class AdminDashboardService {
   }
 
   //return this.myhttp.post<any>("http://localhost:8090/admin/getAllLoanDetails",adminDashboardLoanDetail);
+  getLoanDetailsbyloanIdService(loanId: number):Observable<any>
+  {
+    console.log("From Service");
+    return this.myhttp.get<AdminDashboardLoanDetail>(this.baseUrl+"getLoanDetailbyLoanId/"+loanId);
+  }
+
+
+
 }
