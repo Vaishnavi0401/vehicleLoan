@@ -18,8 +18,6 @@ public class LoginServiceImpl implements LoginService {
 		{
 			return loginRepository.fetchUser(login);
 		}
-
-		
 		return null;
 	}
 }

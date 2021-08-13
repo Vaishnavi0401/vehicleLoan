@@ -10,28 +10,27 @@
 </head>
 
 <body>
+
+    <h1>LOGIN PAGE</h1>
 <div>
-  <form [formGroup]="loginForm" (ngSubmit)="submitLogin(loginForm)">
-    <div>
-      <label for="email">E-mail</label>
-      <input formControlName="email"  type="email" name="email" id="email" placeholder="E-mail" />
-      <div *ngIf="loginForm.get('email').hasError('required')">
-            Email is required 
-      </div>
-      <div *ngIf="loginForm.get('email').hasError('pattern')">
-        Email is invalid
-    </div>
+  <!-- <form> -->
+    
+    <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email"  name="email" class="form-control" id="email" placeholder="Enter Email Id" [(ngModel)]="login.emailId">
+        
+      </div> 
+
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pwd" placeholder="Enter Password" [(ngModel)]="login.password">
+     
     </div>
 
     <div>
-      <label for="pwd">Password</label>
-      <input formControlName="pwd" type="password" name="pwd" id="pwd" placeholder="Password" />
+      <button type="submit" class="btn btn-primary ms-5" (click)="loginId()">Login</button>
     </div>
-
-    <div>
-      <button type="submit">Login</button>
-    </div>
-  </form>
+  <!-- </form> -->
 </div>
 </body>
 </html>

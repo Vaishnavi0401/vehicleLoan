@@ -21,8 +21,10 @@ public class LoginController {
 	public String loginUser(@RequestBody Login login) {
 		UserDetail isValidUser = loginService.validateUser(login);
 		if (isValidUser != null) {
-			return "Login successfully!";
+			return "{\"status\" : \"Logged in successfully!\"}";
 		}
-		return "Login Unsuccessful!";
+		else {
+		return "{\"status\" : \"Login unsuccessful!\"}";
+	}
 	}
 }
