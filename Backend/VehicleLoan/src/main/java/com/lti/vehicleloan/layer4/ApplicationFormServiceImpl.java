@@ -6,12 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.State;
+import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer3.ApplicationFormRepository;
 import com.lti.vehicleloan.layer3.ApplicationFormRepositoryImpl;
@@ -105,6 +108,26 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 	@Override
 	public List<CarType> selectAllCarTypeService() {
 		return appFormRepo.selectAllCarTypes();
+	}
+
+	@Override
+	public List<TypeOfEmploymentDetail> selectAllTypeOfEmploymentService() {
+		return appFormRepo.selectAllTypeOfEmployments();
+	}
+
+	@Override
+	public List<AccountTypeDetail> selectAllAccountTypeDetailService() {
+		return appFormRepo.selectAllAccountTypeDetails();
+	}
+
+	@Override
+	public Integer insertEmploymentDetailService(EmploymentDetail employmentDetail) {
+		System.out.println("Service insert Employment called");
+		if(employmentDetail != null) {
+			Integer employmentId = appFormRepo.insertEmploymentDetail(employmentDetail);
+			return employmentId;
+		}
+		return null;
 	}
 
 	

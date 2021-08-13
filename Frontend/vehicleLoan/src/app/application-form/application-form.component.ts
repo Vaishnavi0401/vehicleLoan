@@ -1,11 +1,16 @@
+import { escapeRegExp } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { AddressDetail } from '../pojos/AddressDetail';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
 import { CarType } from '../pojos/carType';
 import { City } from '../pojos/City';
+import { EmploymentDetail } from '../pojos/EmploymentDetail';
+import { LoanDetail } from '../pojos/LoanDetail';
 import { State } from '../pojos/State';
+import { TypeOfEmploymentDetail } from '../pojos/TypeOfEmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
 import { ApplicationFormService } from './application-form.service';
 
@@ -16,39 +21,9 @@ import { ApplicationFormService } from './application-form.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
-  validateForm: FormGroup;
-
-  //----------------------------PERSONAL DETAILS----------------------------
-  allStates: State[] = [];
-  allCities: City[] = [];
-  allCars: CarDetail[] = [];
-  allCarMakers: CarMaker[] = [];
-  allCarTypes: CarType[] = [];
-  selectedCities: City[] = [];
-
-  userDetail: UserDetail;
-  city: City;
-  state: State;
-  addressDetail: AddressDetail;
-  carDetail: CarDetail;
-  carMaker: CarMaker;
-  carType: CarType;
-
-  password: string = '';
-  password1: string = '';
-  //----------------------------PERSONAL DETAILS ENDS----------------------------
-
-
   constructor(private appFormService: ApplicationFormService) { }
 
   ngOnInit(): void {
-
-    this.validateForm = new FormGroup({
-      name : new FormControl('', [Validators.required,]),
-      age : new FormControl('', [Validators.required,]),
-      emailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
-      mobileNumber: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
-    })
 
     this.getAllStates();
     this.getAllCities();
@@ -63,6 +38,80 @@ export class ApplicationFormComponent implements OnInit {
     this.carMaker = new CarMaker();
     this.carType = new CarType();
   }
+
+  // personalDetailSubmitted = false;
+  ageErrorMsg = '';
+  ageHasError = false;
+  passwordErrorMsg = '';
+  passwordHasError = false;
+  mobileNumberErrorMsg = '';
+  mobileNumberHasError = false;
+  personalDetailHasError = this.ageHasError || this.passwordHasError || this.mobileNumberHasError
+
+  validateAge(value: number) {
+    if (value < 18) {
+      this.ageErrorMsg="Age should be greater than 18";
+      this.ageHasError = true;
+    } 
+    else if(value > 65){
+      this.ageErrorMsg="Age should be less than 60";
+      this.ageHasError = true;
+    }
+    else{
+      this.ageErrorMsg = '';
+      this.ageHasError = false;
+    }
+  }
+
+  validateMobileNumber(mobileNumber: string){
+    if(mobileNumber.length != 10){
+      this.mobileNumberErrorMsg = "Mobile number must be of 10 digits";
+      this.mobileNumberHasError = true;
+    }
+    else{
+      this.mobileNumberErrorMsg = '';
+      this.mobileNumberHasError = false;
+    }
+  }
+
+  validatePassword(){
+    if(this.password1 != this.password){
+      this.passwordErrorMsg = "Passwords don't match"
+      this.passwordHasError = true;
+    }
+    else{
+      this.passwordErrorMsg = ''
+      this.passwordHasError = false;
+    }
+  }
+
+  //----------------------------PERSONAL DETAILS----------------------------
+  allStates: State[] = [];
+  allCities: City[] = [];
+  allCars: CarDetail[] = [];
+  allCarMakers: CarMaker[] = [];
+  allCarTypes: CarType[] = [];
+  allTypeOfEmploymentDeatils: TypeOfEmploymentDetail[] = [];
+  allAccountTypeDetails: AccountTypeDetail[] = [];
+  selectedCities: City[] = [];
+
+
+  userDetail: UserDetail;
+  city: City;
+  state: State;
+  addressDetail: AddressDetail;
+  carDetail: CarDetail;
+  carMaker: CarMaker;
+  carType: CarType;
+  employmentDetail: EmploymentDetail;
+  typeOfEmploymentDetail: TypeOfEmploymentDetail;
+  accountTypeDetail: AccountTypeDetail;
+  loanDetail: LoanDetail;
+
+  password: string = '';
+  password1: string = '';
+  //----------------------------PERSONAL DETAILS ENDS----------------------------
+
 
   //----------------------------PERSONAL DETAILS----------------------------
   getAllStates() {
@@ -81,7 +130,6 @@ export class ApplicationFormComponent implements OnInit {
     this.appFormService.getAllCitiesService().subscribe(
       (data: City[]) => {
         this.allCities = data;
-        console.log(data);
       },
       (err) => {
         console.log(err);
@@ -110,13 +158,12 @@ export class ApplicationFormComponent implements OnInit {
 
   }
 
-  personalDetails() {
+  onPersonalDetailSubmit() {
+    console.log("Submitted");
     this.addressDetail.city = this.getCity(this.city.cityId);
     this.userDetail.addressDetail = this.addressDetail;
     this.userDetail.role = 1;
-    console.log(this.allCars);
-    // console.log("printing the addresid of the user using this.userDetail.addressDetail.addressId: ",this.userDetail.addressDetail.address);
-    // console.log("printing the addresid of the user using this.userDetail.addressDetail.city.cityName: ",this.userDetail.addressDetail.city.cityName);
+    console.log(this.userDetail);
     // this.appFormService.addUserService(this.userDetail).subscribe(
     //   (val)=> console.log(val.status),
     //   (err)=>console.log(err)
@@ -174,7 +221,7 @@ export class ApplicationFormComponent implements OnInit {
     )[0];
   }
 
-  carDetails() {
+  onCarDetailSubmit() {
     this.carDetail.carMaker = this.getCarMaker(this.carMaker.carMakerId);
     this.carDetail.carType = this.getCarType(this.carType.carTypeId);
     console.log(this.carDetail);
@@ -186,4 +233,29 @@ export class ApplicationFormComponent implements OnInit {
 
   //----------------------------CAR DETAILS ENDS----------------------------
 
+  //----------------------------EMPLOYMENT DETAILS----------------------------
+
+  getAllTypeOfEmploymentDetails() {
+    this.appFormService.getAllTypeOfEmploymentDetailService().subscribe(
+      (data: TypeOfEmploymentDetail[]) => {
+        this.allTypeOfEmploymentDeatils = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getAllAccountTypeDetails() {
+    this.appFormService.getAllAccountTypeDetailService().subscribe(
+      (data: AccountTypeDetail[]) => {
+        this.allAccountTypeDetails = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  //----------------------------EMPLOYMENT DETAILS ENDS----------------------------
 }

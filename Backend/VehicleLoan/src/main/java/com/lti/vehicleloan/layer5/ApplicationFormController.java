@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.State;
+import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
 
@@ -52,6 +55,14 @@ public class ApplicationFormController {
 	public String addUser(@RequestBody CarDetail car) {
 		appFormService.insertCarService(car);
 		return "{\"status\" : \"Car Added Successfully\"}";
+	}
+	
+	@PostMapping
+	@ResponseBody
+	@RequestMapping(value="/addEmploymentDetail")
+	public String addUser(@RequestBody EmploymentDetail employementDetail) {
+		appFormService.insertEmploymentDetailService(employementDetail);
+		return "{\"status\" : \"Emploment Detail has been Added Successfully\"}";
 	}
 	
 	@GetMapping
@@ -95,6 +106,20 @@ public class ApplicationFormController {
 	@RequestMapping(value="/getAllCarTypes")
 	public List<CarType> getCarTypes() {
 		return appFormService.selectAllCarTypeService();
+	}
+	
+	@GetMapping
+	@ResponseBody
+	@RequestMapping(value="/getAllTypeOfEmploymentDetails")
+	public List<TypeOfEmploymentDetail> getTypeOfEmploymentsDetails() {
+		return appFormService.selectAllTypeOfEmploymentService();
+	}
+	
+	@GetMapping
+	@ResponseBody
+	@RequestMapping(value="/getAllAccountTypeDetails")
+	public List<AccountTypeDetail> getAccountTypeDetails() {
+		return appFormService.selectAllAccountTypeDetailService();
 	}
 	
 }

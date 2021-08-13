@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
 import { CarType } from '../pojos/carType';
 import { City } from '../pojos/City';
 import { State } from '../pojos/State';
+import { TypeOfEmploymentDetail } from '../pojos/TypeOfEmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
 
 
@@ -52,5 +54,19 @@ export class ApplicationFormService {
   }
 
   //----------------------------CAR DETAILS ENDS----------------------------
+
+  //----------------------------EMPLOYMENT DETAILS----------------------------
+
+  getAllTypeOfEmploymentDetailService():Observable<TypeOfEmploymentDetail[]>{
+    return this.myhttp.get<TypeOfEmploymentDetail[]>(this.baseURL+"getAllTypeOfEmploymentDetails")
+  }
+
+  getAllAccountTypeDetailService():Observable<AccountTypeDetail[]>{
+    return this.myhttp.get<AccountTypeDetail[]>(this.baseURL+"getAllAccountTypeDetails")
+  }
+
+
+  //----------------------------EMPLOYMENT DETAILS ENDS----------------------------
+
 
 }

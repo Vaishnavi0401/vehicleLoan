@@ -8,12 +8,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.State;
+import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 
 @Repository
@@ -61,7 +64,6 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 	}
 
 	@Override
-	@Transactional
 	public State selectState(String stateId) {
 		EntityManager entityManager = super.getEntityManager();
 		return entityManager.find(State.class, stateId);
@@ -69,6 +71,7 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 
 	@Override
 	public List<City> selectAllCities() {
+		System.out.println("Repo select all Cities called");
 		EntityManager entityManager = super.getEntityManager();
 		Query query = entityManager.createQuery("from City");
 		return query.getResultList();
@@ -76,6 +79,7 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 
 	@Override
 	public List<State> selectAllStates() {
+		System.out.println("Repo select all State called");
 		EntityManager entityManager = super.getEntityManager();
 		Query query = entityManager.createQuery("from State");
 		return query.getResultList();
@@ -135,6 +139,31 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		EntityManager entityManager = super.getEntityManager();
 		Query query = entityManager.createQuery("from CarType");
 		return query.getResultList();
+	}
+
+	@Override
+	public List<TypeOfEmploymentDetail> selectAllTypeOfEmployments() {
+		System.out.println("Repo select all Type of Employment Detail called");
+		EntityManager entityManager = super.getEntityManager();
+		Query query = entityManager.createQuery("from TypeOfEmploymentDetail");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<AccountTypeDetail> selectAllAccountTypeDetails() {
+		System.out.println("Repo select all Account Type Detail called");
+		EntityManager entityManager = super.getEntityManager();
+		Query query = entityManager.createQuery("from AccountTypeDetail");
+		return query.getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Integer insertEmploymentDetail(EmploymentDetail employmentDetail) {
+		System.out.println("Repo insert User details called");
+		EntityManager entityManager = super.getEntityManager();
+		entityManager.persist(employmentDetail);
+		return employmentDetail.getEmployeeId();
 	}
 
 
