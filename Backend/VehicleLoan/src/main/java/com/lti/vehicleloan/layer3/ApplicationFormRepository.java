@@ -11,6 +11,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -48,4 +49,7 @@ public interface ApplicationFormRepository {
 	List<TypeOfEmploymentDetail> selectAllTypeOfEmployments() throws TypeOfEmploymentNotFoundException;
 	List<AccountTypeDetail> selectAllAccountTypeDetails() throws AccountTypeDetailNotFoundException;
 	Integer insertEmploymentDetail(EmploymentDetail employmentDetail);
+	
+	Integer insertLoanDetail(LoanDetail loanDetail);
+	
 }

@@ -1,7 +1,7 @@
 <div class="application-form-wrapper">
     <!-- <form action=""> -->
     <!-- ------------------------------------------------------PERSONAL DETAILS FORM STARTS -------------------------------------------------------------->
-    <div class="card">
+    <div class="card" *ngIf="step == 1">
         <div class="card-body">
             <div class="tab">
                 <div class="card-head center">
@@ -160,7 +160,7 @@
     <!-- ------------------------------------------------------PERSONAL DETAILS FORM ENDS -------------------------------------------------------------->
     <br>
     <!-- ------------------------------------------------------CAR DETAILS FORM STARTS -------------------------------------------------------------->
-    <div class="card">
+    <div class="card" *ngIf="step == 2">
         <div class="card-body">
             <div class="tab">
                 <div class="card-head center">
@@ -230,7 +230,8 @@
                         </span>
                     </div>
                     <div class="center">
-                        <button type="submit" class="btn btn-success" [disabled]="carForm.form.invalid">Next</button>
+                        <button type="button" class="btn btn-success" (click)="previous()">Previous</button>
+                        <button type="submit" class="btn btn-success ms-3" [disabled]="carForm.form.invalid">Next</button>
                     </div>
                 </form>
             </div>
@@ -239,53 +240,66 @@
     <!-- ------------------------------------------------------CAR DETAILS FORM ENDS -------------------------------------------------------------->
     <br>
     <!-- ------------------------------------------------------EMPLOYMENT DETAILS FORM STARTS -------------------------------------------------------------->
-    <div class="card">
+    <div class="card" *ngIf="step == 3">
         <div class="card-body">
             <div class="tab">
                 <div class="card-head center">
                     <h1>Employment Details</h1>
                 </div>
-                <form action="" #EmploymentForm="ngForm" (ngSubmit)="onCarDetailSubmit()">
+                <form action="" #EmploymentForm="ngForm" (ngSubmit)="onEmploymentDetailSubmit()">
                     <div class="mb-3">
-                        <label class="form-label" for="vehicleDomain"></label>
-                        <select class="form-select" name="carMaker" [(ngModel)]="carMaker.carMakerId">
-                            <option *ngFor="let carMaker of allCarMakers" value="{{carMaker.carMakerId}}">
-                                {{carMaker.carMaker}}
+                        <label class="form-label" for="typeOfEmploymentDetail">Type of Employment</label>
+                        <select class="form-select" name="typeOfEmploymentDetail" #TYPEOFEMP="ngModel"
+                            [class.is-invalid]="TYPEOFEMP.invalid && TYPEOFEMP.touched"
+                            [(ngModel)]="typeOfEmploymentDetail.typeOfEmpId" required>
+                            <option *ngFor="let typeOfEmployment of allTypeOfEmploymentDeatils"
+                                value="{{typeOfEmployment.typeOfEmpId}}">
+                                {{typeOfEmployment.typeOfEmployment}}
                             </option>
                         </select>
+                        <span *ngIf="TYPEOFEMP.invalid && TYPEOFEMP.touched" style="color: red;">
+                            Type of Employment is Required
+                        </span>
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label" for="carMaker">Car Maker</label>
-                        <select class="form-select" name="carMaker" [(ngModel)]="carMaker.carMakerId">
-                            <option *ngFor="let carMaker of allCarMakers" value="{{carMaker.carMakerId}}">
-                                {{carMaker.carMaker}}
+                        <label class="form-label" for="accountTypeDetail">Account Type</label>
+                        <select class="form-select" name="accountTypeDetail" #ACCTYPE="ngModel"
+                            [class.is-invalid]="ACCTYPE.invalid && ACCTYPE.touched"
+                            [(ngModel)]="accountTypeDetail.accountTypeId" required>
+                            <option *ngFor="let accountTypeDetail of allAccountTypeDetails"
+                                value="{{accountTypeDetail.accountTypeId}}">
+                                {{accountTypeDetail.accountType}}
                             </option>
                         </select>
+                        <span *ngIf="ACCTYPE.invalid && ACCTYPE.touched" style="color: red;">
+                            Account Type is Required
+                        </span>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="carType">Car Type</label>
-                        <select class="form-select" name="carType" [(ngModel)]="carType.carTypeId">
-                            <option *ngFor="let carType of allCarTypes" value="{{carType.carTypeId}}">
-                                {{carType.carType}}
-                            </option>
-                        </select>
+                        <label class="form-label">Annual Salary</label>
+                        <input type="number" name="annualSalary" class="form-control" #ANNUALSALARY="ngModel"
+                            [class.is-invalid]="ANNUALSALARY.invalid && ANNUALSALARY.touched" required
+                            [(ngModel)]="employmentDetail.annualSalary" (ngModelChange)="validateAnnualSalary(ANNUALSALARY.value)">
+                        <span *ngIf="ANNUALSALARY.invalid && ANNUALSALARY.touched" style="color: red;">
+                            Annual Salary is Required
+                        </span>
+                        <span style="color: red;">
+                            {{annualSalaryErrorMsg}}
+                        </span>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Car Model</label>
-                        <input type="text" name="carModel" class="form-control" [(ngModel)]="carDetail.model">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Ex-Showroom Price</label>
-                        <input type="number" name="showroomPrice" class="form-control"
-                            [(ngModel)]="carDetail.showroomPrice">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">On-RoadPrice Price</label>
-                        <input type="number" name="onroadPrice" class="form-control"
-                            [(ngModel)]="carDetail.onroadPrice">
+                        <label class="form-label">Existing EMI</label>
+                        <input type="number" name="existingEmi" class="form-control" #EXISTINGEMI="ngModel"
+                            [class.is-invalid]="EXISTINGEMI.invalid && EXISTINGEMI.touched" required
+                            [(ngModel)]="loanDetail.existingEmi">
+                        <span *ngIf="EXISTINGEMI.invalid && EXISTINGEMI.touched" style="color: red;">
+                            Exisiting EMI is Required
+                        </span>
                     </div>
                     <div class="center">
-                        <button type="submit" class="btn btn-success">Next</button>
+                        <button type="button" class="btn btn-success" (click)="previous()">Previous</button>
+                        <button type="submit" class="btn btn-success ms-3" [disabled]="EmploymentForm.form.invalid || annualSalaryError">Next</button>
                     </div>
                 </form>
             </div>
@@ -293,6 +307,141 @@
     </div>
 
     <!-- ------------------------------------------------------EMPLOYMENT DETAILS FORM ENDS -------------------------------------------------------------->
+<br>
+<!-- ------------------------------------------------------LOAN DETAILS FORM STARTS -------------------------------------------------------------->
+<div class="card" *ngIf="step == 4">
+    <div class="card-body">
+        <div class="tab">
+            <div class="card-head center">
+                <h1>Loan Details</h1>
+            </div>
+            <form action="" #LoanForm="ngForm" (ngSubmit)="onLoanDetailSubmit()">
+                <div class="mb-3">
+                    <label class="form-label" for="typeOfEmploymentDetail">Type of Employment</label>
+                    <select class="form-select" name="typeOfEmploymentDetail" #TYPEOFEMP="ngModel"
+                        [class.is-invalid]="TYPEOFEMP.invalid && TYPEOFEMP.touched"
+                        [(ngModel)]="typeOfEmploymentDetail.typeOfEmpId" required>
+                        <option *ngFor="let typeOfEmployment of allTypeOfEmploymentDeatils"
+                            value="{{typeOfEmployment.typeOfEmpId}}">
+                            {{typeOfEmployment.typeOfEmployment}}
+                        </option>
+                    </select>
+                    <span *ngIf="TYPEOFEMP.invalid && TYPEOFEMP.touched" style="color: red;">
+                        Type of Employment is Required
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="accountTypeDetail">Account Type</label>
+                    <select class="form-select" name="accountTypeDetail" #ACCTYPE="ngModel"
+                        [class.is-invalid]="ACCTYPE.invalid && ACCTYPE.touched"
+                        [(ngModel)]="accountTypeDetail.accountTypeId" required>
+                        <option *ngFor="let accountTypeDetail of allAccountTypeDetails"
+                            value="{{accountTypeDetail.accountTypeId}}">
+                            {{accountTypeDetail.accountType}}
+                        </option>
+                    </select>
+                    <span *ngIf="ACCTYPE.invalid && ACCTYPE.touched" style="color: red;">
+                        Account Type is Required
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Loan Amount</label>
+                    <input type="number" name="loanAmount" class="form-control" #LOANAMOUNT="ngModel"
+                        [class.is-invalid]="LOANAMOUNT.invalid && LOANAMOUNT.touched" required
+                        [(ngModel)]="employmentDetail.annualSalary">
+                    <span *ngIf="LOANAMOUNT.invalid && LOANAMOUNT.touched" style="color: red;">
+                        Annual Salary is Required
+                    </span>
+                    <span style="color: red;">
+                        {{annualSalaryErrorMsg}}
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Existing EMI</label>
+                    <input type="number" name="existingEmi" class="form-control" #EXISTINGEMI="ngModel"
+                        [class.is-invalid]="EXISTINGEMI.invalid && EXISTINGEMI.touched" required
+                        [(ngModel)]="loanDetail.existingEmi">
+                    <span *ngIf="EXISTINGEMI.invalid && EXISTINGEMI.touched" style="color: red;">
+                        Exisiting EMI is Required
+                    </span>
+                </div>
+                <div class="center">
+                    <button type="button" class="btn btn-success" (click)="previous()">Previous</button>
+                    <button type="submit" class="btn btn-success ms-3">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="card" *ngIf="step == 5">
+    <div class="card-body">
+        <div class="tab">
+            <div class="card-head center">
+                <h1>Identity Details</h1>
+            </div>
+            <form action="" (ngSubmit)="onIdentityDetailSubmit()">
+                <div class="mb-3">
+                    <label class="form-label" for="typeOfEmploymentDetail">Type of Employment</label>
+                    <select class="form-select" name="typeOfEmploymentDetail" #TYPEOFEMP="ngModel"
+                        [class.is-invalid]="TYPEOFEMP.invalid && TYPEOFEMP.touched"
+                        [(ngModel)]="typeOfEmploymentDetail.typeOfEmpId" required>
+                        <option *ngFor="let typeOfEmployment of allTypeOfEmploymentDeatils"
+                            value="{{typeOfEmployment.typeOfEmpId}}">
+                            {{typeOfEmployment.typeOfEmployment}}
+                        </option>
+                    </select>
+                    <span *ngIf="TYPEOFEMP.invalid && TYPEOFEMP.touched" style="color: red;">
+                        Type of Employment is Required
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="accountTypeDetail">Account Type</label>
+                    <select class="form-select" name="accountTypeDetail" #ACCTYPE="ngModel"
+                        [class.is-invalid]="ACCTYPE.invalid && ACCTYPE.touched"
+                        [(ngModel)]="accountTypeDetail.accountTypeId" required>
+                        <option *ngFor="let accountTypeDetail of allAccountTypeDetails"
+                            value="{{accountTypeDetail.accountTypeId}}">
+                            {{accountTypeDetail.accountType}}
+                        </option>
+                    </select>
+                    <span *ngIf="ACCTYPE.invalid && ACCTYPE.touched" style="color: red;">
+                        Account Type is Required
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Loan Amount</label>
+                    <input type="number" name="loanAmount" class="form-control" #LOANAMOUNT="ngModel"
+                        [class.is-invalid]="LOANAMOUNT.invalid && LOANAMOUNT.touched" required
+                        [(ngModel)]="employmentDetail.annualSalary">
+                    <span *ngIf="LOANAMOUNT.invalid && LOANAMOUNT.touched" style="color: red;">
+                        Annual Salary is Required
+                    </span>
+                    <span style="color: red;">
+                        {{annualSalaryErrorMsg}}
+                    </span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Existing EMI</label>
+                    <input type="number" name="existingEmi" class="form-control" #EXISTINGEMI="ngModel"
+                        [class.is-invalid]="EXISTINGEMI.invalid && EXISTINGEMI.touched" required
+                        [(ngModel)]="loanDetail.existingEmi">
+                    <span *ngIf="EXISTINGEMI.invalid && EXISTINGEMI.touched" style="color: red;">
+                        Exisiting EMI is Required
+                    </span>
+                </div>
+                <div class="center">
+                    <button type="button" class="btn btn-success" (click)="previous()">Previous</button>
+                    <button type="submit" class="btn btn-success ms-3">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------------------------LOAN DETAILS FORM ENDS -------------------------------------------------------------->
 
     <!-- </form> -->
 </div>

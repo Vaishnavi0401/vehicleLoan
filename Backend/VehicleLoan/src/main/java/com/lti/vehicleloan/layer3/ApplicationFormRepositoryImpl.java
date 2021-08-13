@@ -15,6 +15,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -164,6 +165,15 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		EntityManager entityManager = super.getEntityManager();
 		entityManager.persist(employmentDetail);
 		return employmentDetail.getEmployeeId();
+	}
+
+	@Override
+	@Transactional
+	public Integer insertLoanDetail(LoanDetail loanDetail) {
+		System.out.println("Repo insert Loan called");
+		EntityManager entityManager = super.getEntityManager();
+		entityManager.persist(loanDetail);
+		return loanDetail.getLoanId();
 	}
 
 

@@ -1,8 +1,10 @@
 package com.lti.vehicleloan.layer4;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -126,6 +129,17 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 		if(employmentDetail != null) {
 			Integer employmentId = appFormRepo.insertEmploymentDetail(employmentDetail);
 			return employmentId;
+		}
+		return null;
+	}
+
+	@Override
+	public Integer insertLoanDetailService(LoanDetail loanDetail) {
+		System.out.println("Service insert Loan called");
+		if(loanDetail != null) {
+			loanDetail.setApplyDate(new Date(System.currentTimeMillis()));
+			Integer loanId = appFormRepo.insertLoanDetail(loanDetail);
+			return loanId;
 		}
 		return null;
 	}

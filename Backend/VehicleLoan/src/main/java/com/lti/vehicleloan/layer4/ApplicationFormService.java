@@ -11,6 +11,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -36,5 +37,7 @@ public interface ApplicationFormService {
 	List<TypeOfEmploymentDetail> selectAllTypeOfEmploymentService();
 	List<AccountTypeDetail> selectAllAccountTypeDetailService();
 	Integer insertEmploymentDetailService(EmploymentDetail employmentDetail);
+	
+	Integer insertLoanDetailService(LoanDetail loanDetail);
 	
 }

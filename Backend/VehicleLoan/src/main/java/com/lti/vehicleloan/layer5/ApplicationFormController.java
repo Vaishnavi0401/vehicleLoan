@@ -19,6 +19,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
@@ -63,6 +64,14 @@ public class ApplicationFormController {
 	public String addUser(@RequestBody EmploymentDetail employementDetail) {
 		appFormService.insertEmploymentDetailService(employementDetail);
 		return "{\"status\" : \"Emploment Detail has been Added Successfully\"}";
+	}
+	
+	@PostMapping
+	@ResponseBody
+	@RequestMapping(value="/addLoanDetail")
+	public String addUser(@RequestBody LoanDetail loanDetail) {
+		appFormService.insertLoanDetailService(loanDetail);
+		return "{\"status\" : \"Loan Details has been Added Successfully\"}";
 	}
 	
 	@GetMapping

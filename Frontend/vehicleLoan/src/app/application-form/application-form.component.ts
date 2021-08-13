@@ -1,6 +1,7 @@
 import { escapeRegExp } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { toUnicode } from 'punycode';
 import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { AddressDetail } from '../pojos/AddressDetail';
 import { CarDetail } from '../pojos/CarDetail';
@@ -21,14 +22,25 @@ import { ApplicationFormService } from './application-form.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
+  temp(){
+    sessionStorage.setItem("loanAmount", '500000');
+    sessionStorage.setItem("rateToInterest", '5');
+    sessionStorage.setItem("Tenure", '36');
+  }
+
   constructor(private appFormService: ApplicationFormService) { }
 
   ngOnInit(): void {
+
+    this.temp();
+
 
     this.getAllStates();
     this.getAllCities();
     this.getAllCarMakers();
     this.getAllCarTypes();
+    this.getAllTypeOfEmploymentDetails()
+    this.getAllAccountTypeDetails();
 
     this.userDetail = new UserDetail();
     this.city = new City();
@@ -37,16 +49,25 @@ export class ApplicationFormComponent implements OnInit {
     this.carDetail = new CarDetail();
     this.carMaker = new CarMaker();
     this.carType = new CarType();
+    this.typeOfEmploymentDetail = new TypeOfEmploymentDetail();
+    this.accountTypeDetail = new AccountTypeDetail();
+    this.employmentDetail = new EmploymentDetail();
+    this.loanDetail = new LoanDetail();
   }
 
+  
+
   // personalDetailSubmitted = false;
+  step: any = 1;
   ageErrorMsg = '';
   ageHasError = false;
   passwordErrorMsg = '';
   passwordHasError = false;
   mobileNumberErrorMsg = '';
   mobileNumberHasError = false;
-  personalDetailHasError = this.ageHasError || this.passwordHasError || this.mobileNumberHasError
+  personalDetailHasError = this.ageHasError || this.passwordHasError || this.mobileNumberHasError;
+  annualSalaryErrorMsg = '';
+  annualSalaryError = false;
 
   validateAge(value: number) {
     if (value < 18) {
@@ -72,6 +93,7 @@ export class ApplicationFormComponent implements OnInit {
       this.mobileNumberErrorMsg = '';
       this.mobileNumberHasError = false;
     }
+    sessionStorage.setItem('loanAmount', '500000');
   }
 
   validatePassword(){
@@ -83,6 +105,26 @@ export class ApplicationFormComponent implements OnInit {
       this.passwordErrorMsg = ''
       this.passwordHasError = false;
     }
+  }
+  
+  validateAnnualSalary(annualSalary: number){
+    console.log(annualSalary);
+    if(annualSalary<300000){
+      this.annualSalaryErrorMsg = 'Annual Salary Cannot be less than 300000';
+      this.annualSalaryError = true;
+    }
+    else{
+      this.annualSalaryErrorMsg = '';
+      this.annualSalaryError = false;
+    } 
+  }
+
+  next(){
+    this.step = this.step + 1;
+  }
+
+  previous(){
+    this.step = this.step - 1;
   }
 
   //----------------------------PERSONAL DETAILS----------------------------
@@ -164,6 +206,7 @@ export class ApplicationFormComponent implements OnInit {
     this.userDetail.addressDetail = this.addressDetail;
     this.userDetail.role = 1;
     console.log(this.userDetail);
+    this.next();
     // this.appFormService.addUserService(this.userDetail).subscribe(
     //   (val)=> console.log(val.status),
     //   (err)=>console.log(err)
@@ -225,6 +268,7 @@ export class ApplicationFormComponent implements OnInit {
     this.carDetail.carMaker = this.getCarMaker(this.carMaker.carMakerId);
     this.carDetail.carType = this.getCarType(this.carType.carTypeId);
     console.log(this.carDetail);
+    this.next();
     // this.appFormService.addCarService(this.carDetail).subscribe(
     //   (val)=> console.log(val.status),
     //   (err)=>console.log(err)
@@ -257,5 +301,27 @@ export class ApplicationFormComponent implements OnInit {
     );
   }
 
+  onEmploymentDetailSubmit(){
+    this.employmentDetail.typeOfEmploymentDetail = this.typeOfEmploymentDetail;
+    this.employmentDetail.accountTypeDetail = this.accountTypeDetail;
+    console.log(this.employmentDetail);
+    this.next();
+  }
   //----------------------------EMPLOYMENT DETAILS ENDS----------------------------
+
+//----------------------------LOAN DETAILS STARTS----------------------------
+  onLoanDetailSubmit(){
+    this.next();
+  }
+  //----------------------------LOAN DETAILS ENDS----------------------------
+
+//----------------------------IDENTITY DETAILS STARTS----------------------------
+onIdentityDetailSubmit(){
+  this.next();
 }
+//----------------------------IDENTITY DETAILS ENDS----------------------------
+
+
+}
+
+
