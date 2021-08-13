@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { EmiCalculatorService } from '../emi-calculator.service';
 import { EMICalc } from '../pojos/EMICalculator';
 

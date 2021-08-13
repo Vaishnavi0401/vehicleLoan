@@ -45,27 +45,27 @@ public class State implements Serializable {
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
-
-	public List<City> getCities() {
-		return this.cities;
-	}
+//
+//	public List<City> getCities() {
+//		return this.cities;
+//	}
 
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
-
-	public City addCity(City city) {
-		getCities().add(city);
-		city.setState(this);
-
-		return city;
-	}
-
-	public City removeCity(City city) {
-		getCities().remove(city);
-		city.setState(null);
-
-		return city;
-	}
+//
+//	public City addCity(City city) {
+//		getCities().add(city);
+//		city.setState(this);
+//
+//		return city;
+//	}
+//
+//	public City removeCity(City city) {
+//		getCities().remove(city);
+//		city.setState(null);
+//
+//		return city;
+//	}
 
 }

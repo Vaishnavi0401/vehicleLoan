@@ -46,26 +46,26 @@ public class TypeOfEmploymentDetail implements Serializable {
 		this.typeOfEmployment = typeOfEmployment;
 	}
 
-	public List<EmploymentDetail> getEmploymentDetails() {
-		return this.employmentDetails;
-	}
+//	public List<EmploymentDetail> getEmploymentDetails() {
+//		return this.employmentDetails;
+//	}
 
 	public void setEmploymentDetails(List<EmploymentDetail> employmentDetails) {
 		this.employmentDetails = employmentDetails;
 	}
 
-	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().add(employmentDetail);
-		employmentDetail.setTypeOfEmploymentDetail(this);
-
-		return employmentDetail;
-	}
-
-	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().remove(employmentDetail);
-		employmentDetail.setTypeOfEmploymentDetail(null);
-
-		return employmentDetail;
-	}
+//	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().add(employmentDetail);
+//		employmentDetail.setTypeOfEmploymentDetail(this);
+//
+//		return employmentDetail;
+//	}
+//
+//	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().remove(employmentDetail);
+//		employmentDetail.setTypeOfEmploymentDetail(null);
+//
+//		return employmentDetail;
+//	}
 
 }

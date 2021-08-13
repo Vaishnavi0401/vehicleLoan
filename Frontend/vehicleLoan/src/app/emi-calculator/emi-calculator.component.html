@@ -13,7 +13,8 @@
 <body>
 
 <div class="container">
-    <form >
+    <form> 
+
         <div class="form-group">
           <label for="principal">Principal</label>
           <input type="number" class="form-control" name="principalAmount" id="principal" placeholder="Enter the Principal" [(ngModel)]="principalAmount">         
@@ -21,18 +22,18 @@
 
 
         <div class="form-group">
-            <label for="rate">Principal</label>
+            <label for="rate">Rate of Interest</label>
             <input type="number" class="form-control" id="rate" name="rate" placeholder="Enter the Rate of Interest" [(ngModel)]="rate">         
         </div><br> <br>
         
         
         <div class="form-group">
-            <label for="tenure">Principal</label>
+            <label for="tenure">Time</label>
             <input type="number" class="form-control" id="tenure" name="timePeriod" placeholder="Enter the required Tenure" [(ngModel)]="timePeriod">         
         </div><br><br>
         
         
-        <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI</button>
+        <button type="submit" class="btn btn-primary" (click)="calculateEMI()" >Calculate EMI</button>
     </form>
 </div>
    

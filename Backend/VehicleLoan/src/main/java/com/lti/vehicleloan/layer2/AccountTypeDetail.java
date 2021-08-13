@@ -45,27 +45,27 @@ public class AccountTypeDetail implements Serializable {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-
-	public List<EmploymentDetail> getEmploymentDetails() {
-		return this.employmentDetails;
-	}
+//
+//	public List<EmploymentDetail> getEmploymentDetails() {
+//		return this.employmentDetails;
+//	}
 
 	public void setEmploymentDetails(List<EmploymentDetail> employmentDetails) {
 		this.employmentDetails = employmentDetails;
 	}
 
-	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().add(employmentDetail);
-		employmentDetail.setAccountTypeDetail(this);
-
-		return employmentDetail;
-	}
-
-	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().remove(employmentDetail);
-		employmentDetail.setAccountTypeDetail(null);
-
-		return employmentDetail;
-	}
+//	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().add(employmentDetail);
+//		employmentDetail.setAccountTypeDetail(this);
+//
+//		return employmentDetail;
+//	}
+//
+//	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().remove(employmentDetail);
+//		employmentDetail.setAccountTypeDetail(null);
+//
+//		return employmentDetail;
+//	}
 
 }

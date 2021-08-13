@@ -20,7 +20,6 @@ public class EmiController {
 	@RequestMapping(path="/calculateEmi")
 	public double emiCalculator(@RequestBody EMICalc emiCalc) {
 		double emi = emiCalculatorService.emiCalculator(emiCalc);
-		System.out.println("Hello");
 		return emi;
 	}
 }
