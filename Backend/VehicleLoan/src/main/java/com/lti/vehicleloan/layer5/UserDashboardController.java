@@ -1,15 +1,12 @@
 package com.lti.vehicleloan.layer5;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +29,7 @@ public class UserDashboardController {
 	@ResponseBody
 	@RequestMapping(value="/getUserbyId/{userId}")
 	
-	public UserDetail getUserbyUserId(@PathVariable int userId) {
+	public List<UserDetail> getUserbyUserId(@PathVariable int userId) {
 		return userDashboardService.selectUserbyUserIdService(userId);
 	}
 	

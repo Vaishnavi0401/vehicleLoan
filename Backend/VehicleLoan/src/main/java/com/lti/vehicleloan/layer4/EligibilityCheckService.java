@@ -7,5 +7,5 @@ import com.lti.vehicleloan.layer2.EligibilityCheck;
 @Service
 public interface EligibilityCheckService {
 
-	public boolean checkEligibility(EligibilityCheck eligibility);
+	public boolean checkingEligibility(EligibilityCheck eligibility);
 }

@@ -54,18 +54,18 @@ public class CarMaker implements Serializable {
 		this.carDetails = carDetails;
 	}
 
-	public CarDetail addCarDetail(CarDetail carDetail) {
-		getCarDetails().add(carDetail);
-		carDetail.setCarMaker(this);
-
-		return carDetail;
-	}
-
-	public CarDetail removeCarDetail(CarDetail carDetail) {
-		getCarDetails().remove(carDetail);
-		carDetail.setCarMaker(null);
-
-		return carDetail;
-	}
+//	public CarDetail addCarDetail(CarDetail carDetail) {
+//		getCarDetails().add(carDetail);
+//		carDetail.setCarMaker(this);
+//
+//		return carDetail;
+//	}
+//
+//	public CarDetail removeCarDetail(CarDetail carDetail) {
+//		getCarDetails().remove(carDetail);
+//		carDetail.setCarMaker(null);
+//
+//		return carDetail;
+//	}
 
 }

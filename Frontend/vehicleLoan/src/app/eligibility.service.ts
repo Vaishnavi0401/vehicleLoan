@@ -10,7 +10,7 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
 })
 export class EligibilityService {
 
-   constructor(private myhttp: HttpClient) { }
+   constructor(private myHttp: HttpClient) { }
 
   
   checkEligibilityService(check: EligibilityCheck): Observable<any>{
@@ -18,7 +18,7 @@ export class EligibilityService {
     console.log(check.age);
     
 
-    return this.myhttp.post<any>("http://localhost:8085/CheckEligibility", check);                    
+    return this.myHttp.post<any>("http://localhost:8085/CheckEligibility", check);                    
     
   }
 }

@@ -18,12 +18,12 @@ import com.lti.vehicleloan.layer4.EligibilityCheckService;
 public class EligibilityController{
 
 	@Autowired
-	EligibilityCheckService eligible;
+	EligibilityCheckService isEligible;
 	
 	@PostMapping
 	@RequestMapping(path="/CheckEligibility")
 	public String check(@RequestBody EligibilityCheck eligibility) {
-		boolean checking = eligible.checkEligibility(eligibility);
+		boolean checking = isEligible.checkingEligibility(eligibility);
 		
 		System.out.println("Controller of CheckEligibility");
 		

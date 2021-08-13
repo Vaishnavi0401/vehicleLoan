@@ -124,18 +124,18 @@ public class CarDetail implements Serializable {
 		this.loanDetails = loanDetails;
 	}
 
-	public LoanDetail addLoanDetail(LoanDetail loanDetail) {
-		getLoanDetails().add(loanDetail);
-		loanDetail.setCarDetail(this);
-
-		return loanDetail;
-	}
-
-	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
-		getLoanDetails().remove(loanDetail);
-		loanDetail.setCarDetail(null);
-
-		return loanDetail;
-	}
+//	public LoanDetail addLoanDetail(LoanDetail loanDetail) {
+//		getLoanDetails().add(loanDetail);
+//		loanDetail.setCarDetail(this);
+//
+//		return loanDetail;
+//	}
+//
+//	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
+//		getLoanDetails().remove(loanDetail);
+//		loanDetail.setCarDetail(null);
+//
+//		return loanDetail;
+//	}
 
 }

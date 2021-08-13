@@ -54,18 +54,18 @@ public class CarType implements Serializable {
 		this.carDetails = carDetails;
 	}
 
-	public CarDetail addCarDetail(CarDetail carDetail) {
-		getCarDetails().add(carDetail);
-		carDetail.setCarType(this);
-
-		return carDetail;
-	}
-
-	public CarDetail removeCarDetail(CarDetail carDetail) {
-		getCarDetails().remove(carDetail);
-		carDetail.setCarType(null);
-
-		return carDetail;
-	}
+//	public CarDetail addCarDetail(CarDetail carDetail) {
+//		getCarDetails().add(carDetail);
+//		carDetail.setCarType(this);
+//
+//		return carDetail;
+//	}
+//
+//	public CarDetail removeCarDetail(CarDetail carDetail) {
+//		getCarDetails().remove(carDetail);
+//		carDetail.setCarType(null);
+//
+//		return carDetail;
+//	}
 
 }

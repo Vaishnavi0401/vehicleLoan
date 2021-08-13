@@ -50,27 +50,27 @@ public class City implements Serializable {
 		this.cityName = cityName;
 	}
 
-	public List<AddressDetail> getAddressDetails() {
-		return this.addressDetails;
-	}
+//	public List<AddressDetail> getAddressDetails() {
+//		return this.addressDetails;
+//	}
 
 	public void setAddressDetails(List<AddressDetail> addressDetails) {
 		this.addressDetails = addressDetails;
 	}
 
-	public AddressDetail addAddressDetail(AddressDetail addressDetail) {
-		getAddressDetails().add(addressDetail);
-		addressDetail.setCity(this);
-
-		return addressDetail;
-	}
-
-	public AddressDetail removeAddressDetail(AddressDetail addressDetail) {
-		getAddressDetails().remove(addressDetail);
-		addressDetail.setCity(null);
-
-		return addressDetail;
-	}
+//	public AddressDetail addAddressDetail(AddressDetail addressDetail) {
+//		getAddressDetails().add(addressDetail);
+//		addressDetail.setCity(this);
+//
+//		return addressDetail;
+//	}
+//
+//	public AddressDetail removeAddressDetail(AddressDetail addressDetail) {
+//		getAddressDetails().remove(addressDetail);
+//		addressDetail.setCity(null);
+//
+//		return addressDetail;
+//	}
 
 	public State getState() {
 		return this.state;

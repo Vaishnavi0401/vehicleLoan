@@ -13,7 +13,7 @@ export class GetEligibilityComponent implements OnInit {
 
   eligibility: EligibilityCheck = new EligibilityCheck();
 
-  ValidateForm: FormGroup;
+  validateForm: FormGroup;
 
   age: number;
   typeOfEmployment: string;
@@ -24,7 +24,7 @@ export class GetEligibilityComponent implements OnInit {
 
   constructor(private getService: EligibilityService) { }
 
-  TestEligibility(){
+  testEligibility(){
     console.log("Assign Parameters");
     this.eligibility.age = this.age;
     this.eligibility.typeOfEmployment = this.typeOfEmployment;
@@ -36,18 +36,22 @@ export class GetEligibilityComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ValidateForm = new FormGroup({
+    this.validateForm = new FormGroup({
       Name : new FormControl('', [Validators.required, Validators.minLength(4)]),
-      EmailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
-      MobileNo: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
+      emailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
+      mobileNo: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
+      onRoadPrice: new FormControl('', [Validators.required, Validators.min(0)]),
+      exShowRoomPrice: new FormControl('', [Validators.required, Validators.min(0)]),
+      carModel: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      carMaker: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
   }
 
   submitForm(form:FormGroup){
     console.log("Is Form Valid", form.valid);
     console.log("Name ", form.value.Name);
-    console.log("Email ",form.value.EmailId);
-    console.log("Mobile No ", form.value.MobileNo);
+    console.log("Email ",form.value.emailId);
+    console.log("Mobile No ", form.value.mobileNo);
   }
 
 }

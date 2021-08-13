@@ -1,10 +1,12 @@
 package com.lti.vehicleloan.layer4;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.vehicleloan.layer2.UserDetail;
-import com.lti.vehicleloan.layer2.UserNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 import com.lti.vehicleloan.layer3.UserDashboardRepositoryImpl;
 
 @Service
@@ -15,7 +17,7 @@ public class UserDashboardServiceIpml implements UserDashboardService {
 	UserDashboardRepositoryImpl userRepo;
 	
 	@Override
-	public UserDetail selectUserbyUserIdService(int userId) {
+	public List<UserDetail> selectUserbyUserIdService(int userId) {
 		
 
 		try {

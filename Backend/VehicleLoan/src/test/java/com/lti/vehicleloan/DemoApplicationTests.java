@@ -23,6 +23,7 @@ class DemoApplicationTests {
 	void contextLoads() {
 	}
 	
+	//Object is Created Successfully
 	@Test
 	void objectTest() {
 		System.out.println("Creating EligibilityCheck Object");
@@ -32,6 +33,7 @@ class DemoApplicationTests {
 		System.out.println("Eligibility Check Object Created");
 	}
 	
+	//Passing values via Object
 	@Test
 	void fetchTest() {
 		System.out.println("Fetching Values");
@@ -40,11 +42,12 @@ class DemoApplicationTests {
 		eligibility.setTypeOfEmployment("Salaried");
 		eligibility.setYearlySalary(30000);
 		eligibility.setExistingEmi(10);
-		assertNotNull(eligibilityservice.checkEligibility(eligibility));
+		assertNotNull(eligibilityservice.checkingEligibility(eligibility));
 		//assertNull(eligibilityservice.checkEligibility(eligibility));
 		System.out.println("Values Fetched");
 	}
 
+	//Checking the Conditions of Service
 	@Test
 	void eligibilityTest() {
 		System.out.println("Checking Whether User Eligible or Not");
@@ -53,7 +56,7 @@ class DemoApplicationTests {
 		eligibility.setTypeOfEmployment("Salaried");
 		eligibility.setYearlySalary(300000);
 		eligibility.setExistingEmi(10);
-		assertEquals(true, eligibilityservice.checkEligibility(eligibility));
+		assertEquals(true, eligibilityservice.checkingEligibility(eligibility));
 		System.out.println("User is Eligible");
 		//assertEquals(false, eligibilityservice.checkEligibility(eligibility));
 		//System.out.println("User is not Eligible");
