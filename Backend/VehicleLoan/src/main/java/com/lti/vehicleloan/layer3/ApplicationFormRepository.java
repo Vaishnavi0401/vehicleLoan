@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
@@ -28,10 +29,11 @@ import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 public interface ApplicationFormRepository {
 	
 	Integer insertAddress(AddressDetail add);
-	AddressDetail selectAddress(int userId);
+	AddressDetail selectAddress(int addressId);
 	void updateAddress(UserDetail user, Integer addressId);
 	
 	Integer insertUser(UserDetail user);
+	UserDetail selectUser(int userId);
 	List<UserDetail> selectAllUsers() throws UserNotFoundException;
 	
 	Integer insertCarMaker(CarMaker carMaker);
@@ -49,7 +51,10 @@ public interface ApplicationFormRepository {
 	List<TypeOfEmploymentDetail> selectAllTypeOfEmployments() throws TypeOfEmploymentNotFoundException;
 	List<AccountTypeDetail> selectAllAccountTypeDetails() throws AccountTypeDetailNotFoundException;
 	Integer insertEmploymentDetail(EmploymentDetail employmentDetail);
+	List<EmploymentDetail> selectEmploymentDetails();
 	
 	Integer insertLoanDetail(LoanDetail loanDetail);
 	
+	Integer insertAdvancedUserDetail(AdvancedUserDetail advancedUserDetail);
+
 }

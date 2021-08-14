@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.ApplicationFormDto;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
@@ -39,5 +41,9 @@ public interface ApplicationFormService {
 	Integer insertEmploymentDetailService(EmploymentDetail employmentDetail);
 	
 	Integer insertLoanDetailService(LoanDetail loanDetail);
+	
+	Integer insertAdvancedUserDetailService(AdvancedUserDetail advancedUserDetail);
+	
+	String insertApplicationFormService(ApplicationFormDto applicationForm);
 	
 }

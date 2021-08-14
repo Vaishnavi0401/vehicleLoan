@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
+import com.lti.vehicleloan.layer2.ApplicationFormDto;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
@@ -73,6 +74,15 @@ public class ApplicationFormController {
 		appFormService.insertLoanDetailService(loanDetail);
 		return "{\"status\" : \"Loan Details has been Added Successfully\"}";
 	}
+	
+	@PostMapping
+	@ResponseBody
+	@RequestMapping(value="/addApplicationForm")
+	public String addUser(@RequestBody ApplicationFormDto applicationForm) {
+		String mssg = appFormService.insertApplicationFormService(applicationForm);
+		return "{\"status\" : \"mssg\"}";
+	}
+	
 	
 	@GetMapping
 	@ResponseBody

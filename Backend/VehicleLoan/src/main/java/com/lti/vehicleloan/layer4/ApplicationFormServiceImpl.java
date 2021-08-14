@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.ApplicationFormDto;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
@@ -39,13 +41,16 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 	//Insert a new User in the database
 	@Override
 	public Integer insertUserService(UserDetail user) {
-		System.out.println("Service insert User called");	
-		AddressDetail userAddress = user.getAddressDetail();
-		Integer userAddressId = this.insertAddressService(userAddress);
-		userAddress.setAddressId(userAddressId);
-		user.setAddressDetail(userAddress);
-		Integer userId = appFormRepo.insertUser(user);
-		return userId;
+		System.out.println("Service insert User called");
+		if(user != null) {
+			AddressDetail userAddress = user.getAddressDetail();
+			Integer userAddressId = this.insertAddressService(userAddress);
+			userAddress.setAddressId(userAddressId);
+			user.setAddressDetail(userAddress);
+			Integer userId = appFormRepo.insertUser(user);
+			return userId;	
+		}
+		return null;
 	}
 	
 	//Select All Users
@@ -84,15 +89,11 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 	@Override
 	public Integer insertCarService(CarDetail car) {
 		System.out.println("Insert Car Service Called");
-		System.out.println(car.getCarMaker().getCarMakerId());
-		System.out.println(car.getCarType().getCarTypeId());
-		if(car.getCarMaker().getCarMakerId() == null) {
-			Integer carMakerId = 0;
-			carMakerId = this.insertCarMakerService(car.getCarMaker());
-			car.getCarMaker().setCarMakerId(carMakerId);
+		if(car != null) {
+			Integer carId = appFormRepo.insertCar(car);
+			return carId;
 		}
-		Integer carId = appFormRepo.insertCar(car);
-		return carId;
+		return null;	
 	}
 
 	//Insert a New Car Maker in the database
@@ -143,7 +144,46 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 		}
 		return null;
 	}
+	
+	public Integer insertAdvancedUserDetailService(AdvancedUserDetail advancedUserDetail) {
+		System.out.println("advanced user detail service called");
+		if(advancedUserDetail != null) {
+			Integer advancedDetailId = this.appFormRepo.insertAdvancedUserDetail(advancedUserDetail);
+			return advancedDetailId;
+		}
+		return null;
+	} 
 
+	public String insertApplicationFormService(ApplicationFormDto applicationForm) {
+		System.out.println("InsertApplication from service called");
+		if(applicationForm != null) {
+			
+			UserDetail userDetail = applicationForm.getUserDetail();
+			Integer userId = this.insertUserService(userDetail);
+			userDetail.setUserId(userId);
+			
+			CarDetail carDetail = applicationForm.getCarDetail();
+			Integer carId = this.insertCarService(carDetail);
+			carDetail.setCarId(carId);
+			
+			EmploymentDetail employmentDetail = applicationForm.getEmploymentDetail();
+			employmentDetail.setUserDetail(userDetail);
+			Integer employmentId = this.insertEmploymentDetailService(employmentDetail);
+			
+			LoanDetail loanDetail = applicationForm.getLoanDetail();
+			loanDetail.setUserDetail(userDetail);
+			loanDetail.setCarDetail(carDetail);
+			Integer loanId = this.insertLoanDetailService(loanDetail);
+
+			AdvancedUserDetail advancedUserDetail = applicationForm.getAdvancedUserDetail();
+			advancedUserDetail.setUserDetail(userDetail);
+			Integer advancedDetailId = this.insertAdvancedUserDetailService(advancedUserDetail);
+			
+			System.out.println("ALL THE FIELDS HAVE BEEN SUCCESSFULLY ADDED");
+			return "All the details added Successfully!";
+		}
+		return "Failed to add the details";
+	}
 	
 
 }

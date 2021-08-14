@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
 import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
@@ -53,9 +54,9 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 
 	
 	@Override
-	public AddressDetail selectAddress(int userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public AddressDetail selectAddress(int addressId) {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(AddressDetail.class, addressId);
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		return entityManager.find(State.class, stateId);
 	}
 
+	@Override
+	public UserDetail selectUser(int userId) {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(UserDetail.class, userId);
+	}
+	
 	@Override
 	public List<City> selectAllCities() {
 		System.out.println("Repo select all Cities called");
@@ -176,6 +183,21 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		return loanDetail.getLoanId();
 	}
 
+	@Override
+	public List<EmploymentDetail> selectEmploymentDetails() {
+		System.out.println("Repo select all Employment Detail called");
+		EntityManager entityManager = super.getEntityManager();
+		Query query = entityManager.createQuery("from EmploymentDetail");
+		return query.getResultList();
+	}
 
+	@Override
+	@Transactional
+	public Integer insertAdvancedUserDetail(AdvancedUserDetail advancedUserDetail) {
+		System.out.println("Repo insert Loan called");
+		EntityManager entityManager = super.getEntityManager();
+		entityManager.persist(advancedUserDetail);
+		return advancedUserDetail.getAdvancedDetailsId();
+	}
 
 }
