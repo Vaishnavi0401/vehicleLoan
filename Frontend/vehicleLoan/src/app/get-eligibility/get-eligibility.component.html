@@ -21,7 +21,7 @@
       <form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)">
         <div class="mb-3">
           <label class="form-label"><b>Vehicle Details</b></label>
-          <input type="text" class="form-control" id="carMaker" placeholder="Enter Car Maker">
+          <input type="text" class="form-control" formControlName="carMaker" id="carMaker" placeholder="Enter Car Maker">
           <span *ngIf="validateForm.get('carMaker').hasError('required')" style="color: red;">
             Car Maker is Required
           </span>
