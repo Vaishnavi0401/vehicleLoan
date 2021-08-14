@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmiCalculatorService } from '../emi-calculator.service';
 import { EMICalc } from '../pojos/EMICalculator';
 
@@ -10,7 +10,7 @@ import { EMICalc } from '../pojos/EMICalculator';
   styleUrls: ['./emi-calculator.component.css']
 })
 export class EmiCalculatorComponent implements OnInit {
-
+  emiForm: FormGroup;
   emiCalc: EMICalc = new EMICalc();
 
   principalAmount: number;
@@ -34,6 +34,12 @@ export class EmiCalculatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.emiForm = new FormGroup({
+    principal: new FormControl('', [Validators.required, Validators.min(200000)]),
+    rate: new FormControl('', [Validators.required, Validators.min(3)]),
+    tenure: new FormControl('', [Validators.required, Validators.min(2)])
+    })
   }
 
 }
