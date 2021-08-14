@@ -7,8 +7,13 @@ import javax.persistence.FetchType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.AdvancedUserDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.EmploymentDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.UserDetailNotFoundException;
 import com.lti.vehicleloan.layer3.AdminDashboardRepositoryImpl;
 
 @Service
@@ -103,6 +108,57 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 		}
 		return null;
 
+	}
+
+
+	
+	public List<AdvancedUserDetail> selectAllAdvancedUserDetailService() {
+
+		System.out.println("selectAllAdvancedUserDetailService() method from layer 4");
+
+		return adminRepo.selectAllAdvancedUserDetail();
+	}
+
+
+	
+	public AdvancedUserDetail getAdvancedUserDetailByUserIdService(int userId)  {
+
+		System.out.println("getAdvancedUserDetailByUserIdService() method from layer 4");
+		try {
+			return adminRepo.selectAdvancedUserDetailByUserId(userId);
+		} catch (AdvancedUserDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	
+	public AdvancedUserDetail getAdvancedUserDetailByLoanIdService(int loanId) {
+
+		System.out.println("getAdvancedUserDetailByLoanIdService() method from layer 4");
+		try {
+			return adminRepo.selectAdvancedUserDetailByLoanId(loanId);
+		} catch (AdvancedUserDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	
+	public List<EmploymentDetail> getEmploymentDetailByLoanIdService(int loanId) {
+		
+		System.out.println("getEmploymentDetailByLoanIdService() method from layer 4");
+		try {
+			return adminRepo.getEmploymentDetailsByLoanId(loanId);
+		} catch (EmploymentDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
 import com.lti.vehicleloan.layer3.AdminDashboardRepositoryImpl;
 import com.lti.vehicleloan.layer4.AdminDashboardService;
 

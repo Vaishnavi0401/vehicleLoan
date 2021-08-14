@@ -1043,6 +1043,7 @@ user_id number(8) references user_details(user_id)
 );
 
 
+
 create table employment_details(
 employee_id number primary key,
 annual_salary number,

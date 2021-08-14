@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdminDashboardLoanDetail } from './pojos/AdminDashboardLoanDetail';
+import { AdvancedUserDetail } from './pojos/AdvancedUserDetail';
+import { EmploymentDetail } from './pojos/EmploymentDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +47,21 @@ export class AdminDashboardService {
     console.log("From Service");
     return this.myhttp.get<AdminDashboardLoanDetail>(this.baseUrl+"getLoanDetailbyLoanId/"+loanId);
   }
+  viewAdvancedUserDetailbyLoanIdService(loanId: number):Observable<any>
+  {
+    console.log("From viewAdvancedUserDetailbyLoanId Service");
+    return this.myhttp.get<AdvancedUserDetail>(this.baseUrl+"getAdvancedUserDetailByLoanId/"+loanId);
+  }
+  viewEmploymentDetailsbyLoanIdService(loanId:number):Observable<any>
+  {
+    console.log("From viewEmploymentDetailsbyLoanId Service");
+    return this.myhttp.get<EmploymentDetail[]>(this.baseUrl+"getEmploymentDetailByLoanId/"+loanId);
+  }
 
-
+  viewLoanDetailsbyApprovalService(approval:string):Observable<any>
+  {
+    console.log("from viewLoanDetailsbyApprovalService");
+    return this.myhttp.get<AdminDashboardLoanDetail[]>(this.baseUrl+"getLoanDetailbyApproval/"+approval);
+  }
 
 }

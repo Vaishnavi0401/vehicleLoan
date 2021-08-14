@@ -8,8 +8,14 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.UserDetail;
+import com.lti.vehicleloan.layer2.exceptions.AdvancedUserDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.EmploymentDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.UserDetailNotFoundException;
 @Repository
 public class AdminDashboardRepositoryImpl extends AdminDashboardBaseRepository implements AdminDashboardRepository{
 
@@ -74,9 +80,87 @@ public class AdminDashboardRepositoryImpl extends AdminDashboardBaseRepository i
 		Query query=entityManager.createQuery("select l from LoanDetail l where l.approval=:approval");
 		query.setParameter("approval", approval);
 		List<LoanDetail> loanDetailListByApproval=query.getResultList();
-		return loanDetailListByApproval;
+		return loanDetailListByApproval;	
+	}
+	
+	@Transactional
+	public List<AdvancedUserDetail> selectAllAdvancedUserDetail() {
+
+		EntityManager entityManager=getEntityManager();
+		Query query=entityManager.createQuery("from AdvancedUserDetail");
+		List<AdvancedUserDetail> advancedUserDetailList=query.getResultList();
+		return advancedUserDetailList;
+	}
+	
+	@Transactional
+	public UserDetail getUserDetailByUserId(int userId) throws UserDetailNotFoundException {
 		
+		EntityManager entityManager=getEntityManager();
+		return entityManager.find(UserDetail.class, userId);
+		
+	}
+	@Transactional
+	public AdvancedUserDetail selectAdvancedUserDetailByUserId(int userId) throws AdvancedUserDetailNotFoundException {
+		
+		EntityManager entityManager=getEntityManager();
+		Query query=entityManager.createQuery("select adv from AdvancedUserDetail adv , UserDetail ud where ud.userId=:userId");
+		query.setParameter("userId", userId);
+		AdvancedUserDetail advancedUserDetail=(AdvancedUserDetail) query.getSingleResult();
+		return advancedUserDetail;
+	}
+	
+	//Query query=entityManager.createQuery("select l,adv from AdvancedUserDetail adv , UserDetail ud, LoanDetail l where ud.userId=:userId");
+
+//	EntityManager entityManager = getEntityManager();
+//	Query query = entityManager.createQuery("select loan from UserDetail user, LoanDetail loan where user.userId = loan.userDetail.userId and user.userId = :duserId");
+//	query.setParameter("duserId", userId);
+//	List<UserDetail> users = query.getResultList();
+//	return users;
+	//
+	
+	@Transactional
+	public List<UserDetail> getUserDetailsByLoanId(int loanId) {
+
+		EntityManager entityManager = getEntityManager();
+		//Query query = entityManager.createQuery("select user from UserDetail user,LoanDetail l where l.userId: ");
+		return null;
+	}
+
+	@Transactional
+	public AdvancedUserDetail selectAdvancedUserDetailByLoanId(int loanId) throws AdvancedUserDetailNotFoundException {
+		
+		EntityManager entityManager = getEntityManager();
+		LoanDetail foundLoanDetail=entityManager.find(LoanDetail.class, loanId );
+		int foundLoanDetailUserId=foundLoanDetail.getUserDetail().getUserId();	
+		//Query query = entityManager.createQuery("select adv from AdvancedUserDetail adv , UserDetail ud where ud.userId=:userId  ");
+		Query query = entityManager.createQuery("select adv from AdvancedUserDetail adv , UserDetail ud where adv.userDetail.userId=ud.userId and ud.userId=:userId");
+		query.setParameter("userId",foundLoanDetailUserId );
+		AdvancedUserDetail advancedUserDetail=(AdvancedUserDetail) query.getSingleResult();
+		return advancedUserDetail;
 	}
 	
 	
+	@Transactional
+	public List<EmploymentDetail> getEmploymentDetailsByLoanId(int loanId) throws EmploymentDetailNotFoundException {
+		EntityManager entityManager = getEntityManager();
+		LoanDetail foundLoanDetail=entityManager.find(LoanDetail.class, loanId );
+		int foundLoanDetailUserId=foundLoanDetail.getUserDetail().getUserId();	
+		//Query query = entityManager.createQuery("select ed from EmploymentDetail ed, UserDetail ud where ud.userId=:userId and ed.userDetail.userId=:userId "); 
+		Query query = entityManager.createQuery("select ed from EmploymentDetail ed, UserDetail ud where ed.userDetail.userId=ud.userId and ud.userId=:userId");
+		query.setParameter("userId", foundLoanDetailUserId );
+		List<EmploymentDetail> employmentDetail=query.getResultList();
+		return employmentDetail;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+

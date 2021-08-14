@@ -1,49 +1,57 @@
 <html>
 <body>
     <div class="container">
-        <p>Admin Dashboard</p>
+        
         <br>
         <h1>All Loan Details</h1>
-        <br>
+       
 
-    <div>
-        <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId"   >
-        <button type="button" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)" >Search </button>
-        <table *ngIf="getLoanDetailArray && getLoanDetailArray.length">
-            <thead>
-                <tr>
-                    <th> Loan Id </th>
-                    <th> Loan ApplyDate </th>
-                    <th> Car id</th>
-                    <th>Loan Approval</th> 
-                    <th>Operation </th>
-                    <th>Operation </th>
-                    <th>Operation </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let loan of getLoanDetailArray">
-                    <td>{{loan.loanId}}</td>
-                    <td>{{loan.applyDate}}</td>
-                    <td>{{loan.carDetail.carId}}</td>
-                    <!-- <td>{{loan.model}}</td> -->
-                    <td>{{loan.approval}}</td>
-                    <td>
-                        <button type="button" (click)="approveLoanDetail(loan)" >Approve</button>
-                    </td>
-                    <td>
-                        <button type="button" (click)="rejectLoanDetail(loan)">Reject</button>
-                    </td>
-                    <td>
-                        <button type="button" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
-                    </td>  
-                </tr>
-            </tbody>
-        </table>
     
-    </div>
-    <!-- [(ngModel)]="getLoanbyLoanId"  (ngModelChange)="selectLoanDetailByLoanId()" -->
+        <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId"   >
+        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)" >Search </button>
+        <!-- <input type="text" placeholder="Search by approval" [(ngModel)]="approval">
+        <button type="button" (click)="getLoanDetailsbyApproval(approval)" >Search by approval</button> -->
+        <!-- <button type="button" class="btn btn-primary" (click)="getAllLoanDetails()">All Loan Details</button> -->
+        <div *ngIf="divOneLoan">
+            <table *ngIf="getLoanDetail ">
+                <thead>
+                    <tr>
+                        <th> Loan Id </th>
+                        <th> Loan ApplyDate </th>
+                        <th> Car id</th>
+                        <th>Loan Approval</th> 
+                        <th>Operation </th>
+                        <th>Operation </th>
+                        <th>Operation </th>
+                    </tr>
+                </thead>
+                <!-- *ngFor="let loan of getLoanDetailArray" -->
+                <tbody>
+                    <tr>
+                        <td>{{getLoanDetail.loanId}}</td>
+                        <td>{{getLoanDetail.applyDate}}</td>
+                        <td>{{getLoanDetail.carDetail.carId}}</td>
+                        <!-- <td>{{getLoanDetail.model}}</td> -->
+                        <td>{{getLoanDetail.approval}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="viewLoanDetails(getLoanDetail.loanId)" >View More</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="approveLoanDetail(getLoanDetail)" >Approve</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(getLoanDetail)">Reject</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="deleteLoanDetail(getLoanDetail.loanId)">Delete</button>
+                        </td>  
+                    </tr>
+                </tbody>
+            </table>
+            </div>
 
+    <!-- [(ngModel)]="getLoanbyLoanId"  (ngModelChange)="selectLoanDetailByLoanId()" -->
+<div *ngIf="divAllLoan">
 <table *ngIf="allLoanDetails && allLoanDetails.length">
     <thead>
         <tr>
@@ -52,6 +60,7 @@
              <th> Car id</th>
              <!-- <th> Car model</th> -->
             <th>Loan Approval</th> 
+            <th>Operation </th>
             <th>Operation </th>
             <th>Operation </th>
             <th>Operation </th>
@@ -66,24 +75,101 @@
         <!-- <td>{{loan.model}}</td> -->
         <td>{{loan.approval}}</td>
         <td>
-            <button type="button" (click)="approveLoanDetail(loan)" >Approve</button>
+            <button type="button" class="btn btn-primary" (click)="viewLoanDetails(loan.loanId)">View More</button>
         </td>
         <td>
-            <button type="button" (click)="rejectLoanDetail(loan)">Reject</button>
+            <button type="button" class="btn btn-primary" (click)="approveLoanDetail(loan)"  >Approve</button>
         </td>
         <td>
-            <button type="button" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
+            <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(loan)">Reject</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
         </td>
         </tr>
     </tbody>
 </table>
+</div>
+<!-- <table *ngIf="viewAdvancedUserDetailByLoanId && (viewAdvancedUserDetailByLoanId|keyvalue)?.length">
+  <thead>
+    <tr>
+        <th>Aadhar Card</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>{{viewAdvancedUserDetailByLoanId.aadhaarCard}}</td>
+    </tr>
 
-<br><br><br><br><br><br><br><br><br>
-<button name="button" type="button">Dashboard</button><br><br><br>
-<button name="button" type="button">Clients</button><br><br><br>
-<button name="button" type="button">Application</button><br><br><br>
-<button name="button" type="button">Rejected List</button><br><br><br>
-<button name="button" type="button">Settings</button>
+</tbody>
+</table> -->
+<div *ngIf="divViewMore">
+ <label *ngIf="viewAdvancedUserDetailByLoanId "> Aadhar Card : {{viewAdvancedUserDetailByLoanId.aadhaarCard}}</label>
+
+<table *ngIf="viewEmploymentDetailByLoanId && viewEmploymentDetailByLoanId.length">
+    <thead>
+      <tr>
+          <th>Annual Salary</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let emp of viewEmploymentDetailByLoanId">
+          <td *ngIf="viewEmploymentDetailByLoanId && viewEmploymentDetailByLoanId.length">{{emp.annualSalary}}</td>
+      </tr>
+  
+  </tbody>
+  </table>
+</div>
+
+<div *ngIf="divAprrovalLoan">
+    <table *ngIf="approvalLoanDetailArray && approvalLoanDetailArray.length">
+        <thead>
+            <tr>
+                <th> Loan Id </th>
+                <th> Loan ApplyDate </th>
+                <th> Car id</th>
+                <th>Loan Approval</th> 
+                <th>Operation </th>
+                <th>Operation </th>
+                <th>Operation </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let loan of approvalLoanDetailArray">
+                <td>{{loan.loanId}}</td>
+                <td>{{loan.applyDate}}</td>
+                <td>{{loan.carDetail.carId}}</td>
+                <!-- <td>{{loan.model}}</td> -->
+                <td>{{loan.approval}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="viewLoanDetails(loan.loanId)" >View More</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="approveLoanDetail(loan)" >Approve</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(loan)">Reject</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
+                </td>  
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+
+<br><br>
+<!-- <button name="button" class="btn btn-primary" type="button">Application</button><br><br><br> -->
+<button name="button" class="btn btn-primary" type="button">Clients</button><br><br><br>
+<button name="button" class="btn btn-primary" type="button"  (click)="getAllLoanDetails()">Dashboard</button><br><br><br>
+<button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('pending')">Pending List</button><br><br><br>
+<button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('yes')">Accepted List</button><br><br><br>
+<button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('no')">Rejected List</button><br><br><br>
+
+
+
 </div>
 </body>
 </html>
+<!-- <button name="button" type="button">Settings</button> -->

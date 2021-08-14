@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { AdminDashboardLoanDetail } from '../pojos/AdminDashboardLoanDetail';
+import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
+import { EmploymentDetail } from '../pojos/EmploymentDetail';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,22 +17,49 @@ export class AdminDashboardComponent implements OnInit {
   getLoanbyLoanId: number=0;
   l1: number=0;
   getLoanDetail:AdminDashboardLoanDetail;
+  approval:string;
+
+  divAllLoan:boolean=true;
+  divViewMore:boolean=true;
+  divOneLoan:boolean=true;
+  divAprrovalLoan:boolean=true;
+
   
+
 
   constructor(private adminDashboardService: AdminDashboardService) { }
 
   ngOnInit(): void {
-  this.adminDashboardService.getAllLoanDetailsService().subscribe(
-    (data:AdminDashboardLoanDetail[])=>
-    {
-      this.allLoanDetails=data;
-      this.tempLoanDetails=data;
-    },
-    (err)=>{
-      console.log(err);
-    }
+  // this.adminDashboardService.getAllLoanDetailsService().subscribe(
+  //   (data:AdminDashboardLoanDetail[])=>
+  //   {
+  //     this.allLoanDetails=data;
+  //     this.tempLoanDetails=data;
+  //   },
+  //   (err)=>{
+  //     console.log(err);
+  //   }
 
-  );
+  // );
+  }
+
+  getAllLoanDetails(){
+    this.divAllLoan=true;
+    this.divViewMore=false;
+    this.divOneLoan=false;
+    this.divAprrovalLoan=false;
+
+
+    this.adminDashboardService.getAllLoanDetailsService().subscribe(
+      (data:AdminDashboardLoanDetail[])=>
+      {
+        this.allLoanDetails=data;
+        this.tempLoanDetails=data;
+      },
+      (err)=>{
+        console.log(err);
+      }
+    );
   }
 
   xdata:any;
@@ -129,15 +158,18 @@ export class AdminDashboardComponent implements OnInit {
   searched:boolean;
   selectLoanDetailByLoanId(getLoanbyLoanId:number)
   {
+    this.divAllLoan=false;
+    this.divViewMore=false;
+    this.divOneLoan=true;
+
     console.log('loan id chosen is'+this.getLoanbyLoanId);
     this.adminDashboardService.getLoanDetailsbyloanIdService(getLoanbyLoanId).
     subscribe((data:AdminDashboardLoanDetail)=>
     {
-
       this.getLoanDetail=data;
       console.log(this.getLoanDetail);
-      this.tempLoanDetails=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
-      this.getLoanDetailArray=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      //this.tempLoanDetails=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      //this.getLoanDetailArray=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
       console.log('length of getLoanDetailArray'+ this.getLoanDetailArray.length);
       console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
       console.log('length of allLoanDetails: '+this.allLoanDetails.length);      
@@ -146,6 +178,80 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   } //end of search
+
+  viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
+  //viewAdvancedUserDetailByLoanIdArray:AdvancedUserDetail[]=[];
+  viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
+
+
+  bdata:any;
+  viewed:boolean;
+  viewLoanDetails(viewAllDetailByLoanId:number)
+  {
+    this.divAllLoan=false;
+    this.divViewMore=true;
+    this.divOneLoan=true;
+
+    console.log('loan id chosen is'+this.getLoanbyLoanId);
+    this.adminDashboardService.viewAdvancedUserDetailbyLoanIdService(viewAllDetailByLoanId).
+    subscribe((data:AdvancedUserDetail)=>
+    {
+      this.viewAdvancedUserDetailByLoanId=data;
+      
+      console.log(this.viewAdvancedUserDetailByLoanId);
+      //this.viewAdvancedUserDetailByLoanIdArray=this.viewAdvancedUserDetailByLoanIdArray.filter(v=>())
+
+
+    },(err) => {
+      console.log(err + 'error'+this.adata);
+      }
+    );
+    console.log('viewEmploymentDetailsbyLoanId Service from ts');
+    this.adminDashboardService.viewEmploymentDetailsbyLoanIdService(viewAllDetailByLoanId).
+    subscribe((data:EmploymentDetail[])=>
+    {
+      this.viewEmploymentDetailByLoanId=data;
+      console.log(this.viewEmploymentDetailByLoanId);
+    },(err) => {
+      console.log(err + 'error'+this.adata);
+      }
+    
+    );
+  }
+  approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  cdata:any;
+  getLoanDetailsbyApproval(approval:string)
+  {    
+    this.divAprrovalLoan=true;
+    this.divAllLoan=false;
+
+    console.log('approval chosen is: '+approval);
+    this.adminDashboardService.viewLoanDetailsbyApprovalService(approval).
+    subscribe((data:AdminDashboardLoanDetail[])=>
+    {
+      this.approvalLoanDetailArray=data;
+      console.log(this.approvalLoanDetailArray);
+      console.log('length of approvalLoanDetailArray'+this.approvalLoanDetailArray.length);
+      console.log('length of getLoanDetailArray'+ this.getLoanDetailArray.length);
+      console.log('length of allLoanDetails: '+this.allLoanDetails.length);      
+    
+    },(err) => {
+      console.log(err + 'error'+this.adata);
+      }
+    );
+    
+  
+  }
+
+
+
+
+  viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
+
+
+
+
+
 
  //this.allLoanDetails=this.tempLoanDetails;
         //   console.log('from searchLoan() '+data);
@@ -160,7 +266,5 @@ export class AdminDashboardComponent implements OnInit {
       //   this.searched=true;
       
       // }
-
-
 
 }

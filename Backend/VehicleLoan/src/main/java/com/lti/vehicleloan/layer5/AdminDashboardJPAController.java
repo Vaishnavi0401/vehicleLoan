@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer4.AdminDashboardServiceImpl;
 
@@ -73,6 +75,43 @@ public class AdminDashboardJPAController {
 		{
 			return adminDashboardService.selectLoanDetailbyApprovalService(approval);
 		}
+		
+		//http://localhost:8090/admin/getAllAdvancedUserDetails
+		@GetMapping
+		@ResponseBody
+		@RequestMapping(value="/getAllAdvancedUserDetails")
+		public List<AdvancedUserDetail> getAllAdvancedUserDetails(){
+			return adminDashboardService.selectAllAdvancedUserDetailService();
+		}
+		
+		//http://localhost:8090/admin/getAdvancedUserDetailByUserId/301
+		@GetMapping
+		@ResponseBody
+		@RequestMapping(value="/getAdvancedUserDetailByUserId/{userId}")
+		public AdvancedUserDetail getAdvancedUserDetailByUserId(@PathVariable int userId)
+		{
+			return adminDashboardService.getAdvancedUserDetailByUserIdService(userId);
+		}
+		
+		//http://localhost:8090/admin/getAdvancedUserDetailByLoanId/501
+		@GetMapping
+		@ResponseBody
+		@RequestMapping(value="/getAdvancedUserDetailByLoanId/{loanId}")
+		public AdvancedUserDetail getAdvancedUserDetailByLoanId(@PathVariable int loanId)
+		{
+			return adminDashboardService.getAdvancedUserDetailByLoanIdService(loanId);
+		}
+		
+		//http://localhost:8090/admin/getEmploymentDetailByLoanId/501
+		@GetMapping
+		@ResponseBody
+		@RequestMapping(value="/getEmploymentDetailByLoanId/{loanId}")
+		public List<EmploymentDetail> getEmploymentDetailByLoanId(@PathVariable int loanId)
+		{
+			return adminDashboardService.getEmploymentDetailByLoanIdService(loanId);
+		}
+		
+		
 		
 	}
 
