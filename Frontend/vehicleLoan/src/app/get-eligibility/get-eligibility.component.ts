@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators , MinLengthValidator} from '@angular/forms';
 import { EligibilityService } from '../eligibility.service';
@@ -19,7 +20,7 @@ export class GetEligibilityComponent implements OnInit {
   typeOfEmployment: string;
   salary: number;
   existingEMI: number;
-
+  Name: string;
 
 
   constructor(private getService: EligibilityService) { }
@@ -31,13 +32,13 @@ export class GetEligibilityComponent implements OnInit {
     this.eligibility.yearlySalary = this.salary;
     this.existingEMI = this.existingEMI;
     this.getService.checkEligibilityService(this.eligibility)
-    .subscribe(val => alert(val.status));
+    .subscribe(val => alert(this.Name + " " +val.status));
 
   }
 
   ngOnInit(): void {
     this.validateForm = new FormGroup({
-      Name : new FormControl('', [Validators.required, Validators.minLength(4)]),
+      Name : new FormControl('', [Validators.required, Validators.minLength(3)]),
       emailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
       mobileNo: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
       onRoadPrice: new FormControl('', [Validators.required, Validators.min(0)]),

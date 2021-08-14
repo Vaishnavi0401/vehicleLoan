@@ -5,7 +5,7 @@
     <button type="button" (click)="getUserDetailsByUserId(userId)">Get User</button>
 </div>
 
-<table border=5px>
+<table class="table table-striped">
 
     <thead>
         <tr>
@@ -17,7 +17,7 @@
             <th>Principal Amount</th>
             <th>Rate Of Interest</th>
             <th>Tenure</th>
-            <th>Car Id</th>
+            <!-- <th>Car Id</th>
             <th>Car Model Image</th>
             <th>Model</th>
             <th>On Road Price</th>
@@ -26,7 +26,7 @@
             <th>Car Maker Id</th>
             <th>Car Maker</th>
             <th>Car Type Id</th>
-            <th>Car Type</th>
+            <th>Car Type</th> -->
             <th>User Id</th>
             <th>Age</th>
             <th>Email</th>
@@ -34,13 +34,13 @@
             <th>Mobile Number</th>
             <th>Name</th>
             <th>Password</th>
-            <th>Role</th>
-            <th>Address Id</th>
+            <!-- <th>Role</th> -->
+            <!-- <th>Address Id</th> -->
             <th>Address</th>
             <th>Pincode</th>
-            <th>City Id</th>
+            <!-- <th>City Id</th> -->
             <th>City Name</th>
-            <th>State Id</th>
+            <!-- <th>State Id</th> -->
             <th>State Name</th>
         </tr>
     </thead>
@@ -55,7 +55,7 @@
             <td>{{detail.principalAmount}}</td>
             <td>{{detail.rateOfInterest}}</td>
             <td>{{detail.tenure}}</td>
-            <td>{{detail.carDetail.carId}}</td>
+            <!-- <td>{{detail.carDetail.carId}}</td>
             <td>{{detail.carDetail.carModelImage}}</td>
             <td>{{detail.carDetail.model}}</td>
             <td>{{detail.carDetail.onroadPrice}}</td>
@@ -64,7 +64,7 @@
             <td>{{detail.carDetail.carMaker.carMakerId}}</td>
             <td>{{detail.carDetail.carMaker.carMaker}}</td>
             <td>{{detail.carDetail.carType.carTypeId}}</td>
-            <td>{{detail.carDetail.carType.carType}}</td>
+            <td>{{detail.carDetail.carType.carType}}</td> -->
             <td>{{detail.userDetail.userId}}</td>
             <td>{{detail.userDetail.age}}</td>
             <td>{{detail.userDetail.email}}</td>
@@ -72,16 +72,15 @@
             <td>{{detail.userDetail.mobileNumber}}</td>
             <td>{{detail.userDetail.name}}</td>
             <td>{{detail.userDetail.password}}</td>
-            <td>{{detail.userDetail.role}}</td>
-            <td>{{detail.userDetail.addressDetail.addressId}}</td>
+            <!-- <td>{{detail.userDetail.role}}</td> -->
+            <!-- <td>{{detail.userDetail.addressDetail.addressId}}</td> -->
             <td>{{detail.userDetail.addressDetail.address}}</td>
             <td>{{detail.userDetail.addressDetail.pincode}}</td>
-            <td>{{detail.userDetail.addressDetail.city.cityId}}</td>
+            <!-- <td>{{detail.userDetail.addressDetail.city.cityId}}</td> -->
             <td>{{detail.userDetail.addressDetail.city.cityName}}</td>
-            <td>{{detail.userDetail.addressDetail.city.state.stateId}}</td>
+            <!-- <td>{{detail.userDetail.addressDetail.city.state.stateId}}</td> -->
             <td>{{detail.userDetail.addressDetail.city.state.stateName}}</td>    
          </tr>
     </tbody>
 </table>
-
 
