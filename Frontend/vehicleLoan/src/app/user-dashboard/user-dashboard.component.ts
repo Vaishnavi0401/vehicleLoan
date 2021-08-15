@@ -13,16 +13,20 @@ export class UserDashboardComponent implements OnInit {
   
   users: LoanDetail[];
   userId: number = 0;
-  
-  
+  isLoan: boolean = false;
+  isCar: boolean = false;
+  isUser: boolean = false;
+
   constructor(private userService : UserDashboardService) { }
 
   ngOnInit(): void {
   }
 
   message:any;
-  getUserDetailsByUserId(userId:number)
+  
+  getLoanByUserId(userId:number)
   {
+    this.isLoan = !this.isLoan;
     console.log('user id chosen is'+this.userId);
     this.userService.getUsersService(userId).
     subscribe((data:LoanDetail[])=>
@@ -35,6 +39,39 @@ export class UserDashboardComponent implements OnInit {
       }
     );
   }
+
+  getCarByUserId(userId:number)
+  {
+    this.isCar = !this.isCar;
+    console.log('user id chosen is'+this.userId);
+    this.userService.getUsersService(userId).
+    subscribe((data:LoanDetail[])=>
+     {
+      this.users = data;
+      console.log(data[0]);
+    }
+    ,(err) => {
+      console.log(err + 'error'+this.message);
+      }
+    );
+  }
+  
+  getUserByUserId(userId:number)
+  {
+    this.isUser = !this.isUser;
+    console.log('user id chosen is'+this.userId);
+    this.userService.getUsersService(userId).
+    subscribe((data:LoanDetail[])=>
+     {
+      this.users = data;
+      console.log(data[0]);
+    }
+    ,(err) => {
+      console.log(err + 'error'+this.message);
+      }
+    );
+  }
+  
 }
 
     
