@@ -1,5 +1,6 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators , MinLengthValidator} from '@angular/forms';
 import { EligibilityService } from '../eligibility.service';
 import { EligibilityCheck } from '../pojos/EligibilityCheck';
@@ -23,7 +24,8 @@ export class GetEligibilityComponent implements OnInit {
   Name: string;
 
 
-  constructor(private getService: EligibilityService) { }
+
+  constructor(private getService: EligibilityService, private router: Router) { }
 
   testEligibility(){
     console.log("Assign Parameters");
@@ -32,7 +34,18 @@ export class GetEligibilityComponent implements OnInit {
     this.eligibility.yearlySalary = this.salary;
     this.existingEMI = this.existingEMI;
     this.getService.checkEligibilityService(this.eligibility)
-    .subscribe(val => alert(this.Name + " " +val.status));
+    .subscribe(
+      (val) => {
+        if(val){
+          alert(this.Name + " you are Eligible to apply for a loan");
+          this.router.navigate(['/loan-offers']);
+        }
+        else{
+          alert(this.Name + " you are not Eligible");
+          this.router.navigate(['/']);
+        }
+      }
+    );
 
   }
 
