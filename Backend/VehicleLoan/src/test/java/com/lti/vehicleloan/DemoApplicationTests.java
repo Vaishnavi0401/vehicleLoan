@@ -20,12 +20,7 @@ import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer3.ApplicationFormRepositoryImpl;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.math.BigInteger;
-import java.util.List;
-
-
 import com.lti.vehicleloan.layer2.EMICalc;
 import com.lti.vehicleloan.layer2.Login;
 import com.lti.vehicleloan.layer4.EmiCalculatorService;
@@ -140,7 +135,7 @@ class DemoApplicationTests {
 		advancedUserDetail.setUserDetail(foundUser);
 //		System.out.println("ad");
 		appFormRepo.insertAdvancedUserDetail(advancedUserDetail);
-
+	}
 	//Object is Created Successfully
 	@Test
 	void eligibilityObjectTest() {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
 import { EmploymentDetailsComponent } from './employment-details/employment-details.component';
@@ -12,6 +13,7 @@ import { LoanOfferComponent } from './loan-offer/loan-offer.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 
 const routes: Routes = [
@@ -28,8 +30,10 @@ const routes: Routes = [
     {path: 'vehicle-details', component: VehicleDetailsComponent},
     {path: 'loan-details', component: LoanDetailsComponent},
     {path: 'identity-details', component: IdentityDetailsComponent},
-  ]
+  ],
 },
+{path: 'user-dashboard', component: UserDashboardComponent},
+{path: 'admin-dashboard', component: AdminDashboardComponent},
   // {path: '/about-us', component: AboutUsComponent},
   // {path: '/login', component: LoginComponent},
   // {path: '', redirectTo:'/home', pathMatch: 'full'},

@@ -6,7 +6,7 @@ import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { AddressDetail } from '../pojos/AddressDetail';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
-import { CarType } from '../pojos/carType';
+import { CarType } from '../pojos/CarType';
 import { City } from '../pojos/City';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
 import { LoanDetail } from '../pojos/LoanDetail';

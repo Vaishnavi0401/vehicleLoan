@@ -12,7 +12,7 @@ import { UserDetail } from './pojos/UserDetail';
 })
 export class AdminDashboardService {
 
-  baseUrl:string='http://localhost:8090/admin/'
+  baseUrl:string='http://localhost:8085/admin/'
   constructor(private myhttp: HttpClient) { }
 
   getAllLoanDetailsService(): Observable<any>{

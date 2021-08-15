@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
-import { CarType } from '../pojos/carType';
+import { CarType } from '../pojos/CarType';
 import { City } from '../pojos/City';
 import { State } from '../pojos/State';
 import { TypeOfEmploymentDetail } from '../pojos/TypeOfEmploymentDetail';
