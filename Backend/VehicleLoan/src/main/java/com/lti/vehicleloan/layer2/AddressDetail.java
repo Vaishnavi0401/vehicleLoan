@@ -30,8 +30,8 @@ public class AddressDetail implements Serializable {
 	private City city;
 
 	//bi-directional one-to-one association to UserDetail
-	@OneToOne(mappedBy = "addressDetail")
-	//@JoinColumn(name="ADDRESS_ID", referencedColumnName="ADDRESS_ID")
+
+	@OneToOne(mappedBy="addressDetail")
 	private UserDetail userDetail;
 
 	public AddressDetail() {

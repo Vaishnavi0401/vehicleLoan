@@ -1,4 +1,7 @@
+import { AddressDetail } from "./AddressDetail";
+
 export class UserDetail{
+
     userId: number;
     age: number;
     email: string;
@@ -7,4 +10,6 @@ export class UserDetail{
     name: string;
     password: string;
     role: number;
+    addressDetail: AddressDetail;
 }
+
