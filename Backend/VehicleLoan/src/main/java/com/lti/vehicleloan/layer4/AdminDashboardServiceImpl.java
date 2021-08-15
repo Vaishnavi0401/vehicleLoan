@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.AdvancedUserDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.EmploymentDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
@@ -159,6 +160,13 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	
+	public List<UserDetail> selectAllUserDetailsService() {
+		System.out.println("selectAllUserDetailsService method from layer 4");
+		return adminRepo.selectAllUserDetails();
 	}
 	
 	

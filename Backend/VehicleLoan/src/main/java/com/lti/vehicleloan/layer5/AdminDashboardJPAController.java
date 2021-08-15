@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer4.AdminDashboardServiceImpl;
 
 @CrossOrigin
@@ -111,6 +112,13 @@ public class AdminDashboardJPAController {
 			return adminDashboardService.getEmploymentDetailByLoanIdService(loanId);
 		}
 		
+		//http://localhost:8090/admin/getAllUserDetails
+		@GetMapping
+		@ResponseBody
+		@RequestMapping(value="/getAllUserDetails")
+		public List<UserDetail> getAllUserDetails(){
+			return adminDashboardService.selectAllUserDetailsService();
+		}
 		
 		
 	}

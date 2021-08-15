@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AdminDashboardLoanDetail } from './pojos/AdminDashboardLoanDetail';
 import { AdvancedUserDetail } from './pojos/AdvancedUserDetail';
 import { EmploymentDetail } from './pojos/EmploymentDetail';
+import { UserDetail } from './pojos/UserDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class AdminDashboardService {
     //console.log(adminDashboardLoanDetail.loanId);
   }
 
+  getAllUserDetailsService():Observable<any>{
+    return this.myhttp.get<UserDetail[]>(this.baseUrl+"getAllUserDetails");
+  }
   deleteLoanDetailsService(loanId:number):Observable<String>
   {
     return this.myhttp.delete<string>(this.baseUrl+"deleteLoan/"+loanId);

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.UserDetailNotFoundException;
 
 @Service
@@ -21,4 +22,5 @@ public interface AdminDashboardService {
 	AdvancedUserDetail getAdvancedUserDetailByUserIdService(int userId) ;
 	AdvancedUserDetail getAdvancedUserDetailByLoanIdService(int loanId);
 	List<EmploymentDetail> getEmploymentDetailByLoanIdService(int loanId);
+	List<UserDetail> selectAllUserDetailsService();
 }

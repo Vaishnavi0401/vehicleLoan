@@ -3,6 +3,7 @@ import { AdminDashboardService } from '../admin-dashboard.service';
 import { AdminDashboardLoanDetail } from '../pojos/AdminDashboardLoanDetail';
 import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
+import { UserDetail } from '../pojos/UserDetail';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,11 +19,14 @@ export class AdminDashboardComponent implements OnInit {
   l1: number=0;
   getLoanDetail:AdminDashboardLoanDetail;
   approval:string;
+  allUserDetails: UserDetail[]=[];
+
 
   divAllLoan:boolean=true;
   divViewMore:boolean=true;
   divOneLoan:boolean=true;
   divAprrovalLoan:boolean=true;
+  divUserDetail:boolean;
 
   
 
@@ -41,14 +45,16 @@ export class AdminDashboardComponent implements OnInit {
   //   }
 
   // );
+  this.getAllLoanDetails();
   }
 
   getAllLoanDetails(){
+    
     this.divAllLoan=true;
     this.divViewMore=false;
     this.divOneLoan=false;
     this.divAprrovalLoan=false;
-
+    this.divUserDetail=false;
 
     this.adminDashboardService.getAllLoanDetailsService().subscribe(
       (data:AdminDashboardLoanDetail[])=>
@@ -59,6 +65,23 @@ export class AdminDashboardComponent implements OnInit {
       (err)=>{
         console.log(err);
       }
+    );
+  }
+  getAllUserDetails(){
+    this.divUserDetail=true;
+    this.divAllLoan=false;
+    this.divViewMore=false;
+    this.divOneLoan=false;
+    this.divAprrovalLoan=false;
+
+    this.adminDashboardService.getAllUserDetailsService()
+    .subscribe((data:UserDetail[])=>
+    {
+      this.allUserDetails=data;
+    },(err)=>{
+      console.log(err);
+    }
+
     );
   }
 
@@ -161,6 +184,8 @@ export class AdminDashboardComponent implements OnInit {
     this.divAllLoan=false;
     this.divViewMore=false;
     this.divOneLoan=true;
+    this.divAprrovalLoan=false;
+    this.divUserDetail=false;
 
     console.log('loan id chosen is'+this.getLoanbyLoanId);
     this.adminDashboardService.getLoanDetailsbyloanIdService(getLoanbyLoanId).
@@ -191,6 +216,8 @@ export class AdminDashboardComponent implements OnInit {
     this.divAllLoan=false;
     this.divViewMore=true;
     this.divOneLoan=true;
+    this.divAprrovalLoan=false;
+    this.divUserDetail=false;
 
     console.log('loan id chosen is'+this.getLoanbyLoanId);
     this.adminDashboardService.viewAdvancedUserDetailbyLoanIdService(viewAllDetailByLoanId).
@@ -224,6 +251,9 @@ export class AdminDashboardComponent implements OnInit {
   {    
     this.divAprrovalLoan=true;
     this.divAllLoan=false;
+    this.divOneLoan=false;
+    this.divViewMore=false;
+    this.divUserDetail=false;
 
     console.log('approval chosen is: '+approval);
     this.adminDashboardService.viewLoanDetailsbyApprovalService(approval).
@@ -240,8 +270,10 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
     
+    
   
   }
+
 
 
 

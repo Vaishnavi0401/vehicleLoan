@@ -152,6 +152,14 @@ public class AdminDashboardRepositoryImpl extends AdminDashboardBaseRepository i
 		return employmentDetail;
 	}
 	
+	@Transactional
+	public List<UserDetail> selectAllUserDetails() {
+		EntityManager entityManager = getEntityManager();
+		Query query=entityManager.createQuery("from UserDetail");
+		List<UserDetail> userDetailList=query.getResultList();
+		return userDetailList;
+	}
+	
 	
 	
 	

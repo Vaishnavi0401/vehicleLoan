@@ -33,11 +33,12 @@ public interface AdminDashboardRepository {
 	
 	AdvancedUserDetail selectAdvancedUserDetailByLoanId(int loanId) throws AdvancedUserDetailNotFoundException;
 	
-	
+
 	List<UserDetail> getUserDetailsByLoanId(int loanId);
 	
 	List<EmploymentDetail> getEmploymentDetailsByLoanId(int loanId) throws EmploymentDetailNotFoundException;
 	
+	List<UserDetail> selectAllUserDetails();
 	
 
 }
