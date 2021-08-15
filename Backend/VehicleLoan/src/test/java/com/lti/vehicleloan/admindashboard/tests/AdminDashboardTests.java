@@ -1,13 +1,21 @@
 package com.lti.vehicleloan.admindashboard.tests;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.lti.vehicleloan.layer2.AdvancedUserDetail;
+import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.UserDetail;
+import com.lti.vehicleloan.layer2.exceptions.AdvancedUserDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.EmploymentDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.UserDetailNotFoundException;
 import com.lti.vehicleloan.layer3.AdminDashboardRepositoryImpl;
 import com.lti.vehicleloan.layer4.AdminDashboardService;
 
@@ -24,6 +32,7 @@ public class AdminDashboardTests {
 	void getAllLoanDetailsTest() {
 		System.out.println("Getting all loan details...");
 		List<LoanDetail> loanDetail=admRepo.selectAllLoanDetails();
+		assertNotNull(loanDetail);
 		System.out.println("loanDetails "+loanDetail.size());
 		for(LoanDetail loan: loanDetail) {
 			System.out.println("Loan Details: "+loan);
@@ -31,7 +40,22 @@ public class AdminDashboardTests {
 		
 	}
 	
-	@Test                                                        //Test2
+	@Test 														//Test2
+	void deleteLoanDetailTest() //throws LoanDetailNotFoundException
+	{
+		System.out.println("Deleting loan details by loan id");
+		try {
+			admRepo.deleteLoanDetail(505);
+			System.out.println("Loan Details deleted for loan id");
+			
+		} catch (LoanDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test                                                        //Test3
 	void selectLoanDetailbyloanIdTest() //throws LoanDetailNotFoundException //throws LoanDetailNotFoundException{
 		{
 		System.out.println("Getting loan details by loan id");
@@ -47,7 +71,7 @@ public class AdminDashboardTests {
 	}
 	
 	
-	@Test 														//Test3
+	@Test 														//Test4
 	void selectLoanDetailbyApprovalTest() //throws LoanDetailNotFoundException
 	{
 		System.out.println("Getting loan Details by loan approval");
@@ -64,20 +88,117 @@ public class AdminDashboardTests {
 		
 	}
 	
-	
-	@Test 														//Test4
-	void deleteLoanDetailTest() //throws LoanDetailNotFoundException
+	@Test                                             			//Test5
+	void selectAllAdvancedUserDetailTest()
 	{
-		System.out.println("Deleting loan details by loan id");
+		System.out.println("Getting loan details by approval ");
+		List<AdvancedUserDetail> advancedUserDetailList=admRepo.selectAllAdvancedUserDetail();
+		assertNotNull(advancedUserDetailList);
+		
+	}
+	
+	@Test                                             			//Test6
+	void getUserDetailByUserIdTest()
+	{
+		System.out.println("geting User Detail By UserId Test ");
+		UserDetail userDetailByUserId;
 		try {
-			admRepo.deleteLoanDetail(504);
-			System.out.println("Loan Details deleted for loan id");
+			userDetailByUserId = admRepo.getUserDetailByUserId(301);
+			assertNotNull(userDetailByUserId);
+		} catch (UserDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	@Test                                             			//Test7
+	void selectAdvancedUserDetailByUserIdTest()
+	{
+		System.out.println("Selecting Advanced User Details by UserID Test");
+		AdvancedUserDetail advancedUserDetail;
+		try {
+			advancedUserDetail = admRepo.selectAdvancedUserDetailByUserId(301);
+			
+			assertNotNull(advancedUserDetail);
+		} catch (AdvancedUserDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	@Test                                             			//Test8
+	void selectAdvancedUserDetailByLoanId()
+	{
+		System.out.println("Selecting Advanced User Detail By UserId ");
+		try {
+			AdvancedUserDetail advancedUserDetail=admRepo.selectAdvancedUserDetailByLoanId(501);
+			assertNotNull(advancedUserDetail);
+		} catch (AdvancedUserDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test                                             			//Test9
+	void getEmploymentDetailsByLoanIdTest()
+	{
+		System.out.println("Selecting Employment Details by Loan Id ");
+		try {
+			List<EmploymentDetail> employmentDetailsByLoanId=admRepo.getEmploymentDetailsByLoanId(502);
+			assertNotNull(employmentDetailsByLoanId);
+		} catch (EmploymentDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test                                             			//Test10
+	void selectAllUserDetailsTest()
+	{
+		System.out.println("selecting All User Details Test");
+		List<UserDetail> userDetails=admRepo.selectAllUserDetails();
+		assertNotNull(userDetails);
+	}
+	
+//=================================Not Working============================================//
+
+	//update
+	//getUserDetailsByLoanId
+	
+	@Test
+	void updateApprovalTest()                //Test
+	{
+		System.out.println("Updating loan details ");
+		try {
+			LoanDetail foundLoanDetail=admRepo.selectLoanDetailbyloanId(501);
+			foundLoanDetail.setApproval("no");
 			
 		} catch (LoanDetailNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+				//selectLoanDetailbyloanId.find(LoanDetail.class, 501 );
 	}
+	
+	@Test 
+	void updateApprovalTest2()
+	{
+		System.out.println("Updating loan details ");
+		try {
+			LoanDetail foundLoanDetail=admRepo.selectLoanDetailbyloanId(502);
+			admRepo.updateApproval(foundLoanDetail);
+		} catch (LoanDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	
 	

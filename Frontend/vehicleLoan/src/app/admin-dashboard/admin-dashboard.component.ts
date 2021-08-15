@@ -4,6 +4,7 @@ import { AdminDashboardLoanDetail } from '../pojos/AdminDashboardLoanDetail';
 import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,10 +29,15 @@ export class AdminDashboardComponent implements OnInit {
   divAprrovalLoan:boolean=true;
   divUserDetail:boolean;
 
-  
-
-
   constructor(private adminDashboardService: AdminDashboardService) { }
+
+  private location: Location;
+
+  // backClicked() {
+  //   this.location.back();
+  // }
+
+
 
   ngOnInit(): void {
   // this.adminDashboardService.getAllLoanDetailsService().subscribe(
@@ -213,6 +219,7 @@ export class AdminDashboardComponent implements OnInit {
   viewed:boolean;
   viewLoanDetails(viewAllDetailByLoanId:number)
   {
+    this.selectLoanDetailByLoanId(viewAllDetailByLoanId);
     this.divAllLoan=false;
     this.divViewMore=true;
     this.divOneLoan=true;

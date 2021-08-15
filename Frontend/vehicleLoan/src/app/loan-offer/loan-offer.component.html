@@ -1,11 +1,35 @@
-<h3>Loan offers!</h3>
+<br>
+<div class="container">
+    <h3>Loan offers!</h3>
+    <br>
+    Principal Amount <input type="number" [(ngModel)]="amount" class="form-control" required/>
+    Rate Of Interest<input type="number" [(ngModel)]="rate" class="form-control" required/>
+    <br>
+    <div>
+        
+        <button class="btn btn-primary" (click)="getAllLoanOffers(amount,rate)">Get Loan Offers</button>
+    </div>
+    <table *ngIf="offerTable && offerTable.length" >
+        <thead>
+            <tr>
+                <th>Principal Amount</th>
+                <th>Rate Of Interest</th>
+                <th>Tenure</th>
+            </tr> 
+        </thead>
+        <tbody>
+            <tr *ngFor="let offer of offerTable">
+                <td>{{offer.offerAmount}}</td>
+                <td>{{offer.offerRate}}</td>
+                <td>{{offer.offerTenure}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-<button routerLink="../personal-details" class="btn btn-primary">Submit</button>
-
-<div>
-    <button>Apply now</button>
-</div>
-<br><Br>
-<div>
-    <button>EMI Scheduler</button>
+    <br> <br> <br>
+    <button routerLink="../personal-details" class="btn btn-primary">Submit</button>
+    <br><br>
+    <div>
+        <button class="btn btn-primary">EMI Scheduler</button>
+    </div>
 </div>
