@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="\"STATE\"")
+@Table(name="STATE")
 @NamedQuery(name="State.findAll", query="SELECT s FROM State s")
 public class State implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -46,26 +46,26 @@ public class State implements Serializable {
 		this.stateName = stateName;
 	}
 
-	public List<City> getCities() {
-		return this.cities;
-	}
+//	public List<City> getCities() {
+//		return this.cities;
+//	}
 
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
 
-	public City addCity(City city) {
-		getCities().add(city);
-		city.setState(this);
-
-		return city;
-	}
-
-	public City removeCity(City city) {
-		getCities().remove(city);
-		city.setState(null);
-
-		return city;
-	}
+//	public City addCity(City city) {
+//		getCities().add(city);
+//		city.setState(this);
+//
+//		return city;
+//	}
+//
+//	public City removeCity(City city) {
+//		getCities().remove(city);
+//		city.setState(null);
+//
+//		return city;
+//	}
 
 }

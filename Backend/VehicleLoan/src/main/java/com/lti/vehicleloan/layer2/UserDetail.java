@@ -34,15 +34,15 @@ public class UserDetail implements Serializable {
 
 	private String password;
 
-	@Column(name="\"ROLE\"")
+	@Column(name="ROLE")
 	private Integer role;
 
 	//bi-directional many-to-one association to EmploymentDetail
-	@OneToMany(mappedBy="userDetail", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="userDetail")
 	private List<EmploymentDetail> employmentDetails;
 
 	//bi-directional many-to-one association to LoanDetail
-	@OneToMany(mappedBy="userDetail", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="userDetail")
 	private List<LoanDetail> loanDetails;
 
 	//bi-directional one-to-one association to AdvancedUserDetail
@@ -50,7 +50,8 @@ public class UserDetail implements Serializable {
 	private AdvancedUserDetail advancedUserDetail;
 
 	//bi-directional one-to-one association to AddressDetail
-	@OneToOne(mappedBy="userDetail")
+	@OneToOne()
+	@JoinColumn(name="ADDRESS_ID", referencedColumnName ="ADDRESS_ID")
 	private AddressDetail addressDetail;
 
 	public UserDetail() {
@@ -120,53 +121,53 @@ public class UserDetail implements Serializable {
 		this.role = role;
 	}
 
-	public List<EmploymentDetail> getEmploymentDetails() {
-		return this.employmentDetails;
-	}
+//	public List<EmploymentDetail> getEmploymentDetails() {
+//		return this.employmentDetails;
+//	}
 
 	public void setEmploymentDetails(List<EmploymentDetail> employmentDetails) {
 		this.employmentDetails = employmentDetails;
 	}
 
-	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().add(employmentDetail);
-		employmentDetail.setUserDetail(this);
+//	public EmploymentDetail addEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().add(employmentDetail);
+//		employmentDetail.setUserDetail(this);
+//
+//		return employmentDetail;
+//	}
 
-		return employmentDetail;
-	}
+//	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
+//		getEmploymentDetails().remove(employmentDetail);
+//		employmentDetail.setUserDetail(null);
+//
+//		return employmentDetail;
+//	}
 
-	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
-		getEmploymentDetails().remove(employmentDetail);
-		employmentDetail.setUserDetail(null);
-
-		return employmentDetail;
-	}
-
-	public List<LoanDetail> getLoanDetails() {
-		return this.loanDetails;
-	}
+//	public List<LoanDetail> getLoanDetails() {
+//		return this.loanDetails;
+//	}
 
 	public void setLoanDetails(List<LoanDetail> loanDetails) {
 		this.loanDetails = loanDetails;
 	}
 
-	public LoanDetail addLoanDetail(LoanDetail loanDetail) {
-		getLoanDetails().add(loanDetail);
-		loanDetail.setUserDetail(this);
+//	public LoanDetail addLoanDetail(LoanDetail loanDetail) {
+//		getLoanDetails().add(loanDetail);
+//		loanDetail.setUserDetail(this);
+//
+//		return loanDetail;
+//	}
+//
+//	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
+//		getLoanDetails().remove(loanDetail);
+//		loanDetail.setUserDetail(null);
+//
+//		return loanDetail;
+//	}
 
-		return loanDetail;
-	}
-
-	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
-		getLoanDetails().remove(loanDetail);
-		loanDetail.setUserDetail(null);
-
-		return loanDetail;
-	}
-
-	public AdvancedUserDetail getAdvancedUserDetail() {
-		return this.advancedUserDetail;
-	}
+//	public AdvancedUserDetail getAdvancedUserDetail() {
+//		return this.advancedUserDetail;
+//	}
 
 	public void setAdvancedUserDetail(AdvancedUserDetail advancedUserDetail) {
 		this.advancedUserDetail = advancedUserDetail;
