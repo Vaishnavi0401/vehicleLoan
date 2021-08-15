@@ -24,7 +24,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AboutUsComponent } from './about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+
 
 
 @NgModule({
@@ -52,8 +54,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
