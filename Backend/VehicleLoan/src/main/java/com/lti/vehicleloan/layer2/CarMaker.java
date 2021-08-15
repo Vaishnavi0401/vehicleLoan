@@ -60,7 +60,7 @@ public class CarMaker implements Serializable {
 //
 //		return carDetail;
 //	}
-//
+
 //	public CarDetail removeCarDetail(CarDetail carDetail) {
 //		getCarDetails().remove(carDetail);
 //		carDetail.setCarMaker(null);

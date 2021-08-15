@@ -12,3 +12,4 @@ export class UserDetail{
     role: number;
     addressDetail: AddressDetail;
 }
+

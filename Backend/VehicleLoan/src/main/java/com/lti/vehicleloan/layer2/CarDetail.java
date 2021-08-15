@@ -130,7 +130,7 @@ public class CarDetail implements Serializable {
 //
 //		return loanDetail;
 //	}
-//
+
 //	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
 //		getLoanDetails().remove(loanDetail);
 //		loanDetail.setCarDetail(null);

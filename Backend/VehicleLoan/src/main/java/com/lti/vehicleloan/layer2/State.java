@@ -60,7 +60,7 @@ public class State implements Serializable {
 //
 //		return city;
 //	}
-//
+
 //	public City removeCity(City city) {
 //		getCities().remove(city);
 //		city.setState(null);

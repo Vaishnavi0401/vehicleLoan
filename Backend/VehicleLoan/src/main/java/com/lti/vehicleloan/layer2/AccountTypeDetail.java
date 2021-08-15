@@ -60,7 +60,7 @@ public class AccountTypeDetail implements Serializable {
 //
 //		return employmentDetail;
 //	}
-//
+
 //	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
 //		getEmploymentDetails().remove(employmentDetail);
 //		employmentDetail.setAccountTypeDetail(null);

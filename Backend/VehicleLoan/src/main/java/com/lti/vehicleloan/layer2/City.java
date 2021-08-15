@@ -64,7 +64,7 @@ public class City implements Serializable {
 //
 //		return addressDetail;
 //	}
-//
+
 //	public AddressDetail removeAddressDetail(AddressDetail addressDetail) {
 //		getAddressDetails().remove(addressDetail);
 //		addressDetail.setCity(null);

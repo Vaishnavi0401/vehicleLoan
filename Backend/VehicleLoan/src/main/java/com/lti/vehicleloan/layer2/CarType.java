@@ -60,7 +60,7 @@ public class CarType implements Serializable {
 //
 //		return carDetail;
 //	}
-//
+
 //	public CarDetail removeCarDetail(CarDetail carDetail) {
 //		getCarDetails().remove(carDetail);
 //		carDetail.setCarType(null);
