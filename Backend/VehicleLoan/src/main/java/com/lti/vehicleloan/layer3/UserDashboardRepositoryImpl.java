@@ -13,6 +13,7 @@ import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 
 @Repository
 public class UserDashboardRepositoryImpl extends BaseRepository implements UserDashboardRepository {
+	
 
 	@Transactional
 	public List<UserDetail> selectUserById(int userId) throws UserNotFoundException {
