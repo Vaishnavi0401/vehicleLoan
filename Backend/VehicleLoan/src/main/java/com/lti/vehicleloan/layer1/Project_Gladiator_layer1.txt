@@ -1,8 +1,4 @@
-﻿
-
-
-
-drop table offer_table cascade constraints;
+﻿drop table offer_table cascade constraints;
 drop table type_of_employment_details cascade constraints;
 drop table account_type_details cascade constraints;
 drop table city cascade constraints;
@@ -1041,6 +1037,7 @@ salary_slip varchar2(20),
 photo varchar2(20),
 user_id number(8) references user_details(user_id)
 );
+
 
 
 create table employment_details(

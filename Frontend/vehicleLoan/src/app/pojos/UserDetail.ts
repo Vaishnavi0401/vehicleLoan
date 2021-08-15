@@ -1,6 +1,7 @@
 import { AddressDetail } from "./AddressDetail";
 
 export class UserDetail{
+
     userId: number;
     age: number;
     email: string;
@@ -11,3 +12,4 @@ export class UserDetail{
     role: number;
     addressDetail: AddressDetail;
 }
+

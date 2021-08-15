@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.componen
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 import { IdentityDetailsComponent } from './identity-details/identity-details.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http'
 
 import { GetEligibilityComponent } from './get-eligibility/get-eligibility.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,6 +27,12 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+
+
 
 
 @NgModule({
@@ -48,7 +56,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PageNotFoundComponent,
     AboutUsComponent,
     LoginComponent,
-    ApplicationFormComponent
+    ApplicationFormComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +65,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

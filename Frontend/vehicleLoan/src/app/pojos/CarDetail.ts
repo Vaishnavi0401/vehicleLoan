@@ -1,5 +1,7 @@
 import { CarMaker } from "./CarMaker";
 import { CarType } from "./carType";
+import { CarType } from "./CarType";
+
 
 export class CarDetail{
     carId: number;
