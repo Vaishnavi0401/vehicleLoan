@@ -2,8 +2,9 @@
 
 <div>
     <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId">
-    <!-- <button type="button" (click)="getUserDetailsByUserId(userId)">Get User</button> -->
+    <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button>
 </div>
+<br>
 
 
 <button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
@@ -24,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor=" let detail of users">
+            <tr *ngFor=" let detail of details">
                 <td>{{detail.loanId}}</td>
                 <td>{{detail.applyDate}}</td>
                 <td>{{detail.approval}}</td>
@@ -33,6 +34,7 @@
                 <td>{{detail.principalAmount}}</td>
                 <td>{{detail.rateOfInterest}}</td>
                 <td>{{detail.tenure}}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -47,7 +49,7 @@
         <thead>
             <tr>
                 <th>Car Id</th>
-                <th>Car Model Image</th>
+                <!-- <th>Car Model Image</th> -->
                 <th>Model</th>
                 <th>On Road Price</th>
                 <th>Show Room Price</th>
@@ -59,17 +61,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor=" let detail of users">
-            <td>{{detail.carDetail.carId}}</td>
-            <td>{{detail.carDetail.carModelImage}}</td>
-            <td>{{detail.carDetail.model}}</td>
-            <td>{{detail.carDetail.onroadPrice}}</td>
-            <td>{{detail.carDetail.showroomPrice}}</td>
-            <td>{{detail.carDetail.vehicleDomain}}</td>
-            <td>{{detail.carDetail.carMaker.carMakerId}}</td>
-            <td>{{detail.carDetail.carMaker.carMaker}}</td>
-            <td>{{detail.carDetail.carType.carTypeId}}</td>
-            <td>{{detail.carDetail.carType.carType}}</td>
+            <tr *ngFor=" let detail of details">
+                <td>{{detail.carDetail.carId}}</td>
+                <!-- <td>{{detail.carDetail.carModelImage}}</td> -->
+                <td>{{detail.carDetail.model}}</td>
+                <td>{{detail.carDetail.onroadPrice}}</td>
+                <td>{{detail.carDetail.showroomPrice}}</td>
+                <td>{{detail.carDetail.vehicleDomain}}</td>
+                <td>{{detail.carDetail.carMaker.carMakerId}}</td>
+                <td>{{detail.carDetail.carMaker.carMaker}}</td>
+                <td>{{detail.carDetail.carType.carTypeId}}</td>
+                <td>{{detail.carDetail.carType.carType}}</td>
+            </tr>
         </tbody>
     </table>
 
@@ -90,7 +93,7 @@
                 <th>Mobile Number</th>
                 <th>Name</th>
                 <th>Password</th>
-                <th>Role</th>
+                <!-- <th>Role</th> -->
                 <th>Address Id</th>
                 <th>Address</th>
                 <th>Pincode</th>
@@ -98,29 +101,30 @@
                 <th>City Name</th>
                 <th>State Id</th>
                 <th>State Name</th>
-    
+
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor=" let detail of users">
-                <td>{{detail.userDetail.userId}}</td>
-                <td>{{detail.userDetail.age}}</td>
-                <td>{{detail.userDetail.email}}</td>
-                <td>{{detail.userDetail.gender}}</td>
-                <td>{{detail.userDetail.mobileNumber}}</td>
-                <td>{{detail.userDetail.name}}</td>
-                <td>{{detail.userDetail.password}}</td>
-                <td>{{detail.userDetail.role}}</td>
-                <td>{{detail.userDetail.addressDetail.addressId}}</td> 
-                <td>{{detail.userDetail.addressDetail.address}}</td>
-                <td>{{detail.userDetail.addressDetail.pincode}}</td>
-                <td>{{detail.userDetail.addressDetail.city.cityId}}</td> 
-                <td>{{detail.userDetail.addressDetail.city.cityName}}</td>
-                <td>{{detail.userDetail.addressDetail.city.state.stateId}}</td>
-                <td>{{detail.userDetail.addressDetail.city.state.stateName}}</td>
+            
+            <tr *ngFor=" let detail of details; let i = index">
+                <td *ngIf="i==0">{{detail.userDetail.userId}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.age}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.email}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.gender}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.mobileNumber}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.name}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.password}}</td>
+                <!-- <td>{{detail.userDetail.role}}</td> -->
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.addressId}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.address}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.pincode}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityId}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityName}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateId}}</td>
+                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateName}}</td> 
+            </tr>
         </tbody>
     </table>
 
 
 </div>
-

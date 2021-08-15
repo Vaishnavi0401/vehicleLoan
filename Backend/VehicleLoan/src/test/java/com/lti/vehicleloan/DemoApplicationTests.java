@@ -3,7 +3,12 @@ package com.lti.vehicleloan;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -225,4 +230,35 @@ class DemoApplicationTests {
 		System.out.println("User Detail Object Created");
 
 	}
+		
+	
+	@Test
+	void loanUserTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			}
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
 }

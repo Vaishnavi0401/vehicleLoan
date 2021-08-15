@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 
@@ -12,5 +13,6 @@ import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 @Repository
 public interface UserDashboardRepository {
 
-	List<UserDetail> selectUserById(int userId) throws UserNotFoundException; 
+	
+	List<LoanDetail> selectUserById(int userId) throws UserNotFoundException; 
 }
