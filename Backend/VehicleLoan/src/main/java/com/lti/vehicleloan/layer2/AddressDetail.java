@@ -30,7 +30,6 @@ public class AddressDetail implements Serializable {
 	private City city;
 
 	//bi-directional one-to-one association to UserDetail
-
 	@OneToOne(mappedBy="addressDetail")
 	private UserDetail userDetail;
 

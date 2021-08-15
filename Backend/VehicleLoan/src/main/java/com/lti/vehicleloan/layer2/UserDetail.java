@@ -61,7 +61,6 @@ public class UserDetail implements Serializable {
 
 	//bi-directional one-to-one association to AddressDetail
 	@OneToOne()
-
   @JoinColumn(name="ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
 	private AddressDetail addressDetail;
 
@@ -168,6 +167,7 @@ public class UserDetail implements Serializable {
 //
 //		return loanDetail;
 //	}
+
 //	public LoanDetail removeLoanDetail(LoanDetail loanDetail) {
 //		getLoanDetails().remove(loanDetail);
 //		loanDetail.setUserDetail(null);
