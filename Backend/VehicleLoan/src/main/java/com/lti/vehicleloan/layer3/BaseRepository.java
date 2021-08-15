@@ -6,14 +6,15 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BaseRepository {
+
+public abstract class BaseRepository {
 	
 	@PersistenceContext
-	private EntityManager entityManager;
-	
+	EntityManager entityManager;
+
 	public EntityManager getEntityManager() {
-		System.out.println("Base Repository");
+		System.out.println("BaseRepository: getting entityManager");
 		return entityManager;
 	}
-
 }
+

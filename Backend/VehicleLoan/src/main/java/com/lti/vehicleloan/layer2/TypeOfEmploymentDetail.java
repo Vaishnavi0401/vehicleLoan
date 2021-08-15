@@ -60,7 +60,7 @@ public class TypeOfEmploymentDetail implements Serializable {
 //
 //		return employmentDetail;
 //	}
-//
+
 //	public EmploymentDetail removeEmploymentDetail(EmploymentDetail employmentDetail) {
 //		getEmploymentDetails().remove(employmentDetail);
 //		employmentDetail.setTypeOfEmploymentDetail(null);

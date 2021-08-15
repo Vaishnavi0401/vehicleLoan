@@ -45,7 +45,7 @@ public class AccountTypeDetail implements Serializable {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-//
+
 //	public List<EmploymentDetail> getEmploymentDetails() {
 //		return this.employmentDetails;
 //	}

@@ -45,7 +45,7 @@ public class State implements Serializable {
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
-//
+
 //	public List<City> getCities() {
 //		return this.cities;
 //	}
@@ -53,7 +53,7 @@ public class State implements Serializable {
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
-//
+
 //	public City addCity(City city) {
 //		getCities().add(city);
 //		city.setState(this);
