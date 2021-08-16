@@ -64,6 +64,10 @@ export class AdminDashboardComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  getFiles(){
+    this.router.navigate(['/view-files'])
+  }
+
   getAllLoanDetails(){
     
     this.divAllLoan=true;

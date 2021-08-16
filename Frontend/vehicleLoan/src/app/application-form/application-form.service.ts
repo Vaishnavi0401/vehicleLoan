@@ -78,17 +78,6 @@ export class ApplicationFormService {
   //----------------------------APPLICATION FORM DETAILS ENDS---------------------------
 
 //----------------------------FILE UPLOAD DETAILS ENDS----------------------------
-  upload(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
 
-    formData.append('file', file);
-
-    const req = new HttpRequest('POST', `${this.baseURL}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
-
-    return this.myhttp.request(req);
-  }
 //----------------------------FILE UPLOAD DETAILS ENDS----------------------------
 }

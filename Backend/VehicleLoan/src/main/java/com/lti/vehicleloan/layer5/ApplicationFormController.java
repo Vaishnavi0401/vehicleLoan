@@ -1,8 +1,11 @@
 package com.lti.vehicleloan.layer5;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
@@ -24,6 +28,7 @@ import com.lti.vehicleloan.layer2.CarMaker;
 import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
+import com.lti.vehicleloan.layer2.FileInfo;
 import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.ResponseMessage;
 import com.lti.vehicleloan.layer2.State;
@@ -39,9 +44,7 @@ public class ApplicationFormController {
 
 	@Autowired
 	ApplicationFormServiceImpl appFormService;
-	
-	@Autowired
-	FileStorageService storageService;
+
 	
 //	@PostMapping
 //	@ResponseBody
@@ -91,22 +94,7 @@ public class ApplicationFormController {
 		return status;
 		
 	}
-	
-	@PostMapping("/upload")
-	public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-    String message = "";
-    try {
-    	storageService.save(file);
-    	message = "Uploaded the file successfully: " + file.getOriginalFilename();
-    	return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-    }
-    catch (Exception e) {
-    	message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-    	return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-    }
-}
-	
-	
+	 
 	@GetMapping
 	@ResponseBody
 	@RequestMapping(value="/getAllUsers")

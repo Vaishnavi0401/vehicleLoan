@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AdminDashboardFilesComponent } from './admin-dashboard-files/admin-dashboard-files.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { BaseComponent } from './base/base.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   },
  
   { path: 'user-dashboard', component: UserDashboardComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent},
+  { path: 'view-files', component: AdminDashboardFilesComponent },
   // {path: '/about-us', component: AboutUsComponent},
   // {path: '/login', component: LoginComponent},
   // {path: '', redirectTo:'/home', pathMatch: 'full'},

@@ -18,6 +18,7 @@ import { LoanDetail } from '../pojos/LoanDetail';
 import { State } from '../pojos/State';
 import { TypeOfEmploymentDetail } from '../pojos/TypeOfEmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
+import { UploadFilesService } from '../upload-files.service';
 import { ApplicationFormService } from './application-form.service';
 
 @Component({
@@ -27,9 +28,9 @@ import { ApplicationFormService } from './application-form.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
- 
+  IdentityDetailsFormGroup: FormGroup;
 
-  constructor(private appFormService: ApplicationFormService, private router: Router) { }
+  constructor(private appFormService: ApplicationFormService, private uploadService: UploadFilesService ,private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -363,7 +364,7 @@ aadharCardUpload() {
 
   this.aadharCardCurrentFile = this.aadharCardSelectedFiles.item(0);
   this.aadharCardSelectedFiles = null;
-  this.appFormService.upload(this.aadharCardCurrentFile).subscribe(
+  this.uploadService.upload(this.aadharCardCurrentFile).subscribe(
     event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.aadharCardProgress = Math.round(100 * event.loaded / event.total);
@@ -393,7 +394,7 @@ panCardUpload() {
 
   this.panCardCurrentFile = this.panCardSelectedFiles.item(0);
   this.panCardSelectedFiles = null;
-  this.appFormService.upload(this.panCardCurrentFile).subscribe(
+  this.uploadService.upload(this.panCardCurrentFile).subscribe(
     event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.panCardProgress = Math.round(100 * event.loaded / event.total);
@@ -424,7 +425,7 @@ photoUpload() {
 
   this.photoCurrentFile = this.photoSelectedFiles.item(0);
   this.photoSelectedFiles = null;
-  this.appFormService.upload(this.photoCurrentFile).subscribe(
+  this.uploadService.upload(this.photoCurrentFile).subscribe(
     event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.photoProgress = Math.round(100 * event.loaded / event.total);
@@ -456,7 +457,7 @@ salarySlipUpload() {
 
   this.salarySlipCurrentFile = this.salarySlipSelectedFiles.item(0);
   this.salarySlipSelectedFiles = null;
-  this.appFormService.upload(this.salarySlipCurrentFile).subscribe(
+  this.uploadService.upload(this.salarySlipCurrentFile).subscribe(
     event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.salarySlipProgress = Math.round(100 * event.loaded / event.total);

@@ -1,0 +1,16 @@
+<div *ngIf="isAdminLoggedIn == 'true' else myElseBlock">
+
+    <div class="card">
+        <div class="card-header">List of Files</div>
+        <ul class="list-group list-group-flush" *ngFor="let file of fileInfos | async">
+            <li class="list-group-item">
+                <a href="{{ file.url }}">{{ file.name }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #myElseBlock>
+    <h1>You are not logged in </h1>
+    <h4>To login <a routerLink="/login">Click here.</a> </h4>
+</ng-template>

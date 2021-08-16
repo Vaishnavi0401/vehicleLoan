@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoanOfferService } from '../loan-offer.service';
 import { OfferTable } from '../pojos/OfferTable';
-import {NgxWebstorageModule, SessionStorageService} from 'ngx-webstorage';
-
-import { StorageServiceModule} from 'angular-webstorage-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EMICalc } from '../pojos/EMICalculator';
 import { EmiCalculatorService } from '../emi-calculator.service';

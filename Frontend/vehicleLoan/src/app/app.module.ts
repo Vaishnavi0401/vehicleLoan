@@ -18,6 +18,7 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { BaseComponent } from './base/base.component';
+import { AdminDashboardFilesComponent } from './admin-dashboard-files/admin-dashboard-files.component';
 // import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
@@ -36,7 +37,8 @@ import { BaseComponent } from './base/base.component';
     LoginComponent,
     ApplicationFormComponent,
     UserDashboardComponent,
-    BaseComponent
+    BaseComponent,
+    AdminDashboardFilesComponent
   ],
   imports: [
     BrowserModule,
