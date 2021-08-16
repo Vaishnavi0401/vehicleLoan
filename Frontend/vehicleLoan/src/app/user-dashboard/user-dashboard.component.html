@@ -1,131 +1,132 @@
-<div *ngIf="isUserLoggedIn == 'true' else myElseBlock">
+<div *ngIf="isUserLoggedIn == 'true'; else myElseBlock">
     <p>user-dashboard works!</p>
 
 
-<div>
-    <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId">
-    <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button>
-</div>
-<br>
-<button class="btn btn-primary" (click)="logout()">Logout</button>
+    <div>
+        <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId">
+        <!-- <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button> -->
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="logout()">Logout</button>
 
-<button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
+    <button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
 
-<div *ngIf="isLoan">
+    <div *ngIf="isLoan">
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Loan Id</th>
-                <th>Apply Date</th>
-                <th>Approval</th>
-                <th>EMI</th>
-                <th>Existing EMI</th>
-                <th>Principal Amount</th>
-                <th>Rate Of Interest</th>
-                <th>Tenure</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor=" let detail of details">
-                <td>{{detail.loanId}}</td>
-                <td>{{detail.applyDate}}</td>
-                <td>{{detail.approval}}</td>
-                <td>{{detail.emi}}</td>
-                <td>{{detail.existingEmi}}</td>
-                <td>{{detail.principalAmount}}</td>
-                <td>{{detail.rateOfInterest}}</td>
-                <td>{{detail.tenure}}</td>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Loan Id</th>
+                    <th>Apply Date</th>
+                    <th>Approval</th>
+                    <th>EMI</th>
+                    <th>Existing EMI</th>
+                    <th>Principal Amount</th>
+                    <th>Rate Of Interest</th>
+                    <th>Tenure</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let detail of details">
+                    <td>{{detail.loanId}}</td>
+                    <td>{{detail.applyDate}}</td>
+                    <td>{{detail.approval}}</td>
+                    <td>{{detail.emi}}</td>
+                    <td>{{detail.existingEmi}}</td>
+                    <td>{{detail.principalAmount}}</td>
+                    <td>{{detail.rateOfInterest}}</td>
+                    <td>{{detail.tenure}}</td>
 
-            </tr>
-        </tbody>
-    </table>
-</div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<button class="btn btn-primary" type="button" (click)="getCarByUserId(userId)">Car Details</button>
+    <button class="btn btn-primary" type="button" (click)="getCarByUserId(userId)">Car Details</button>
 
-<div *ngIf="isCar">
+    <div *ngIf="isCar">
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Car Id</th>
-                <!-- <th>Car Model Image</th> -->
-                <th>Model</th>
-                <th>On Road Price</th>
-                <th>Show Room Price</th>
-                <th>Vehicle Domain</th>
-                <th>Car Maker Id</th>
-                <th>Car Maker</th>
-                <th>Car Type Id</th>
-                <th>Car Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor=" let detail of details">
-                <td>{{detail.carDetail.carId}}</td>
-                <!-- <td>{{detail.carDetail.carModelImage}}</td> -->
-                <td>{{detail.carDetail.model}}</td>
-                <td>{{detail.carDetail.onroadPrice}}</td>
-                <td>{{detail.carDetail.showroomPrice}}</td>
-                <td>{{detail.carDetail.vehicleDomain}}</td>
-                <td>{{detail.carDetail.carMaker.carMakerId}}</td>
-                <td>{{detail.carDetail.carMaker.carMaker}}</td>
-                <td>{{detail.carDetail.carType.carTypeId}}</td>
-                <td>{{detail.carDetail.carType.carType}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Car Id</th>
+                    <!-- <th>Car Model Image</th> -->
+                    <th>Model</th>
+                    <th>On Road Price</th>
+                    <th>Show Room Price</th>
+                    <th>Vehicle Domain</th>
+                    <th>Car Maker Id</th>
+                    <th>Car Maker</th>
+                    <th>Car Type Id</th>
+                    <th>Car Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let detail of details">
+                    <td>{{detail.carDetail.carId}}</td>
+                    <!-- <td>{{detail.carDetail.carModelImage}}</td> -->
+                    <td>{{detail.carDetail.model}}</td>
+                    <td>{{detail.carDetail.onroadPrice}}</td>
+                    <td>{{detail.carDetail.showroomPrice}}</td>
+                    <td>{{detail.carDetail.vehicleDomain}}</td>
+                    <td>{{detail.carDetail.carMaker.carMakerId}}</td>
+                    <td>{{detail.carDetail.carMaker.carMaker}}</td>
+                    <td>{{detail.carDetail.carType.carTypeId}}</td>
+                    <td>{{detail.carDetail.carType.carType}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<button class="btn btn-primary" type="button" (click)="getUserByUserId(userId)">User Details</button>
+    <button class="btn btn-primary" type="button" (click)="getUserByUserId(userId)">User Details</button>
 
-<div *ngIf="isUser">
+    <div *ngIf="isUser">
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>User Id</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Mobile Number</th>
-                <th>Name</th>
-                <th>Password</th>
-                <!-- <th>Role</th> -->
-                <th>Address Id</th>
-                <th>Address</th>
-                <th>Pincode</th>
-                <th>City Id</th>
-                <th>City Name</th>
-                <th>State Id</th>
-                <th>State Name</th>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Mobile Number</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <!-- <th>Role</th> -->
+                    <th>Address Id</th>
+                    <th>Address</th>
+                    <th>Pincode</th>
+                    <th>City Id</th>
+                    <th>City Name</th>
+                    <th>State Id</th>
+                    <th>State Name</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            
-            <tr *ngFor=" let detail of details; let i = index">
-                <td *ngIf="i==0">{{detail.userDetail.userId}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.age}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.email}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.gender}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.mobileNumber}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.name}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.password}}</td>
-                <!-- <td>{{detail.userDetail.role}}</td> -->
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.addressId}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.address}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.pincode}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityId}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityName}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateId}}</td>
-                <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateName}}</td> 
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor=" let detail of details; let i = index">
+                    <td *ngIf="i==0">{{detail.userDetail.userId}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.age}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.email}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.gender}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.mobileNumber}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.name}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.password}}</td>
+                    <!-- <td>{{detail.userDetail.role}}</td> -->
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.addressId}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.address}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.pincode}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityId}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.cityName}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateId}}</td>
+                    <td *ngIf="i==0">{{detail.userDetail.addressDetail.city.state.stateName}}</td>
+                </tr>
+            </tbody>
+        </table>
 
 
+    </div>
 </div>
 <ng-template #myElseBlock>
     <h1>You are not logged in </h1>

@@ -13,15 +13,13 @@ import { UserDashboardService } from '../user-dashboard.service';
 export class UserDashboardComponent implements OnInit {
 
   details: LoanDetail[];
-  userId: number = 0;
+  userId: number;
 
   isLoan: boolean = false;
   isCar: boolean = false;
   isUser: boolean = false;
   message:any;
-
-
-  constructor(private userService : UserDashboardService) { }
+  sessionUser: UserDetail;
 
   isUserLoggedIn: string;
   
@@ -29,7 +27,9 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
-    console.log(this.isUserLoggedIn);
+    this.sessionUser = JSON.parse(sessionStorage.getItem("user_obj"));
+    this.userId = this.sessionUser.userId;
+    this.getUserDetails(this.userId);
   }
   
   getUserDetails(userId: number){
