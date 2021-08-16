@@ -1,9 +1,14 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { escapeRegExp } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { toUnicode } from 'punycode';
+import { Observable } from 'rxjs';
 import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
 import { AddressDetail } from '../pojos/AddressDetail';
+import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
+import { ApplicationFormDTO } from '../pojos/ApplicationFormDTO';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
 import { CarType } from '../pojos/CarType';
@@ -22,18 +27,11 @@ import { ApplicationFormService } from './application-form.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
-  temp(){
-    sessionStorage.setItem("loanAmount", '500000');
-    sessionStorage.setItem("rateToInterest", '5');
-    sessionStorage.setItem("Tenure", '36');
-  }
+ 
 
-  constructor(private appFormService: ApplicationFormService) { }
+  constructor(private appFormService: ApplicationFormService, private router: Router) { }
 
   ngOnInit(): void {
-
-    this.temp();
-
 
     this.getAllStates();
     this.getAllCities();
@@ -53,6 +51,8 @@ export class ApplicationFormComponent implements OnInit {
     this.accountTypeDetail = new AccountTypeDetail();
     this.employmentDetail = new EmploymentDetail();
     this.loanDetail = new LoanDetail();
+    this.applicationFormDTO = new ApplicationFormDTO();
+    this.advancedUserDetail = new AdvancedUserDetail();
   }
 
   
@@ -149,9 +149,39 @@ export class ApplicationFormComponent implements OnInit {
   typeOfEmploymentDetail: TypeOfEmploymentDetail;
   accountTypeDetail: AccountTypeDetail;
   loanDetail: LoanDetail;
+  advancedUserDetail: AdvancedUserDetail;
+  applicationFormDTO: ApplicationFormDTO;
 
   password: string = '';
   password1: string = '';
+
+  aadharCardSelectedFiles: FileList;
+  aadharCardCurrentFile: File;
+  aadharCardProgress = 0;
+  aadharCardMessage = '';
+  aadharCardSelected: boolean = false;
+
+  panCardSelectedFiles: FileList;
+  panCardCurrentFile: File;
+  panCardProgress = 0;
+  panCardMessage = '';
+  panCardSelected: boolean = false;
+
+  photoSelectedFiles: FileList;
+  photoCurrentFile: File;
+  photoProgress = 0;
+  photoMessage = '';
+  photoSelected: boolean = false;
+
+  salarySlipSelectedFiles: FileList;
+  salarySlipCurrentFile: File;
+  salarySlipProgress = 0;
+  salarySlipMessage = '';
+  salarySlipSelected: boolean = false;
+
+  identityDetailHasError:boolean = !this.aadharCardSelected || !this.panCardSelected || !this.photoSelected || !this.salarySlipSelected;
+
+
   //----------------------------PERSONAL DETAILS ENDS----------------------------
 
 
@@ -205,6 +235,7 @@ export class ApplicationFormComponent implements OnInit {
     this.addressDetail.city = this.getCity(this.city.cityId);
     this.userDetail.addressDetail = this.addressDetail;
     this.userDetail.role = 1;
+    this.userDetail.password = this.password;
     console.log(this.userDetail);
     this.next();
     // this.appFormService.addUserService(this.userDetail).subscribe(
@@ -311,13 +342,158 @@ export class ApplicationFormComponent implements OnInit {
 
 //----------------------------LOAN DETAILS STARTS----------------------------
   onLoanDetailSubmit(){
+    console.log(this.loanDetail);
+    this.loanDetail.approval = "pending";
     this.next();
   }
   //----------------------------LOAN DETAILS ENDS----------------------------
 
 //----------------------------IDENTITY DETAILS STARTS----------------------------
+
+
+aadharCardSelectFile(event) {
+  console.log(this.aadharCardSelectedFiles)
+  this.aadharCardSelectedFiles = event.target.files;
+  this.aadharCardSelected = this.aadharCardSelectedFiles.length>0;
+  
+}
+
+aadharCardUpload() {
+  this.aadharCardProgress = 0;
+
+  this.aadharCardCurrentFile = this.aadharCardSelectedFiles.item(0);
+  this.aadharCardSelectedFiles = null;
+  this.appFormService.upload(this.aadharCardCurrentFile).subscribe(
+    event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.aadharCardProgress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        this.aadharCardMessage = event.body.message;
+        // this.fileInfos = this.uploadService.getFiles();
+      }
+    },
+    err => {
+      this.aadharCardProgress = 0;
+      this.aadharCardMessage = 'Could not upload the file!';
+      this.aadharCardCurrentFile = undefined;
+    });
+
+  this.aadharCardSelectedFiles = undefined;
+  this.identityDetailHasError = !this.aadharCardSelected || !this.panCardSelected || !this.photoSelected || !this.salarySlipSelected;
+}
+
+panCardSelectFile(event) {
+  // console.log(this.aadharCardSelectedFiles)
+  this.panCardSelectedFiles = event.target.files;
+  this.panCardSelected = this.panCardSelectedFiles.length>0;
+}
+
+panCardUpload() {
+  this.panCardProgress = 0;
+
+  this.panCardCurrentFile = this.panCardSelectedFiles.item(0);
+  this.panCardSelectedFiles = null;
+  this.appFormService.upload(this.panCardCurrentFile).subscribe(
+    event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.panCardProgress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        this.panCardMessage = event.body.message;
+        // this.fileInfos = this.uploadService.getFiles();
+      }
+    },
+    err => {
+      this.panCardProgress = 0;
+      this.panCardMessage = 'Could not upload the file!';
+      this.panCardCurrentFile = undefined;
+    });
+
+  this.panCardSelectedFiles = undefined;
+  this.identityDetailHasError = !this.aadharCardSelected || !this.panCardSelected || !this.photoSelected || !this.salarySlipSelected;
+}
+
+photoSelectFile(event) {
+  // console.log(this.aadharCardSelectedFiles)
+  this.photoSelectedFiles = event.target.files;
+  this.photoSelected = this.photoSelectedFiles.length>0;
+  
+}
+
+photoUpload() {
+  this.photoProgress = 0;
+
+  this.photoCurrentFile = this.photoSelectedFiles.item(0);
+  this.photoSelectedFiles = null;
+  this.appFormService.upload(this.photoCurrentFile).subscribe(
+    event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.photoProgress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        this.photoMessage = event.body.message;
+        // this.fileInfos = this.uploadService.getFiles();
+      }
+    },
+    err => {
+      this.photoProgress = 0;
+      this.photoMessage = 'Could not upload the file!';
+      this.photoCurrentFile = undefined;
+    });
+
+  this.photoSelectedFiles = undefined;
+  this.identityDetailHasError = !this.aadharCardSelected || !this.panCardSelected || !this.photoSelected || !this.salarySlipSelected;
+}
+
+salarySlipSelectFile(event) {
+  // console.log(this.aadharCardSelectedFiles)
+  this.salarySlipSelectedFiles = event.target.files;
+  this.salarySlipSelected = this.salarySlipSelectedFiles.length>0;
+  
+  
+}
+
+salarySlipUpload() {
+  this.salarySlipProgress = 0;
+
+  this.salarySlipCurrentFile = this.salarySlipSelectedFiles.item(0);
+  this.salarySlipSelectedFiles = null;
+  this.appFormService.upload(this.salarySlipCurrentFile).subscribe(
+    event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        this.salarySlipProgress = Math.round(100 * event.loaded / event.total);
+      } else if (event instanceof HttpResponse) {
+        this.salarySlipMessage = event.body.message;
+        // this.fileInfos = this.uploadService.getFiles();
+      }
+    },
+    err => {
+      this.salarySlipProgress = 0;
+      this.salarySlipMessage = 'Could not upload the file!';
+      this.salarySlipCurrentFile = undefined;
+    });
+
+  this.salarySlipSelectedFiles = undefined;
+  this.identityDetailHasError = !this.aadharCardSelected || !this.panCardSelected || !this.photoSelected || !this.salarySlipSelected;
+}
+
 onIdentityDetailSubmit(){
-  this.next();
+  this.advancedUserDetail.userDetail = this.userDetail;
+  this.advancedUserDetail.aadhaarCard = "*";
+  this.advancedUserDetail.panCard = "*";
+  this.advancedUserDetail.photo = "*";
+  this.advancedUserDetail.salarySlip = "*";
+  this.applicationFormDTO.userDetail = this.userDetail;
+  this.applicationFormDTO.carDetail = this.carDetail;
+  this.applicationFormDTO.employmentDetail = this.employmentDetail;
+  this.applicationFormDTO.loanDetail = this.loanDetail;
+  this.applicationFormDTO.advancedUserDetail = this.advancedUserDetail;
+
+  this.appFormService.addApplicationForm(this.applicationFormDTO).subscribe(
+    (data: any) => {
+      console.log(data);
+    }
+  );
+  alert("Your Details have been successfully submitted!");
+  this.router.navigate(['/']);
 }
 //----------------------------IDENTITY DETAILS ENDS----------------------------
 
