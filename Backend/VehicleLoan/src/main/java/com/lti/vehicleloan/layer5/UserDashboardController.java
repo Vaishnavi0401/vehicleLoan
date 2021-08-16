@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer4.UserDashboardServiceIpml;
 
 @RestController

@@ -1,7 +1,6 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoanDetail } from '../pojos/LoanDetail';
-import { State } from '../pojos/State';
 import { UserDetail } from '../pojos/UserDetail';
 import { UserDashboardService } from '../user-dashboard.service';
 
@@ -20,7 +19,7 @@ export class UserDashboardComponent implements OnInit {
   isUser: boolean = false;
   message:any;
   sessionUser: UserDetail;
-
+  
   isUserLoggedIn: string;
   
   constructor(private userService : UserDashboardService, private router: Router) { }
