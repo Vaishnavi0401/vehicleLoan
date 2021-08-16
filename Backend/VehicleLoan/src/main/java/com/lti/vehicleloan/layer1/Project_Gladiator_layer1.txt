@@ -1,4 +1,8 @@
-﻿drop table offer_table cascade constraints;
+﻿
+
+
+
+drop table offer_table cascade constraints;
 drop table type_of_employment_details cascade constraints;
 drop table account_type_details cascade constraints;
 drop table city cascade constraints;
@@ -16,21 +20,35 @@ create table offer_table(
 offer_id number(8) primary key,
 offer_amount number(20),
 offer_rate float(10),
-offer_tenure number(8)
+offer_tenure number(8),
+offer_emi number
 );
 
 
-insert into offer_table values (401, 100000, 4, 10); 
-insert into offer_table values (402, 200000, 5, 13); 
-insert into offer_table values (403, 500000, 4, 8); 
-insert into offer_table values (404, 600000, 6, 22); 
-insert into offer_table values (405, 1000000, 6, 21); 
-insert into offer_table values (406, 1500000, 6.5, 24); 
-insert into offer_table values (407, 860000, 9.5, 43);
-insert into offer_table values (408, 620000, 7.5, 37);
-insert into offer_table values (409, 920000, 10, 46);
-insert into offer_table values (410, 800000, 9, 40);
-
+insert into offer_table values (401,50000,7,12,4326.0);
+insert into offer_table values (402,50000,7,24,2238.0);
+insert into offer_table values (403,100000,7,12,8652.0);
+insert into offer_table values (404,100000,7,18,5686.0);
+insert into offer_table values (405,100000,7,24,4477.0);
+insert into offer_table values (406,300000,7,12,25958.0);
+insert into offer_table values (407,300000,7,18,17605.0);
+insert into offer_table values (408,300000,7,24,13431.0);
+insert into offer_table values (409,300000,7,30,10929.0);
+insert into offer_table values (410,300000,7,36,9263.0);
+insert into offer_table values (411,300000,7,40,8430.0);
+insert into offer_table values (412,500000,7,12,43263.0);
+insert into offer_table values (413,500000,7,18,29342.0);
+insert into offer_table values (414,500000,7,24,22386.0);
+insert into offer_table values (415,500000,7,30,18215.0);
+insert into offer_table values (416,500000,7,36,15438.0);
+insert into offer_table values (417,700000,7,12,60568.0);
+insert into offer_table values (418,700000,7,24,31340.0);
+insert into offer_table values (419,700000,7,36,21613.0);
+insert into offer_table values (420,1000000,7.5,12,86757.0);
+insert into offer_table values (421,1000000,7.5,24,44999.0);
+insert into offer_table values (422,1000000,7.5,36,31106.0);
+insert into offer_table values (423,1000000,7.5,42,27144.0);
+insert into offer_table values (424,1000000,7.5,48,24178.0);
 
 
 create table type_of_employment_details(
@@ -999,7 +1017,7 @@ INSERT INTO city VALUES('Tripura', '3213','32');
 
 create table address_details(
 address_id number(8) primary key,
-address varchar2(30),
+address varchar2(70),
 pincode number(8),
 city_id varchar2(5) references city(city_id)
 );
@@ -1027,17 +1045,6 @@ insert into user_details VALUES (301,'Krutika','krutika@gmail.com','test1234',98
 insert into user_details VALUES(302,'Jatin','jatin@gmail.com','test1234',9998887776,'M',24,202,0);
 insert into user_details VALUES(303,'Vaishnavi','vaishnavi@gmail.com','test1234',8886664442,'F',20,203,1);
 insert into user_details VALUES(304,'Vineet','vineet@gmail.com','test1234',9075386421,'M',16,204,1);
-
-
-create table advanced_user_details(
-advanced_details_id number(8) primary key,
-aadhaar_card varchar2(20),
-pan_card varchar2(20),
-salary_slip varchar2(20),
-photo varchar2(20),
-user_id number(8) references user_details(user_id)
-);
-
 
 
 create table employment_details(
@@ -1071,6 +1078,7 @@ insert into car_maker values (1103, 'Suzuki');
 insert into car_maker values (1104, 'Toyota');
 insert into car_maker values (1105, 'Mercury');
 insert into car_maker values (1106, 'Lotus');
+insert into car_maker values (1107, 'Other');
 
 
 create table car_type(
@@ -1096,18 +1104,17 @@ car_maker_id number references car_maker(car_maker_id),
 car_type_id number references car_type(car_type_id),
 model varchar2(20),
 showroom_price number,
-onroad_price number,
-car_model_image varchar2(30)
+onroad_price number
 );
 
 
-insert into car_details values (1001, 'PR', 1100, 1200, 'Indica', 1000000, 1100000, '*');
-insert into car_details values (1002, 'PR', 1100, 1200, 'Bolt', 750000,825000, '*');
-insert into car_details values (1003, 'CM', 1102, 1206, 'School Bus', 500000,550000, '*');
-insert into car_details values (1004, 'PR', 1101, 1201, 'X6',250000, 275000, '*');
-insert into car_details values (1005, 'PR', 1102, 1202, 'XUV500', 1000000, 330000, '*');
-insert into car_details values (1006, 'PR', 1103, 1203, 'Ertiga', 250000, 275000, '*');
-insert into car_details values (1007, 'CM', 1104, 1207, 'Ultra 912', 500000, 220000, '*');
+insert into car_details values (1001, 'PR', 1100, 1200, 'Indica', 1000000, 1100000);
+insert into car_details values (1002, 'PR', 1100, 1200, 'Bolt', 750000,825000);
+insert into car_details values (1003, 'CM', 1102, 1206, 'School Bus', 500000,550000);
+insert into car_details values (1004, 'PR', 1101, 1201, 'X6',250000, 275000);
+insert into car_details values (1005, 'PR', 1102, 1202, 'XUV500', 1000000, 330000);
+insert into car_details values (1006, 'PR', 1103, 1203, 'Ertiga', 250000, 275000);
+insert into car_details values (1007, 'CM', 1104, 1207, 'Ultra 912', 500000, 220000);
 
 
 
@@ -1134,8 +1141,8 @@ insert into loan_details values (505,600000,23,7.5,20000,3500,'14-DEC-1982',301,
 insert into loan_details values (506,500000,15,5,10000,0,'15-NOV-1982',302,1006,'no');
 insert into loan_details values (507,200000,20,6,36000,0,'19-FEB-1982',302,1002,'yes');
 
-
 commit;
+
 
 
 
