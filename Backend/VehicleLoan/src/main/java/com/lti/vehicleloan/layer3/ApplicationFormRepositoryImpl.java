@@ -125,7 +125,7 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 	public Integer insertCar(CarDetail car) {
 		System.out.println("Insert car Repo called");
 		EntityManager entityManager = super.getEntityManager();
-		entityManager.merge(car);
+		entityManager.persist(car);
 		System.out.println("Car Successfully added: "+car.getCarId());
 		return car.getCarId();	
 	}

@@ -352,7 +352,7 @@ export class ApplicationFormComponent implements OnInit {
 
 
 aadharCardSelectFile(event) {
-  console.log(this.aadharCardSelectedFiles)
+  // console.log(this.aadharCardSelectedFiles)
   this.aadharCardSelectedFiles = event.target.files;
   this.aadharCardSelected = this.aadharCardSelectedFiles.length>0;
   
@@ -487,13 +487,15 @@ onIdentityDetailSubmit(){
   this.applicationFormDTO.loanDetail = this.loanDetail;
   this.applicationFormDTO.advancedUserDetail = this.advancedUserDetail;
 
+  console.log(this.applicationFormDTO);
+
   this.appFormService.addApplicationForm(this.applicationFormDTO).subscribe(
     (data: any) => {
       console.log(data);
     }
   );
-  alert("Your Details have been successfully submitted!");
-  this.router.navigate(['/']);
+  // alert("Your Details have been successfully submitted!");
+  // this.router.navigate(['/']);
 }
 //----------------------------IDENTITY DETAILS ENDS----------------------------
 
