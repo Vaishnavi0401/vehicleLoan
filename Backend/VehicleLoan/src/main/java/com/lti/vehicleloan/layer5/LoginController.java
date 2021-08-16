@@ -18,13 +18,13 @@ public class LoginController {
 	private LoginService loginService;
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String loginUser(@RequestBody Login login) {
-		UserDetail isValidUser = loginService.validateUser(login);
-		if (isValidUser != null) {
-			return "{\"status\" : \"Logged in successfully!\"}";
+	public UserDetail loginUser(@RequestBody Login login) {
+		UserDetail user = loginService.validateUser(login);
+		if (user != null) {
+			return user;
 		}
 		else {
-		return "{\"status\" : \"Login unsuccessful!\"}";
+		return null;
 	}
 	}
 }

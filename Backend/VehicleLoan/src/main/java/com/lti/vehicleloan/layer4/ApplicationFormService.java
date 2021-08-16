@@ -1,8 +1,11 @@
 package com.lti.vehicleloan.layer4;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
@@ -44,6 +47,7 @@ public interface ApplicationFormService {
 	
 	Integer insertAdvancedUserDetailService(AdvancedUserDetail advancedUserDetail);
 	
-	String insertApplicationFormService(ApplicationFormDto applicationForm);
+	
+	Boolean insertApplicationFormService(ApplicationFormDto applicationForm);
 	
 }

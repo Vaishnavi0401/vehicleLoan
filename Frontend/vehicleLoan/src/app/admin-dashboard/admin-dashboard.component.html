@@ -1,12 +1,21 @@
-<html>
-<body>
-    <div class="container">  
-        <br>  
-        <input type="number" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId"   >
-        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)" >Search </button>
-        <!----------------------------------- Table for Search Button------------------------->
-        <div *ngIf="divOneLoan"> 
-            <table *ngIf="getLoanDetail" class="table table-striped">                     
+
+<div *ngIf="isAdminLoggedIn == 'true' else myElseBlock">
+
+    <button class="btn btn-primary" (click)="logout()">Logout</button>
+
+    <div class="container">
+
+        <br>
+        <!-- <h3>All Loan Details</h3> -->
+
+
+
+        <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId">
+        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)">Search
+        </button>
+
+        <div *ngIf="divOneLoan">
+            <table *ngIf="getLoanDetail" class="table table-striped">
                 <thead>
                     <tr>
                         <th> Loan Id </th>
@@ -21,6 +30,9 @@
                         <th>Operation </th>
                         <th>Operation </th>
                         <th>Operation </th>
+
+
+
                     </tr>
                 </thead>
                
@@ -36,19 +48,24 @@
                         <td>{{getLoanDetail.tenure}}</td>
                         <td>{{getLoanDetail.approval}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanDetail.loanId)" (click)="viewLoanDetails(getLoanDetail.loanId)" >View More</button>
+                            <button type="button" class="btn btn-primary"
+                                (click)="selectLoanDetailByLoanId(getLoanDetail.loanId)"
+                                (click)="viewLoanDetails(getLoanDetail.loanId)">View More</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" (click)="approveLoanDetail(getLoanDetail)" >Approve</button>
+                            <button type="button" class="btn btn-primary"
+                                (click)="approveLoanDetail(getLoanDetail)">Approve</button>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(getLoanDetail)">Reject</button>
+                            <button type="button" class="btn btn-primary"
+                                (click)="rejectLoanDetail(getLoanDetail)">Reject</button>
                         </td>
-                        
+
                     </tr>
                 </tbody>
             </table>
         </div>
+
 
         <!----------------------------------- Table for All Loan Details Button------------------------->
 
@@ -114,11 +131,11 @@
                         <th>Account Type</th>
                         <th>Annual Salary</th>
                         <th>Mobile Number</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let emp of viewEmploymentDetailByLoanId">
+
                        
                         <td>{{emp.userDetail.userId}}</td>
                         <td>{{emp.userDetail.name}}</td>
@@ -158,7 +175,6 @@
                         <th>Operation </th>
                         <th>Operation </th>
                         <th>Operation </th>
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -180,7 +196,6 @@
                         <td>
                             <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(loan)">Reject</button>
                         </td>
-                        
                     </tr>
                 </tbody>
             </table>
@@ -232,6 +247,19 @@
             <button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('no')">Rejected List</button><br><br><br>
         </div>
 
-    </div>  
-</body>
-</html>
+    </div>
+</div>
+
+<ng-template #myElseBlock>
+    <h1>You are not logged in </h1>
+    <h4>To login <a routerLink="/login">Click here.</a> </h4>
+</ng-template>
+
+<!-- <button name="button" type="button">Settings</button> -->
+<!-- <input type="text" placeholder="Search by approval" [(ngModel)]="approval">
+<button type="button" (click)="getLoanDetailsbyApproval(approval)" >Search by approval</button> -->
+<!-- <button type="button" class="btn btn-primary" (click)="getAllLoanDetails()">All Loan Details</button> -->
+<!-- <td>
+<button type="button" class="btn btn-primary" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
+</td>   -->
+

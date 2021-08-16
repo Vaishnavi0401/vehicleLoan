@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminDashboardService } from '../admin-dashboard.service';
 import { AdminDashboardLoanDetail } from '../pojos/AdminDashboardLoanDetail';
 import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
@@ -21,10 +22,14 @@ export class AdminDashboardComponent implements OnInit {
   getLoanDetail:AdminDashboardLoanDetail;
   approval:string;
   allUserDetails: UserDetail[]=[];
+
   viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
   viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
   approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
   viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
+
+  isAdminLoggedIn: string;
+
 
   divAllLoan:boolean=true;
   divViewMore:boolean=true;
@@ -32,11 +37,31 @@ export class AdminDashboardComponent implements OnInit {
   divAprrovalLoan:boolean=true;
   divUserDetail:boolean;
 
-  constructor(private adminDashboardService: AdminDashboardService) { }
-  
+
+
+
+  constructor(private adminDashboardService: AdminDashboardService, private router: Router) { }
+
   ngOnInit(): void {
-  
+    this.isAdminLoggedIn = sessionStorage.getItem("isAdminLoggedIn");
+  // this.adminDashboardService.getAllLoanDetailsService().subscribe(
+  //   (data:AdminDashboardLoanDetail[])=>
+  //   {
+  //     this.allLoanDetails=data;
+  //     this.tempLoanDetails=data;
+  //   },
+  //   (err)=>{
+  //     console.log(err);
+  //   }
+
+  // );
   this.getAllLoanDetails();
+  }
+
+  logout(){
+    sessionStorage.clear();
+    alert('You have successfully logged out!');
+    this.router.navigate(['/']);
   }
 
   getAllLoanDetails(){

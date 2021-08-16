@@ -1,0 +1,6 @@
+.card{
+    /* float: left; */
+    border-style: solid;
+    margin: 0 auto;
+    width: 50%;
+}

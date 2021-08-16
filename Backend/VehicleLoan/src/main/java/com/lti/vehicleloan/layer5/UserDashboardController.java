@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer4.UserDashboardServiceIpml;
 
@@ -31,7 +32,7 @@ public class UserDashboardController {
 	@ResponseBody
 	@RequestMapping(value="/getUserbyId/{userId}")
 	
-	public  List<UserDetail>getUserbyUserId(@PathVariable int userId) {
+	public  List<LoanDetail>getUserbyUserId(@PathVariable int userId) {
 		return userDashboardService.selectUserbyUserIdService(userId);
 	}
 	

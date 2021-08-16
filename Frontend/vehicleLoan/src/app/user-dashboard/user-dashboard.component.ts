@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoanDetail } from '../pojos/LoanDetail';
+import { State } from '../pojos/State';
 import { UserDetail } from '../pojos/UserDetail';
 import { UserDashboardService } from '../user-dashboard.service';
 
@@ -10,24 +12,32 @@ import { UserDashboardService } from '../user-dashboard.service';
 })
 export class UserDashboardComponent implements OnInit {
 
+  details: LoanDetail[];
+  userId: number;
+
+  isLoan: boolean = false;
+  isCar: boolean = false;
+  isUser: boolean = false;
+  message:any;
+  sessionUser: UserDetail;
+
+  isUserLoggedIn: string;
   
-  users: LoanDetail[];
-  userId: number = 0;
-  
-  
-  constructor(private userService : UserDashboardService) { }
+  constructor(private userService : UserDashboardService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
+    this.sessionUser = JSON.parse(sessionStorage.getItem("user_obj"));
+    this.userId = this.sessionUser.userId;
+    this.getUserDetails(this.userId);
   }
-
-  message:any;
-  getUserDetailsByUserId(userId:number)
-  {
+  
+  getUserDetails(userId: number){
     console.log('user id chosen is'+this.userId);
-    this.userService.getUsersService(userId).
-    subscribe((data:LoanDetail[])=>
+    this.userService.getUsersService(userId)
+    .subscribe((data:LoanDetail[])=>
      {
-      this.users = data;
+      this.details = data;
       console.log(data[0]);
     }
     ,(err) => {
@@ -35,6 +45,30 @@ export class UserDashboardComponent implements OnInit {
       }
     );
   }
+
+  
+  getLoanByUserId(userId:number)
+  {
+    this.isLoan = !this.isLoan;
+  }
+
+  getCarByUserId(userId:number)
+  {
+    this.isCar = !this.isCar;
+  }
+  
+  getUserByUserId(userId:number)
+  {
+    this.isUser = !this.isUser;
+  }
+
+
+  logout(){
+    sessionStorage.clear();
+    alert('You have successfully logged out!');
+    this.router.navigate(['/']);
+  }
+
 }
 
     

@@ -3,41 +3,37 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { BaseComponent } from './base/base.component';
 import { EmiCalculatorComponent } from './emi-calculator/emi-calculator.component';
-import { EmploymentDetailsComponent } from './employment-details/employment-details.component';
 import { GetEligibilityComponent } from './get-eligibility/get-eligibility.component';
 import { HomeComponent } from './home/home.component';
-import { IdentityDetailsComponent } from './identity-details/identity-details.component';
-import { LoanDetailsComponent } from './loan-details/loan-details.component';
 import { LoanOfferComponent } from './loan-offer/loan-offer.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+
 
 const routes: Routes = [
-  {path: '', component: HomeComponent,
-  children:[
-    {path:'about-us', component:AboutUsComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'emi-calculator', component: EmiCalculatorComponent},
-    {path: 'check-eligibility', component: GetEligibilityComponent},
-    {path: 'loan-offers', component: LoanOfferComponent},
-    {path: 'application-form', component: ApplicationFormComponent},
-    {path: 'personal-details', component: PersonalDetailsComponent},
-    {path: 'employment-details', component: EmploymentDetailsComponent},
-    {path: 'vehicle-details', component: VehicleDetailsComponent},
-    {path: 'loan-details', component: LoanDetailsComponent},
-    {path: 'identity-details', component: IdentityDetailsComponent},
-  ],
-},
-{path: 'user-dashboard', component: UserDashboardComponent},
-{path: 'admin-dashboard', component: AdminDashboardComponent},
+  { path: '', redirectTo:'/home', pathMatch: 'full'},
+  {
+    path: '', component: BaseComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'emi-calculator', component: EmiCalculatorComponent },
+      { path: 'check-eligibility', component: GetEligibilityComponent },
+      { path: 'loan-offers', component: LoanOfferComponent },
+      { path: 'application-form', component: ApplicationFormComponent },
+    ],
+  },
+ 
+  { path: 'user-dashboard', component: UserDashboardComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
   // {path: '/about-us', component: AboutUsComponent},
   // {path: '/login', component: LoginComponent},
   // {path: '', redirectTo:'/home', pathMatch: 'full'},
-  {path: '**', component: PageNotFoundComponent},
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
