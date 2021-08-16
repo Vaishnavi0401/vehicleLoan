@@ -28,6 +28,12 @@ export class LoanOfferComponent implements OnInit {
   offerTableObject:OfferTable;
 
   ngOnInit(): void {
+    this.validateForm=new FormGroup(
+      {
+        principal:new FormControl('',[Validators.required,Validators.min(0)])
+        
+      }
+    );
     
   }
   data:any
@@ -62,13 +68,7 @@ export class LoanOfferComponent implements OnInit {
 //     console.log('tenure',tenure);
 //     //console.log('emi',emi);
  }
-//  this.validateForm=new FormGroup(
-//   {
-//     principal:new FormControl('',[Validators.required,Validators.minLength(5)]),
-//     rate:new FormControl('',[Validators.required,Validators.maxLength(3)])
-//   }
-// );
-
+ 
     
 
 
