@@ -11,8 +11,8 @@ export class LoanOfferService {
   baseUrl:string='http://localhost:8085/loan/';
   constructor(private myhttp: HttpClient) { }
 
-  getAllOffersService(amount:number,rate:number):Observable<any>{
-    return this.myhttp.get<OfferTable[]>(this.baseUrl+"getAllLoanOffers/"+amount+"/"+rate);
+  getAllOffersService(amount:number):Observable<any>{
+    return this.myhttp.get<OfferTable[]>(this.baseUrl+"getAllLoanOffers/"+amount);
   }
 
 

@@ -10,7 +10,7 @@ import com.lti.vehicleloan.layer2.OfferTable;
 @Service
 public interface LoanOfferService {
 
-	List<OfferTable> getAllLoanOffers(BigDecimal amount, BigDecimal rate);
+	List<OfferTable> getAllLoanOffers(BigDecimal amount);
 	
 	
 }

@@ -26,11 +26,13 @@ public class LoanOfferJPAController {
 		System.out.println("LoanOfferJPAController() constructed");
 	}
 	
+	
+	
 	@GetMapping
 	@ResponseBody
-	@RequestMapping(value="/getAllLoanOffers/{amount}/{rate}")
-	public List<OfferTable> getAllLoanOffers(@PathVariable BigDecimal amount,@PathVariable BigDecimal rate){
-		return loanService.getAllLoanOffers(amount, rate);
+	@RequestMapping(value="/getAllLoanOffers/{amount}")
+	public List<OfferTable> getAllLoanOffers(@PathVariable BigDecimal amount){
+		return loanService.getAllLoanOffers(amount);
 	}
 }
 

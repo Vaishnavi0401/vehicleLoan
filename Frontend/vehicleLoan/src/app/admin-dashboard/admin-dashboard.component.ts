@@ -4,7 +4,7 @@ import { AdminDashboardLoanDetail } from '../pojos/AdminDashboardLoanDetail';
 import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
-import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -21,7 +21,10 @@ export class AdminDashboardComponent implements OnInit {
   getLoanDetail:AdminDashboardLoanDetail;
   approval:string;
   allUserDetails: UserDetail[]=[];
-
+  viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
+  viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
+  approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
 
   divAllLoan:boolean=true;
   divViewMore:boolean=true;
@@ -30,27 +33,9 @@ export class AdminDashboardComponent implements OnInit {
   divUserDetail:boolean;
 
   constructor(private adminDashboardService: AdminDashboardService) { }
-
-  private location: Location;
-
-  // backClicked() {
-  //   this.location.back();
-  // }
-
-
-
+  
   ngOnInit(): void {
-  // this.adminDashboardService.getAllLoanDetailsService().subscribe(
-  //   (data:AdminDashboardLoanDetail[])=>
-  //   {
-  //     this.allLoanDetails=data;
-  //     this.tempLoanDetails=data;
-  //   },
-  //   (err)=>{
-  //     console.log(err);
-  //   }
-
-  // );
+  
   this.getAllLoanDetails();
   }
 
@@ -87,7 +72,6 @@ export class AdminDashboardComponent implements OnInit {
     },(err)=>{
       console.log(err);
     }
-
     );
   }
 
@@ -169,20 +153,7 @@ export class AdminDashboardComponent implements OnInit {
   } //end of reject
 
 
-  // selectLoanDetailByLoanId(){
-  //   if(this.getLoanbyLoanId==0){
-  //     console.log('loan id chosen is zero'+this.getLoanbyLoanId);
-  //     this.tempLoanDetails=this.allLoanDetails;
-  //   }
-  //   else
-  //   {
-  //     console.log('loan Id chosen is: '+this.getLoanbyLoanId);
-  //     this.tempLoanDetails=this.allLoanDetails.filter(l=>{l.loanId==this.getLoanbyLoanId});
-  //     //this.allLoanDetails=this.tempLoanDetails;
-  //     console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
-  //     
-  //   }
-  // }
+  
   adata:any;
   searched:boolean;
   selectLoanDetailByLoanId(getLoanbyLoanId:number)
@@ -199,8 +170,7 @@ export class AdminDashboardComponent implements OnInit {
     {
       this.getLoanDetail=data;
       console.log(this.getLoanDetail);
-      //this.tempLoanDetails=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
-      //this.getLoanDetailArray=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      
       console.log('length of getLoanDetailArray'+ this.getLoanDetailArray.length);
       console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
       console.log('length of allLoanDetails: '+this.allLoanDetails.length);      
@@ -210,9 +180,7 @@ export class AdminDashboardComponent implements OnInit {
     );
   } //end of search
 
-  viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
-  //viewAdvancedUserDetailByLoanIdArray:AdvancedUserDetail[]=[];
-  viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
+  
 
 
   bdata:any;
@@ -231,11 +199,7 @@ export class AdminDashboardComponent implements OnInit {
     subscribe((data:AdvancedUserDetail)=>
     {
       this.viewAdvancedUserDetailByLoanId=data;
-      
       console.log(this.viewAdvancedUserDetailByLoanId);
-      //this.viewAdvancedUserDetailByLoanIdArray=this.viewAdvancedUserDetailByLoanIdArray.filter(v=>())
-
-
     },(err) => {
       console.log(err + 'error'+this.adata);
       }
@@ -251,8 +215,10 @@ export class AdminDashboardComponent implements OnInit {
       }
     
     );
-  }
-  approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  }  //end of viewLoanDetails
+
+
+  
   cdata:any;
   getLoanDetailsbyApproval(approval:string)
   {    
@@ -276,34 +242,12 @@ export class AdminDashboardComponent implements OnInit {
       console.log(err + 'error'+this.adata);
       }
     );
-    
-    
-  
-  }
-
-
-
-
-
-  viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
+  }  //end of getLoanDetailsbyApproval
 
 
 
 
 
 
- //this.allLoanDetails=this.tempLoanDetails;
-        //   console.log('from searchLoan() '+data);
-      //   console.log(this.tempLoanDetails);
-         
-      //   console.log('Employee Searched'+getLoanbyLoanId);
-      
-      // this.adata=data;
-      // console.log('log is'+ data);
-      // if(data==null)
-      // {
-      //   this.searched=true;
-      
-      // }
 
 }

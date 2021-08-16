@@ -16,11 +16,11 @@ public class LoanOfferServiceImpl implements LoanOfferService{
 	
 	LoanOfferRepositoryImpl loanRepo;
 	
-	public List<OfferTable> getAllLoanOffers(BigDecimal amount, BigDecimal rate) {
+	public List<OfferTable> getAllLoanOffers(BigDecimal amount) {
 
 		
 		System.out.println("Loan Offers Service Impl: Layer 4");
-		return loanRepo.getOfferTable(amount, rate);
+		return loanRepo.getOfferTable(amount);
 	}
 
 }

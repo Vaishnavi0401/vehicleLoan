@@ -11,13 +11,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.OfferTable;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.AdvancedUserDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.EmploymentDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.LoanDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.UserDetailNotFoundException;
 import com.lti.vehicleloan.layer3.AdminDashboardRepositoryImpl;
+import com.lti.vehicleloan.layer3.LoanOfferRepositoryImpl;
 import com.lti.vehicleloan.layer4.AdminDashboardService;
+import com.lti.vehicleloan.layer4.LoanOfferServiceImpl;
 
 @SpringBootTest
 public class AdminDashboardTests {
@@ -27,6 +30,12 @@ public class AdminDashboardTests {
 	
 	@Autowired
 	AdminDashboardService admServ;
+	
+	@Autowired
+	LoanOfferRepositoryImpl loanOfferRepo=new LoanOfferRepositoryImpl();
+	
+	@Autowired
+	LoanOfferServiceImpl loanServ;
 	
 	@Test                                                        //Test1
 	void getAllLoanDetailsTest() {
@@ -165,6 +174,10 @@ public class AdminDashboardTests {
 		assertNotNull(userDetails);
 	}
 	
+	//loan offers test
+	
+	
+	
 //=================================Not Working============================================//
 
 	//update
@@ -198,6 +211,15 @@ public class AdminDashboardTests {
 		}
 
 	}
+	
+//	@Test														//Test11
+//	void getAllLoanOffersTest()
+//	{
+//		System.out.println("Getting loan offers");
+//		List<OfferTable> offerTable=loanOfferRepo.getOfferTable(500000.0000000000000000000000);
+//		assertNotNull(offerTable);
+//	}
+	
 	
 	
 	

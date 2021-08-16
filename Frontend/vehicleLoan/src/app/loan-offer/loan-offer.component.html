@@ -2,19 +2,23 @@
 <div class="container">
     <h3>Loan offers!</h3>
     <br>
-    Principal Amount <input type="number" [(ngModel)]="amount" class="form-control" required/>
-    Rate Of Interest<input type="number" [(ngModel)]="rate" class="form-control" required/>
+    Principal Amount <input type="number" class="form-control" [(ngModel)]="amount"  />
     <br>
+    
+    
     <div>
-        
-        <button class="btn btn-primary" (click)="getAllLoanOffers(amount,rate)">Get Loan Offers</button>
+        <button class="btn btn-primary" (click)="getAllLoanOffers(amount)"  >Get Loan Offers</button>
     </div>
-    <table *ngIf="offerTable && offerTable.length" >
+    <br>
+    <table *ngIf="offerTable && offerTable.length" class="table table-striped">
         <thead>
             <tr>
                 <th>Principal Amount</th>
                 <th>Rate Of Interest</th>
-                <th>Tenure</th>
+                <th>Tenure(in Months)</th>
+                <th>EMI</th>
+                <th>Select</th>
+                
             </tr> 
         </thead>
         <tbody>
@@ -22,14 +26,26 @@
                 <td>{{offer.offerAmount}}</td>
                 <td>{{offer.offerRate}}</td>
                 <td>{{offer.offerTenure}}</td>
+                <td>{{offer.offerEmi}}</td>
+                <Button class="btn btn-primary" >Select</Button>
             </tr>
         </tbody>
     </table>
 
-    <br> <br> <br>
+    <br> 
     <button routerLink="../personal-details" class="btn btn-primary">Submit</button>
     <br><br>
     <div>
         <button class="btn btn-primary">EMI Scheduler</button>
     </div>
 </div>
+<!-- Principal Amount <input type="number" class="form-control" id="principal" formControlName="principal" [(ngModel)]="amount" class="form-control" /> -->
+
+    <!-- <span *ngIf="validateForm.get('principal').hasError('required')" style="color: red;" >
+        Principal is required
+    </span>
+    <span *ngIf="validateForm.get('principal').hasError('min')" style="color: red;" >
+        Principal should be 5 digits
+    </span> -->
+    
+    <!-- (click)="setValues(offer.offerAmount,offer.offerRate,offer.offerTenure)" -->

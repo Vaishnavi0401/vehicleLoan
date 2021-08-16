@@ -58,7 +58,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

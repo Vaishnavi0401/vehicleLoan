@@ -28,6 +28,17 @@ public class OfferTable implements Serializable {
 
 	@Column(name="OFFER_TENURE")
 	private Integer offerTenure;
+	
+	@Column(name="OFFER_EMI")
+	private double offerEmi;
+
+	public double getOfferEmi() {
+		return offerEmi;
+	}
+
+	public void setOfferEmi(double offerEmi) {
+		this.offerEmi = offerEmi;
+	}
 
 	public OfferTable() {
 	}

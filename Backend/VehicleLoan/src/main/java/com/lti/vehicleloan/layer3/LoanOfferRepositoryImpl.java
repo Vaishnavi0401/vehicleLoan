@@ -18,15 +18,17 @@ public class LoanOfferRepositoryImpl extends BaseRepository implements LoanOffer
 	}
 
 	@Transactional
-	public List<OfferTable> getOfferTable(BigDecimal amount, BigDecimal rate) {
+	public List<OfferTable> getOfferTable(BigDecimal amount) {
 		
 		EntityManager entityManager=getEntityManager();
-		Query query=entityManager.createQuery("Select o from OfferTable o where o.offerAmount<=:amount and o.offerRate<=:rate");	
+		Query query=entityManager.createQuery("Select o from OfferTable o where o.offerAmount<=:amount");	
 		query.setParameter("amount", amount);
-		query.setParameter("rate",rate);
+		
 		
 		List<OfferTable> offerTable=query.getResultList();
 		return offerTable;
 	}
 
 }
+
+

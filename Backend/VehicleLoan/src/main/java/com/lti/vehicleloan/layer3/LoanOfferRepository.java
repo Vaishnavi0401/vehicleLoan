@@ -10,6 +10,6 @@ import com.lti.vehicleloan.layer2.OfferTable;
 @Repository
 public interface LoanOfferRepository {
 	
-	List<OfferTable> getOfferTable(BigDecimal amount,BigDecimal rate);
+	List<OfferTable> getOfferTable(BigDecimal amount);
 	
 }
