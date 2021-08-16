@@ -38,6 +38,9 @@ public interface ApplicationFormRepository {
 	
 	Integer insertCarMaker(CarMaker carMaker);
 	Integer insertCar(CarDetail car);
+	CarDetail selectCarDetail(Integer carId) throws CarNotFoundException;
+	CarMaker selectCarMakerDetail(Integer carMakerId) throws CarMakerNotFoundException;
+	CarType selectCarTypeDetail(Integer carTypeId) throws CarTypeNotFoundException;
 	List<CarMaker> selectAllCarMakers() throws CarMakerNotFoundException;
 	List<CarType> selectAllCarTypes() throws CarTypeNotFoundException;
 	List<CarDetail> selectAllCars() throws CarNotFoundException;
@@ -48,9 +51,11 @@ public interface ApplicationFormRepository {
 	State selectState(String stateId);
 	List<State> selectAllStates() throws StateNotFoundException;
 	
+	Integer insertEmploymentDetail(EmploymentDetail employmentDetail);
+	TypeOfEmploymentDetail selectTypeOfEmploymentDetail(Integer typeOfEmpId) throws TypeOfEmploymentNotFoundException;
+	AccountTypeDetail selectAccountTypeDetail(Integer accountTypeId) throws AccountTypeDetailNotFoundException;
 	List<TypeOfEmploymentDetail> selectAllTypeOfEmployments() throws TypeOfEmploymentNotFoundException;
 	List<AccountTypeDetail> selectAllAccountTypeDetails() throws AccountTypeDetailNotFoundException;
-	Integer insertEmploymentDetail(EmploymentDetail employmentDetail);
 	List<EmploymentDetail> selectEmploymentDetails();
 	
 	Integer insertLoanDetail(LoanDetail loanDetail);

@@ -3,14 +3,18 @@ package com.lti.vehicleloan.layer5;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
@@ -21,10 +25,12 @@ import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.LoanDetail;
+import com.lti.vehicleloan.layer2.ResponseMessage;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
+import com.lti.vehicleloan.layer4.FileStorageService;
 
 @CrossOrigin
 @RestController
@@ -34,6 +40,8 @@ public class ApplicationFormController {
 	@Autowired
 	ApplicationFormServiceImpl appFormService;
 	
+	@Autowired
+	FileStorageService storageService;
 	
 //	@PostMapping
 //	@ResponseBody
@@ -78,10 +86,25 @@ public class ApplicationFormController {
 	@PostMapping
 	@ResponseBody
 	@RequestMapping(value="/addApplicationForm")
-	public String addUser(@RequestBody ApplicationFormDto applicationForm) {
-		String mssg = appFormService.insertApplicationFormService(applicationForm);
-		return "{\"status\" : \"mssg\"}";
+	public Boolean addUser(@RequestBody ApplicationFormDto applicationForm) {
+		Boolean status = appFormService.insertApplicationFormService(applicationForm);
+		return status;
+		
 	}
+	
+	@PostMapping("/upload")
+	public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    String message = "";
+    try {
+    	storageService.save(file);
+    	message = "Uploaded the file successfully: " + file.getOriginalFilename();
+    	return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+    }
+    catch (Exception e) {
+    	message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+    	return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+    }
+}
 	
 	
 	@GetMapping

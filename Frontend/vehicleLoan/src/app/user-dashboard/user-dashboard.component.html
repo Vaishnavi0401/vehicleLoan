@@ -1,11 +1,13 @@
-<p>user-dashboard works!</p>
+<div *ngIf="isUserLoggedIn == 'true' else myElseBlock">
+    <p>user-dashboard works!</p>
+
 
 <div>
     <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId">
     <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button>
 </div>
 <br>
-
+<button class="btn btn-primary" (click)="logout()">Logout</button>
 
 <button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
 
@@ -34,11 +36,10 @@
                 <td>{{detail.principalAmount}}</td>
                 <td>{{detail.rateOfInterest}}</td>
                 <td>{{detail.tenure}}</td>
+
             </tr>
         </tbody>
     </table>
-
-
 </div>
 
 <button class="btn btn-primary" type="button" (click)="getCarByUserId(userId)">Car Details</button>
@@ -75,8 +76,6 @@
             </tr>
         </tbody>
     </table>
-
-
 </div>
 
 <button class="btn btn-primary" type="button" (click)="getUserByUserId(userId)">User Details</button>
@@ -128,3 +127,7 @@
 
 
 </div>
+<ng-template #myElseBlock>
+    <h1>You are not logged in </h1>
+    <h4>To login <a routerLink="/login">Click here.</a> </h4>
+</ng-template>

@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
+import com.lti.vehicleloan.layer2.AccountTypeDetail;
 import com.lti.vehicleloan.layer2.AddressDetail;
 import com.lti.vehicleloan.layer2.AdvancedUserDetail;
 import com.lti.vehicleloan.layer2.CarDetail;
@@ -24,10 +26,12 @@ import com.lti.vehicleloan.layer2.CarType;
 import com.lti.vehicleloan.layer2.City;
 import com.lti.vehicleloan.layer2.EmploymentDetail;
 import com.lti.vehicleloan.layer2.State;
+import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer3.ApplicationFormRepositoryImpl;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import com.lti.vehicleloan.layer2.EMICalc;
 import com.lti.vehicleloan.layer2.Login;
@@ -36,6 +40,11 @@ import com.lti.vehicleloan.layer4.LoginService;
 import com.lti.vehicleloan.layer2.EligibilityCheck;
 import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
+import com.lti.vehicleloan.layer2.exceptions.AccountTypeDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarMakerNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarTypeNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.TypeOfEmploymentNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 import com.lti.vehicleloan.layer3.UserDashboardRepository;
 import com.lti.vehicleloan.layer4.EligibilityCheckService;
@@ -94,7 +103,7 @@ class DemoApplicationTests {
 //	}
 	
 	@Test
-	void insertAddress() {
+	void insertANewAddressAddress() {
 		City foundCity = appFormRepo.selectCity("102"); //Existing City
 		assertNotNull(foundCity);
 		System.out.println(foundCity.getCityName());
@@ -109,7 +118,7 @@ class DemoApplicationTests {
 	}
 	
 	@Test
-	void insertUser() {
+	void insertUserWithExistingFK() {
 		System.out.println("Creating an address");
 		AddressDetail foundAddress = appFormRepo.selectAddress(190);
 		assertNotNull(foundAddress);
@@ -130,7 +139,90 @@ class DemoApplicationTests {
 		System.out.println("Successfuly added the user");
 	}
 	
-	void insertLoanDetail() {}
+	@Test
+	void insertCarWithExistingFK() {
+		try {
+			CarMaker foundCarMaker = appFormRepo.selectCarMakerDetail(1104);
+			assertNotNull(foundCarMaker);
+			CarType foundCarType = appFormRepo.selectCarTypeDetail(1204);
+			assertNotNull(foundCarType);
+			CarDetail car = new CarDetail();
+			car.setVehicleDomain("CM");
+			car.setCarMaker(foundCarMaker);
+			car.setCarType(foundCarType);
+			car.setModel("Brezza");
+			car.setShowroomPrice(BigDecimal.valueOf(3000000));
+			car.setOnroadPrice(BigDecimal.valueOf(3010000));
+			car.setCarModelImage("*");
+			assertNotNull(car);
+			System.out.println("Car Object Created");
+			Integer carId = appFormRepo.insertCar(car);
+			System.out.println("Car has been added successfully with the carId: "+carId);
+		} catch (CarMakerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CarTypeNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void insertEmploymentForExistingUser() {
+		try {
+			TypeOfEmploymentDetail foundTypeOfEmployment = appFormRepo.selectTypeOfEmploymentDetail(1301);
+			assertNotNull(foundTypeOfEmployment);
+			AccountTypeDetail foundAccountType = appFormRepo.selectAccountTypeDetail(1401);
+			assertNotNull(foundAccountType);
+			UserDetail foundUser = appFormRepo.selectUser(304);
+			assertNotNull(foundUser);
+			EmploymentDetail empDetail = new EmploymentDetail();
+			empDetail.setAnnualSalary(BigDecimal.valueOf(1000000));
+			empDetail.setTypeOfEmploymentDetail(foundTypeOfEmployment);
+			empDetail.setAccountTypeDetail(foundAccountType);
+			empDetail.setUserDetail(foundUser);
+			System.out.println("Employment Detail Object Created");
+			Integer empId = appFormRepo.insertEmploymentDetail(empDetail);
+			System.out.println("Car has been added successfully with the carId: "+empId);
+			
+		} catch (TypeOfEmploymentNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AccountTypeDetailNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void insertLoanDetailWithExistingFK() {
+		
+		try {
+			UserDetail foundUser = appFormRepo.selectUser(304);
+			assertNotNull(foundUser);
+			CarDetail foundCar = appFormRepo.selectCarDetail(224);
+			assertNotNull(foundCar);
+			LoanDetail loanDetail = new LoanDetail();
+			loanDetail.setPrincipalAmount(BigDecimal.valueOf(2000000));
+			loanDetail.setRateOfInterest(BigDecimal.valueOf(8));
+			loanDetail.setTenure(36);
+			loanDetail.setExistingEmi(BigDecimal.valueOf(5000));
+			loanDetail.setEmi(BigDecimal.valueOf(10000));
+			loanDetail.setApplyDate(new Date(System.currentTimeMillis()));
+			loanDetail.setUserDetail(foundUser);
+			loanDetail.setCarDetail(foundCar);
+			loanDetail.setApproval("pending");
+			assertNotNull(loanDetail);
+			System.out.println("LoanDetail object created");
+			Integer loanId = appFormRepo.insertLoanDetail(loanDetail);
+			System.out.println("LoanDetail object inserted with loanId: "+ loanId);
+			
+		} catch (CarNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	@Test
 	void insertAdvancedUserDetail() {

@@ -1,4 +1,5 @@
 import { Component, OnInit, Pipe } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoanDetail } from '../pojos/LoanDetail';
 import { State } from '../pojos/State';
 import { UserDetail } from '../pojos/UserDetail';
@@ -13,6 +14,7 @@ export class UserDashboardComponent implements OnInit {
 
   details: LoanDetail[];
   userId: number = 0;
+
   isLoan: boolean = false;
   isCar: boolean = false;
   isUser: boolean = false;
@@ -21,10 +23,14 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(private userService : UserDashboardService) { }
 
-  ngOnInit(): void {
-    //this.getUserDetails();  
-  }
+  isUserLoggedIn: string;
+  
+  constructor(private userService : UserDashboardService, private router: Router) { }
 
+  ngOnInit(): void {
+    this.isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
+    console.log(this.isUserLoggedIn);
+  }
   
   getUserDetails(userId: number){
     console.log('user id chosen is'+this.userId);
@@ -39,6 +45,7 @@ export class UserDashboardComponent implements OnInit {
       }
     );
   }
+
   
   getLoanByUserId(userId:number)
   {
@@ -54,7 +61,14 @@ export class UserDashboardComponent implements OnInit {
   {
     this.isUser = !this.isUser;
   }
-  
+
+
+  logout(){
+    sessionStorage.clear();
+    alert('You have successfully logged out!');
+    this.router.navigate(['/']);
+  }
+
 }
 
     

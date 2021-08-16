@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountTypeDetail } from '../pojos/AccountTypeDetail';
+import { ApplicationFormDTO } from '../pojos/ApplicationFormDTO';
 import { CarDetail } from '../pojos/CarDetail';
 import { CarMaker } from '../pojos/CarMaker';
 import { CarType } from '../pojos/CarType';
@@ -68,5 +69,26 @@ export class ApplicationFormService {
 
   //----------------------------EMPLOYMENT DETAILS ENDS----------------------------
 
+  //----------------------------APPLICATION FORM DETAILS STARTS---------------------------
 
+  addApplicationForm(applicationForm: ApplicationFormDTO):Observable<any>{
+    return this.myhttp.post<any>(this.baseURL+"addApplicationForm", applicationForm);
+  }
+
+  //----------------------------APPLICATION FORM DETAILS ENDS---------------------------
+
+//----------------------------FILE UPLOAD DETAILS ENDS----------------------------
+  upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', `${this.baseURL}/upload`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.myhttp.request(req);
+  }
+//----------------------------FILE UPLOAD DETAILS ENDS----------------------------
 }
