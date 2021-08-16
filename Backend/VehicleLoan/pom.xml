@@ -61,18 +61,14 @@
 
 
 		<!--  <dependency>
-
 	    	<groupId>com.oracle</groupId>
 	    	<artifactId>ojdbc</artifactId>
 	    	<version>6</version>
 		    <scope>system</scope>
 		  	<systemPath>C:/Users/Admin/Desktop/ojdbc6_g.jar</systemPath>
-		</dependency> 
-	 <dependency>
-		  	<systemPath>C:/Users/Admin/Desktop/ojdbc6_g.jar</systemPath> 
-		</dependency>  -->
-		 <dependency>
+		</dependency>   -->
 
+		 <dependency>
 	    	<groupId>com.oracle</groupId>
 	    	<artifactId>ojdbc</artifactId>
 	    	<version>6</version>

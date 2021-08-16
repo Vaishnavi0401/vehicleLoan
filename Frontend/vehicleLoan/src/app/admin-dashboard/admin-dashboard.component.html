@@ -1,18 +1,32 @@
 
+
+
+
+
+
+
 <div *ngIf="isAdminLoggedIn == 'true' else myElseBlock">
 
     <button class="btn btn-primary" (click)="logout()">Logout</button>
 
     <div class="container">
 
+        <div class="row">
+            <div class="col-24 col-md-12">
+               <form>
+                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getAllLoanDetails()">Dashboard </button>
+                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getAllUserDetails()">Client List</button>
+                <button class="btn btn-primary" type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('pending')">Pending List</button>
+                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('yes')">Accepted List</button>
+                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('no')">Rejected List</button>
+                <button class="btn btn-primary" (click)="getFiles()" type="button" style="margin:10px;">View Files</button>
+                </form>
+            </div> 
+        </div>
         <br>
-        <!-- <h3>All Loan Details</h3> -->
-
-
-
         <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId">
-        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)">Search
-        </button>
+        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)">Search</button>
+        
 
         <div *ngIf="divOneLoan">
             <table *ngIf="getLoanDetail" class="table table-striped">
@@ -30,9 +44,6 @@
                         <th>Operation </th>
                         <th>Operation </th>
                         <th>Operation </th>
-
-
-
                     </tr>
                 </thead>
                
@@ -150,11 +161,11 @@
             </table>
             <br>
             
-            <label *ngIf="viewAdvancedUserDetailByLoanId "> Aadhar Card : {{viewAdvancedUserDetailByLoanId.aadhaarCard}}</label><br>
+            <!-- <label *ngIf="viewAdvancedUserDetailByLoanId "> Aadhar Card : {{viewAdvancedUserDetailByLoanId.aadhaarCard}}</label><br>
             <label *ngIf="viewAdvancedUserDetailByLoanId "> Pan Card : {{viewAdvancedUserDetailByLoanId.panCard}}</label><br>
             <label *ngIf="viewAdvancedUserDetailByLoanId "> Photo : {{viewAdvancedUserDetailByLoanId.photo}}</label><br>
             <label *ngIf="viewAdvancedUserDetailByLoanId "> Salary Slip : {{viewAdvancedUserDetailByLoanId.salarySlip}}</label><br>
-           
+            -->
 
         </div>
 
@@ -238,15 +249,7 @@
 
 
         <br>
-        <div>
-           
-            <button name="button" class="btn btn-primary" type="button"  (click)="getAllLoanDetails()">Dashboard</button><br><br><br>
-            <button name="button" class="btn btn-primary" type="button" (click)="getAllUserDetails()" >Clients</button><br><br><br>
-            <button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('pending')">Pending List</button><br><br><br>
-            <button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('yes')">Accepted List</button><br><br><br>
-            <button name="button" class="btn btn-primary" type="button"  (click)="getLoanDetailsbyApproval('no')">Rejected List</button><br><br><br>
-            <button class="btn btn-primary" (click)="getFiles()" type="button">View Files</button>
-        </div>
+        
 
     </div>
 </div>
@@ -256,11 +259,7 @@
     <h4>To login <a routerLink="/login">Click here.</a> </h4>
 </ng-template>
 
-<!-- <button name="button" type="button">Settings</button> -->
-<!-- <input type="text" placeholder="Search by approval" [(ngModel)]="approval">
-<button type="button" (click)="getLoanDetailsbyApproval(approval)" >Search by approval</button> -->
-<!-- <button type="button" class="btn btn-primary" (click)="getAllLoanDetails()">All Loan Details</button> -->
-<!-- <td>
-<button type="button" class="btn btn-primary" (click)="deleteLoanDetail(loan.loanId)">Delete</button>
-</td>   -->
+
+
+
 

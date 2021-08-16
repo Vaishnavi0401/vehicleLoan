@@ -2,13 +2,16 @@
 <div class="container">
     <h3>Loan offers!</h3>
     <br>
-    Principal Amount <input type="number" class="form-control" [(ngModel)]="amount"  />
+    <form [formGroup]="validateForm" >
+    Principal Amount <input type="number" class="form-control" formControlName="principal" id="principal" [(ngModel)]="amount"  />
+    <span *ngIf="validateForm.get('principal').hasError('required')" style="color: red;">Principal is required</span>
+    <span *ngIf="validateForm.get('principal').hasError('min')" style="color: red;">Principal cannot be negative</span>
+
     <br>
-    
-    
     <div>
-        <button class="btn btn-primary" (click)="getAllLoanOffers(amount)"  >Get Loan Offers</button>
+        <button class="btn btn-primary" (click)="getAllLoanOffers(amount)">Get Loan Offers</button>
     </div>
+    </form>
     <br>
     <table *ngIf="offerTable && offerTable.length" class="table table-striped">
         <thead>
@@ -34,10 +37,8 @@
 
 
 <button routerLink="/application-form" class="btn btn-primary">Submit</button>
-
-<div>
-    <button>Apply now</button>
-</div>
+<br>
+<br>
 <!-- Principal Amount <input type="number" class="form-control" id="principal" formControlName="principal" [(ngModel)]="amount" class="form-control" /> -->
 
     <!-- <span *ngIf="validateForm.get('principal').hasError('required')" style="color: red;" >
