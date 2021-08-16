@@ -21,7 +21,7 @@ export class GetEligibilityComponent implements OnInit {
   salary: number;
   existingEMI: number;
   Name: string;
-
+  lastName: string;
 
 
   constructor(private getService: EligibilityService, private router: Router) { }
@@ -51,6 +51,7 @@ export class GetEligibilityComponent implements OnInit {
   ngOnInit(): void {  
     this.validateForm = new FormGroup({
       Name : new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern("^[a-zA-Z]*$")]),
+      lastName : new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern("^[a-zA-Z]*$")]),
       emailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
       mobileNo: new FormControl('', [Validators.required, Validators.pattern('^(\\+?\d{1,4}[\s-])?(?!0+\s+,?$)\\d{10}\s*,?$')] ),
       onRoadPrice: new FormControl('', [Validators.required, Validators.min(0)]),

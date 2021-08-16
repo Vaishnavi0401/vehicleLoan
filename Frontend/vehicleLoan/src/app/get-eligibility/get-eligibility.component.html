@@ -76,6 +76,21 @@
 
               <br><br>
 
+              <label for="Name">Enter Your Last Name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" [(ngModel)]="lastName">
+              <span *ngIf="validateForm.get('lastName').hasError('required')" style="color: red;font-size: 12px;">
+                Last Name is Required
+              </span>
+              <span *ngIf="validateForm.get('lastName').hasError('minlength')" style="color: red;font-size: 12px;">
+                Min Last Name Length should be 3
+              </span>
+              <span *ngIf="validateForm.get('lastName').hasError('pattern')" style="color: red;font-size: 12px;">
+                Numbers or Special Characters not allowed
+              </span>
+
+              <br><br>
+
+
               <label for="Age">Enter Your Age</label>
               <input type="number" class="form-control" id="Age" #A="ngModel" [(ngModel)]="age"
                 [ngModelOptions]="{standalone: true}">
