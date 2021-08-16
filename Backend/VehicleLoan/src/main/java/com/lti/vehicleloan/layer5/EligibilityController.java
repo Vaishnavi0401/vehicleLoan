@@ -24,16 +24,10 @@ public class EligibilityController{
 	@RequestMapping(path="/CheckEligibility")
 	public String check(@RequestBody EligibilityCheck eligibility) {
 		boolean checking = isEligible.checkingEligibility(eligibility);
-		
-		System.out.println("Controller of CheckEligibility");
-		
+		System.out.println("Controller of CheckEligibility");		
 		if (checking) {
             return "{\"status\" : \"You are eligible!\"}";
         }
         return "{\"status\" : \"You are not eligible \"}";
-
-
 	}
-	
-	
 }

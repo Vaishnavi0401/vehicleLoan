@@ -10,15 +10,15 @@ import { Login } from '../pojos/Login';
 })
 export class LoginComponent implements OnInit {
 
-   loginForm: FormGroup;
+  loginForm: FormGroup;
   login: Login = new Login();
 
   constructor(private getService: LoginService) { }
 
   loginId(){
     console.log("Assign parameters");
-    this.getService.loginService(this.login).subscribe( 
-      val=> console.log(val)
+    this.getService.loginService(this.login).subscribe(    
+      val=> alert(this.login.emailId+" "+ val.status)
     );
   }
 

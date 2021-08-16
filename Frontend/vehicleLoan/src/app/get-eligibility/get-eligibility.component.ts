@@ -36,7 +36,7 @@ export class GetEligibilityComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.validateForm = new FormGroup({
       Name : new FormControl('', [Validators.required, Validators.minLength(3)]),
       emailId: new FormControl('',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$")]),
