@@ -58,6 +58,7 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+
 		<!-- <dependency>
 	    	<groupId>com.oracle</groupId>
 	    	<artifactId>ojdbc</artifactId>
@@ -72,6 +73,7 @@
 		    <scope>system</scope>
 		  	<systemPath>C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib\ojdbc6_g.jar</systemPath>
 		</dependency>  
+
 		<!-- <dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>

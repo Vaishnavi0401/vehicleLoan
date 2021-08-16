@@ -1,0 +1,12 @@
+.card{
+    float: left;
+    border-style: solid;
+    margin-top: 100px;
+    margin-left:300px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    padding-left: 350px;
+    padding-top: 50px; 
+    padding-right: 300px;
+    padding-bottom: 50px;
+}

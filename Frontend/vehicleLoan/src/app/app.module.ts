@@ -25,9 +25,7 @@ import { LoginComponent } from './login/login.component';
 import { ApplicationFormComponent } from './application-form/application-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-
-
-
+// import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -58,7 +56,9 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    // Ng5SliderModule,
     HttpClientModule
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

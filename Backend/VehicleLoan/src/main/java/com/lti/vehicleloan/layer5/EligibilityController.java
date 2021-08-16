@@ -23,8 +23,7 @@ public class EligibilityController{
 	@PostMapping
 	@RequestMapping(path="/CheckEligibility")
 	public boolean check(@RequestBody EligibilityCheck eligibility) {
-		boolean checking = isEligible.checkingEligibility(eligibility);
-		
+		boolean checking = isEligible.checkingEligibility(eligibility);	
 		System.out.println("Controller of CheckEligibility");
 		
 		return(checking);
@@ -33,8 +32,5 @@ public class EligibilityController{
 //        }
 //        return "{\"status\" : \"You are not eligible \"}";
 
-
 	}
-	
-	
 }

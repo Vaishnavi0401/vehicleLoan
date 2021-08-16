@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmiCalculatorService } from '../emi-calculator.service';
 import { EMICalc } from '../pojos/EMICalculator';
 
-
 @Component({
   selector: 'app-emi-calculator',
   templateUrl: './emi-calculator.component.html',
@@ -26,11 +25,12 @@ export class EmiCalculatorComponent implements OnInit {
     this.emiCalc.rateOfInterest=this.rate;
     this.emiCalc.tenure=this.timePeriod;
     this.getService.emiCalculatorService(this.emiCalc).subscribe(
-      (data: number)=> {this.emiFinal=data;},
+      (data: number)=> {this.emiFinal=data;
+      console.log(this.emiFinal);},
       (err)=> {console.log(err);}
     );
     console.log(this.emiCalc);
-    console.log(this.emiFinal);
+    
   }
 
   ngOnInit(): void {
@@ -41,5 +41,6 @@ export class EmiCalculatorComponent implements OnInit {
     tenure: new FormControl('', [Validators.required, Validators.min(2)])
     })
   }
-
+  
+ 
 }
