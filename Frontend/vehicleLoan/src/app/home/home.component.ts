@@ -8,23 +8,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  isUserLoggedIn: string;
-  isAdminLoggedIn: string;
+ 
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
-    this.isAdminLoggedIn = sessionStorage.getItem("isAdminLoggedIn");
+    
   }
 
-  goToDashboard(){
-    if(this.isUserLoggedIn == 'true'){
-      this.router.navigate(['/user-dashboard'])
-    }
-    if(this.isAdminLoggedIn == 'true'){
-      this.router.navigate(['/admin-dashboard'])
-    }
-  }
 
 }
