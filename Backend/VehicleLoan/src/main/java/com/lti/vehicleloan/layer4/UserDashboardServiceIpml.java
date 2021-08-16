@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 import com.lti.vehicleloan.layer3.UserDashboardRepositoryImpl;
 

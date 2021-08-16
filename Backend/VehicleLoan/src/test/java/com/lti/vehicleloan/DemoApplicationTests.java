@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +38,6 @@ import com.lti.vehicleloan.layer4.EmiCalculatorService;
 import com.lti.vehicleloan.layer4.LoginService;
 import com.lti.vehicleloan.layer2.EligibilityCheck;
 import com.lti.vehicleloan.layer2.LoanDetail;
-import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.AccountTypeDetailNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.CarMakerNotFoundException;
 import com.lti.vehicleloan.layer2.exceptions.CarNotFoundException;
@@ -75,6 +73,351 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+
+	
+	//Creating Object of Eligibility Check - Test Case 1
+	@Test
+	void eligibilityObjectTest() {
+		System.out.println("Creating Eligibility Check Object");
+		EligibilityCheck eligibility  = new EligibilityCheck();
+		assertNotNull(eligibility);
+		//assertNull(eligibility);
+		System.out.println("Eligibility Check Object Created");
+	}
+	
+	//Setting the values via the created object "eligibility" - Test Case 2
+	@Test
+	void eligibilityFetchTest() {
+		System.out.println("Fetching Values");
+		EligibilityCheck eligibility  = new EligibilityCheck();
+		eligibility.setAge(22);
+		eligibility.setTypeOfEmployment("Salaried");
+		eligibility.setYearlySalary(30000);
+		eligibility.setExistingEmi(10);
+		assertNotNull(eligibilityservice.checkingEligibility(eligibility));
+		//assertNull(eligibilityservice.checkEligibility(eligibility));
+		System.out.println("Values Fetched");
+	}
+
+	//Using the service to get whether the user is eligible or not - Test Case 3
+	@Test
+	void eligibilityServiceTest() {
+		System.out.println("Checking Whether User Eligible or Not");
+		EligibilityCheck eligibility  = new EligibilityCheck();
+		eligibility.setAge(22);
+		eligibility.setTypeOfEmployment("Salaried");
+		eligibility.setYearlySalary(300000);
+		eligibility.setExistingEmi(10);
+		assertEquals(true, eligibilityservice.checkingEligibility(eligibility));
+		System.out.println("User is Eligible");
+		//assertEquals(false, eligibilityservice.checkEligibility(eligibility));
+		//System.out.println("User is not Eligible");
+	}
+	
+	@BeforeEach
+	void loadDB() {
+		System.out.println("Connecting to the Database");
+	}
+	
+	
+	//Creating an object of User Detail - Test Case 4
+	@Test
+	void userDetailObjectTest() {
+		System.out.println("Creating User Detail Object");
+		UserDetail user = new UserDetail();
+		assertNotNull(user);
+		//assertNull(user);
+		System.out.println("User Detail Object Created");
+
+	}
+		
+	//Creating an object of Loan Detail and getting values from the database - Test Case 5
+	@Test
+	void loanDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			}
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	
+	//Loan Details contains an object of UserDetail hence fetching User Details via Loan Details - Test Case 6
+	@Test
+	void userDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			}
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	
+	//Loan Details contains an object of UserDetail and UserDetail contains an object of AddressDetail 
+	//hence fetching Address Details via User Details via Loan Details - Test Case 7
+	@Test
+	void AddressDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			AddressDetail a = u.getAddressDetail();
+			System.out.println("Address is " + a.getAddress());
+			System.out.println("Pin Code is "+ a.getPincode());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+
+	
+	//Loan Details contains an object of CarDetail hence fetching Car Details via Loan Details - Test Case 8
+	@Test
+	void carDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			CarDetail c = l.getCarDetail();
+			System.out.println("Car Model is " + c.getModel());
+			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
+			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
+			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	//Loan Details contains an object of CarDetail and CarDetail contains an object of CarMakerDetail 
+	//hence fetching Car Maker Details via Car Details via Loan Details - Test Case 9
+	@Test
+	void carMakerDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			CarDetail c = l.getCarDetail();
+			System.out.println("Car Model is " + c.getModel());
+			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
+			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
+			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
+			CarMaker cm = c.getCarMaker();
+			System.out.println("Car Maker is " + cm.getCarMaker());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	//Loan Details contains an object of CarDetail and CarDetail contains an object of CarTypeDetail 
+	//hence fetching Car Type Details via Car Details via Loan Details - Test Case 10	
+	@Test
+	void carTypeDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			CarDetail c = l.getCarDetail();
+			System.out.println("Car Model is " + c.getModel());
+			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
+			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
+			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
+			CarType ct = c.getCarType();
+			System.out.println("Car Type is " + ct.getCarType());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+
+
+	//Loan Details contains an object of UserDetail and UserDetail and AddressDetail and AddressDetail contains an object of CityDetail 
+	//hence fetching City Details via Address Details via User Details - Test Case 11		
+	@Test
+	void cityDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			AddressDetail a = u.getAddressDetail();
+			System.out.println("Address is " + a.getAddress());
+			System.out.println("Pin Code is "+ a.getPincode());
+			City c = a.getCity();
+			System.out.println("City Name is " + c.getCityName());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+	//Loan Details contains an object of UserDetail and UserDetail and AddressDetail and AddressDetail contains an object of CityDetail and CityDetail contains 
+	//an object of StateDetail hence fetching State Details via City Details via Address Details via User Details - Test Case 12			
+	@Test
+	void stateDetailsTest() {
+		List<LoanDetail> loan = new ArrayList<LoanDetail>();
+		try {
+			loan = userRepo.selectUserById(301);
+			for(LoanDetail l: loan) {
+			System.out.println("Loan Id is "+l.getLoanId());
+			System.out.println("Loan Applied on " + l.getApplyDate());
+			System.out.println("Loan Approval Status " + l.getApproval());
+			System.out.println("EMI is " + l.getEmi());
+			System.out.println("Existing EMI is " + l.getExistingEmi());
+			System.out.println("Principal Amount is " + l.getPrincipalAmount());
+			System.out.println("Rate of Interest is " + l.getRateOfInterest());
+			System.out.println("Tenure is " + l.getTenure());
+			UserDetail u = l.getUserDetail();
+			System.out.println("User Id is " + u.getUserId());
+			System.out.println("User Name is " + u.getName());
+			System.out.println("User's Age is " + u.getAge());
+			System.out.println("User's Gender is " + u.getGender());
+			System.out.println("User's Email id is " + u.getEmail());
+			System.out.println("User's Mobile No. is " + u.getMobileNumber());
+			System.out.println("===================================");
+			AddressDetail a = u.getAddressDetail();
+			System.out.println("Address is " + a.getAddress());
+			System.out.println("Pin Code is "+ a.getPincode());
+			City c = a.getCity();
+			System.out.println("City Name is " + c.getCityName());
+			State s = c.getState();
+			System.out.println("State Name is " + s.getStateName());
+			}
+			
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+
+	
+	@AfterEach
+	void closeDB() {
+		System.out.println("Disconecting from the Database");
+	}
+	
 	
 //	@Test 
 //	void insertState() {
@@ -236,29 +579,7 @@ class DemoApplicationTests {
 //		System.out.println("ad");
 		appFormRepo.insertAdvancedUserDetail(advancedUserDetail);
 	}
-	//Object is Created Successfully
-	@Test
-	void eligibilityObjectTest() {
-		System.out.println("Creating Eligibility Check Object");
-		EligibilityCheck eligibility  = new EligibilityCheck();
-		assertNotNull(eligibility);
-		//assertNull(eligibility);
-		System.out.println("Eligibility Check Object Created");
-	}
-	
-	//Passing values via Object
-	@Test
-	void eligibilityFetchTest() {
-		System.out.println("Fetching Values");
-		EligibilityCheck eligibility  = new EligibilityCheck();
-		eligibility.setAge(22);
-		eligibility.setTypeOfEmployment("Salaried");
-		eligibility.setYearlySalary(30000);
-		eligibility.setExistingEmi(10);
-		assertNotNull(eligibilityservice.checkingEligibility(eligibility));
-		//assertNull(eligibilityservice.checkEligibility(eligibility));
-		System.out.println("Values Fetched");
-	}
+
 
 	@Test
 	void testEMI() {
@@ -291,308 +612,5 @@ class DemoApplicationTests {
 		assertEquals("Login successfully!", loginService.validateUser(login));
 	}
 
-	//Checking the Conditions of Service
-	@Test
-	void eligibilityServiceTest() {
-		System.out.println("Checking Whether User Eligible or Not");
-		EligibilityCheck eligibility  = new EligibilityCheck();
-		eligibility.setAge(22);
-		eligibility.setTypeOfEmployment("Salaried");
-		eligibility.setYearlySalary(300000);
-		eligibility.setExistingEmi(10);
-		assertEquals(true, eligibilityservice.checkingEligibility(eligibility));
-		System.out.println("User is Eligible");
-		//assertEquals(false, eligibilityservice.checkEligibility(eligibility));
-		//System.out.println("User is not Eligible");
-	}
-	
-	@BeforeEach
-	void loadDB() {
-		System.out.println("Connecting to the Database");
-	}
-	
-	@AfterEach
-	void closeDB() {
-		System.out.println("Disconecting from the Database");
-	}
-	
-	@Test
-	void userDetailObjectTest() {
-		System.out.println("Creating User Detail Object");
-		UserDetail user = new UserDetail();
-		assertNotNull(user);
-		//assertNull(user);
-		System.out.println("User Detail Object Created");
-
-	}
-		
-	
-	@Test
-	void loanDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			}
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-	
-	
-	@Test
-	void userDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			}
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-	
-	
-	@Test
-	void carDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			CarDetail c = l.getCarDetail();
-			System.out.println("Car Model is " + c.getModel());
-			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
-			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
-			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-	
-	@Test
-	void carMakerDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			CarDetail c = l.getCarDetail();
-			System.out.println("Car Model is " + c.getModel());
-			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
-			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
-			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
-			CarMaker cm = c.getCarMaker();
-			System.out.println("Car Maker is " + cm.getCarMaker());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-	
-	@Test
-	void carTypeDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			CarDetail c = l.getCarDetail();
-			System.out.println("Car Model is " + c.getModel());
-			System.out.println("Car's on Road Price is " + c.getOnroadPrice());
-			System.out.println("Car's Showroom Price is " + c.getShowroomPrice());
-			System.out.println("Vehicle Domain is " + c.getVehicleDomain());
-			CarType ct = c.getCarType();
-			System.out.println("Car Type is " + ct.getCarType());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-
-
-	@Test
-	void AddressDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			AddressDetail a = u.getAddressDetail();
-			System.out.println("Address is " + a.getAddress());
-			System.out.println("Pin Code is "+ a.getPincode());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-
-	@Test
-	void cityDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			AddressDetail a = u.getAddressDetail();
-			System.out.println("Address is " + a.getAddress());
-			System.out.println("Pin Code is "+ a.getPincode());
-			City c = a.getCity();
-			System.out.println("City Name is " + c.getCityName());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
-	
-	
-	@Test
-	void stateDetailsTest() {
-		List<LoanDetail> loan = new ArrayList<LoanDetail>();
-		try {
-			loan = userRepo.selectUserById(301);
-			for(LoanDetail l: loan) {
-			System.out.println("Loan Id is "+l.getLoanId());
-			System.out.println("Loan Applied on " + l.getApplyDate());
-			System.out.println("Loan Approval Status " + l.getApproval());
-			System.out.println("EMI is " + l.getEmi());
-			System.out.println("Existing EMI is " + l.getExistingEmi());
-			System.out.println("Principal Amount is " + l.getPrincipalAmount());
-			System.out.println("Rate of Interest is " + l.getRateOfInterest());
-			System.out.println("Tenure is " + l.getTenure());
-			UserDetail u = l.getUserDetail();
-			System.out.println("User Id is " + u.getUserId());
-			System.out.println("User Name is " + u.getName());
-			System.out.println("User's Age is " + u.getAge());
-			System.out.println("User's Gender is " + u.getGender());
-			System.out.println("User's Email id is " + u.getEmail());
-			System.out.println("User's Mobile No. is " + u.getMobileNumber());
-			System.out.println("===================================");
-			AddressDetail a = u.getAddressDetail();
-			System.out.println("Address is " + a.getAddress());
-			System.out.println("Pin Code is "+ a.getPincode());
-			City c = a.getCity();
-			System.out.println("City Name is " + c.getCityName());
-			State s = c.getState();
-			System.out.println("State Name is " + s.getStateName());
-			}
-			
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-	}
 
 }

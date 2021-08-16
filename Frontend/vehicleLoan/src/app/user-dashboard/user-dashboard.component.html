@@ -1,17 +1,19 @@
 <div *ngIf="isUserLoggedIn == 'true'; else myElseBlock">
-    <p>user-dashboard works!</p>
 
 
-    <div>
-        <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId">
-        <!-- <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button> -->
+    <!-- <div>
+         <input type="number" placeholder="Enter your UserId" [(ngModel)]="userId"> 
+        <button class="btn btn-primary" type="button" (click)="getUserDetails(userId)">Details</button> 
     </div>
-    <br>
+    <br> -->
     <button class="btn btn-primary" (click)="logout()">Logout</button>
+    <nav class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
+    </nav>
+<!--=====================================================Loan Details ================================================================-->
 
-    <button class="btn btn-primary" type="button" (click)="getLoanByUserId(userId)">Loan Details</button>
-
-    <div *ngIf="isLoan">
+    
+    <span *ngIf="isLoan">
 
         <table class="table table-striped">
             <thead>
@@ -40,9 +42,14 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </span>
 
-    <button class="btn btn-primary" type="button" (click)="getCarByUserId(userId)">Car Details</button>
+    <nav class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <button class="btn btn-primary" type="button" (click)="getCarByUserId(userId)">Car Details</button>
+    </nav>
+
+<!--=====================================================Car Details ================================================================-->
+
 
     <div *ngIf="isCar">
 
@@ -78,7 +85,11 @@
         </table>
     </div>
 
-    <button class="btn btn-primary" type="button" (click)="getUserByUserId(userId)">User Details</button>
+    <nav class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <button class="btn btn-primary" type="button" (click)="getUserByUserId(userId)">User Details</button> 
+    </nav>
+<!--=====================================================User Details ================================================================-->
+    
 
     <div *ngIf="isUser">
 
@@ -125,9 +136,10 @@
             </tbody>
         </table>
 
-
+    
     </div>
 </div>
+
 <ng-template #myElseBlock>
     <h1>You are not logged in </h1>
     <h4>To login <a routerLink="/login">Click here.</a> </h4>
