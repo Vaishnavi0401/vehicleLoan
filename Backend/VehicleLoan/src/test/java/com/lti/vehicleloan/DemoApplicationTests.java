@@ -28,6 +28,7 @@ import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer3.ApplicationFormRepositoryImpl;
+import com.lti.vehicleloan.layer3.LoginRepository;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
 
 import java.math.BigDecimal;
@@ -61,6 +62,10 @@ class DemoApplicationTests {
 
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	LoginRepository loginRepo;
+	
 	@Autowired
 	EmiCalculatorService calculator;
 
@@ -99,7 +104,43 @@ class DemoApplicationTests {
 		System.out.println("Values Fetched");
 	}
 
+
+	@Test
+	void testEMI() {
+		// Object Creation
+		EMICalc emiCalc = new EMICalc();
+		emiCalc.setPrincipal(500000);
+		emiCalc.setRateOfInterest(5);
+		emiCalc.setTenure(24);
+		assertEquals(26250.0, calculator.emiCalculator(emiCalc));
+	}
+
+	@Test
+	void testEmiObject() {
+		// Object Creation
+		EMICalc emiCalc = new EMICalc();
+		assertNotNull(emiCalc);
+	}
+
+	@Test
+	void testLoginObject() {
+		Login login = new Login();
+		assertNotNull(loginService.validateUser(login));
+	}
+
+	@Test
+	void testLogin() {
+		Login login = new Login();
+		login.setEmailId("vineet@gmail.com");
+		login.setPassword("test1234");
+		UserDetail userDetail = loginRepo.fetchUser(login);
+		assertNotNull(userDetail);
+	}
+
+	//Checking the Conditions of Service
+
 	//Using the service to get whether the user is eligible or not - Test Case 3
+
 	@Test
 	void eligibilityServiceTest() {
 		System.out.println("Checking Whether User Eligible or Not");
@@ -581,36 +622,7 @@ class DemoApplicationTests {
 	}
 
 
-	@Test
-	void testEMI() {
-		// Object Creation
-		EMICalc emiCalc = new EMICalc();
-		emiCalc.setPrincipal(500000);
-		emiCalc.setRateOfInterest(5);
-		emiCalc.setTenure(24);
-		assertEquals(26250.0, calculator.emiCalculator(emiCalc));
-	}
 
-	@Test
-	void testEmiObject() {
-		// Object Creation
-		EMICalc emiCalc = new EMICalc();
-		assertNotNull(emiCalc);
-	}
-
-	@Test
-	void testLoginObject() {
-		Login login = new Login();
-		assertNotNull(loginService.validateUser(login));
-	}
-
-	@Test
-	void testLogin() {
-		Login login = new Login();
-		login.setEmailId("jatin@gmail.com");
-		login.setPassword("test1234");
-		assertEquals("Login successfully!", loginService.validateUser(login));
-	}
 
 
 }
