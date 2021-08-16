@@ -20,6 +20,11 @@ import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
+import com.lti.vehicleloan.layer2.exceptions.AccountTypeDetailNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarMakerNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.CarTypeNotFoundException;
+import com.lti.vehicleloan.layer2.exceptions.TypeOfEmploymentNotFoundException;
 
 @Repository
 public class ApplicationFormRepositoryImpl extends BaseRepository implements ApplicationFormRepository {
@@ -198,6 +203,37 @@ public class ApplicationFormRepositoryImpl extends BaseRepository implements App
 		EntityManager entityManager = super.getEntityManager();
 		entityManager.persist(advancedUserDetail);
 		return advancedUserDetail.getAdvancedDetailsId();
+	}
+
+	@Override
+	public CarDetail selectCarDetail(Integer carId) throws CarNotFoundException {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(CarDetail.class, carId);
+	}
+
+	@Override
+	public CarMaker selectCarMakerDetail(Integer carMakerId) throws CarMakerNotFoundException {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(CarMaker.class, carMakerId);
+	}
+
+	@Override
+	public CarType selectCarTypeDetail(Integer carTypeId) throws CarTypeNotFoundException {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(CarType.class, carTypeId);
+	}
+
+	@Override
+	public TypeOfEmploymentDetail selectTypeOfEmploymentDetail(Integer typeOfEmpId)
+			throws TypeOfEmploymentNotFoundException {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(TypeOfEmploymentDetail.class, typeOfEmpId);
+	}
+
+	@Override
+	public AccountTypeDetail selectAccountTypeDetail(Integer accountTypeId) throws AccountTypeDetailNotFoundException {
+		EntityManager entityManager = super.getEntityManager();
+		return entityManager.find(AccountTypeDetail.class, accountTypeId);
 	}
 
 }

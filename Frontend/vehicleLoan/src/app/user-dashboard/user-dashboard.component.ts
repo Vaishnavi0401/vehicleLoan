@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoanDetail } from '../pojos/LoanDetail';
+import { State } from '../pojos/State';
 import { UserDetail } from '../pojos/UserDetail';
 import { UserDashboardService } from '../user-dashboard.service';
 
@@ -10,24 +12,32 @@ import { UserDashboardService } from '../user-dashboard.service';
 })
 export class UserDashboardComponent implements OnInit {
 
-  
-  users: LoanDetail[];
+  details: LoanDetail[];
   userId: number = 0;
-  
-  
+
+  isLoan: boolean = false;
+  isCar: boolean = false;
+  isUser: boolean = false;
+  message:any;
+
+
   constructor(private userService : UserDashboardService) { }
 
-  ngOnInit(): void {
-  }
+  isUserLoggedIn: string;
+  
+  constructor(private userService : UserDashboardService, private router: Router) { }
 
-  message:any;
-  getUserDetailsByUserId(userId:number)
-  {
+  ngOnInit(): void {
+    this.isUserLoggedIn = sessionStorage.getItem("isUserLoggedIn");
+    console.log(this.isUserLoggedIn);
+  }
+  
+  getUserDetails(userId: number){
     console.log('user id chosen is'+this.userId);
-    this.userService.getUsersService(userId).
-    subscribe((data:LoanDetail[])=>
+    this.userService.getUsersService(userId)
+    .subscribe((data:LoanDetail[])=>
      {
-      this.users = data;
+      this.details = data;
       console.log(data[0]);
     }
     ,(err) => {
@@ -35,6 +45,30 @@ export class UserDashboardComponent implements OnInit {
       }
     );
   }
+
+  
+  getLoanByUserId(userId:number)
+  {
+    this.isLoan = !this.isLoan;
+  }
+
+  getCarByUserId(userId:number)
+  {
+    this.isCar = !this.isCar;
+  }
+  
+  getUserByUserId(userId:number)
+  {
+    this.isUser = !this.isUser;
+  }
+
+
+  logout(){
+    sessionStorage.clear();
+    alert('You have successfully logged out!');
+    this.router.navigate(['/']);
+  }
+
 }
 
     
