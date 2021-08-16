@@ -48,6 +48,6 @@ public interface ApplicationFormService {
 	Integer insertAdvancedUserDetailService(AdvancedUserDetail advancedUserDetail);
 	
 	
-	String insertApplicationFormService(ApplicationFormDto applicationForm);
+	Boolean insertApplicationFormService(ApplicationFormDto applicationForm);
 	
 }

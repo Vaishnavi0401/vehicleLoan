@@ -491,7 +491,12 @@ onIdentityDetailSubmit(){
 
   this.appFormService.addApplicationForm(this.applicationFormDTO).subscribe(
     (data: any) => {
-      console.log(data);
+      if(data == true){
+        alert("Your Details have been successfully submitted!");
+        this.router.navigate(['/']);
+      }else{
+        alert("There was some Error in storing please try again later!");
+      }
     }
   );
   // alert("Your Details have been successfully submitted!");

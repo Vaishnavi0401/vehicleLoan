@@ -6,6 +6,8 @@
     <button routerLink="login" class="btn btn-primary ms-5">Login</button>
     <button routerLink="check-eligibility" class="btn btn-primary ms-5">Apply For Loan</button>
     <button routerLink="emi-calculator" class="btn btn-primary ms-5">EMI Calculator</button>
+    <button *ngIf="isUserLoggedIn == 'true' || isAdminLoggedIn == 'true'" class="btn btn-primary ms-5" (click)="goToDashboard()">Dashboard</button>
+
 </div>
 
 <router-outlet></router-outlet>

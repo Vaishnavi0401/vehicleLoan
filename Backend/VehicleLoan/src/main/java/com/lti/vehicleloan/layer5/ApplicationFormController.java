@@ -86,9 +86,10 @@ public class ApplicationFormController {
 	@PostMapping
 	@ResponseBody
 	@RequestMapping(value="/addApplicationForm")
-	public String addUser(@RequestBody ApplicationFormDto applicationForm) {
-		String mssg = appFormService.insertApplicationFormService(applicationForm);
-		return "{\"status\" : \"mssg\"}";
+	public Boolean addUser(@RequestBody ApplicationFormDto applicationForm) {
+		Boolean status = appFormService.insertApplicationFormService(applicationForm);
+		return status;
+		
 	}
 	
 	@PostMapping("/upload")
