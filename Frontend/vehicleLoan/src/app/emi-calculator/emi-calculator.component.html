@@ -34,7 +34,7 @@
 
         <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI </button> <BR>
     <div>
-       <h3>YOUR EMI IS: {{emiFinal}}</h3> 
+       <h3>YOUR EMI IS: {{emiFinal | currency:'INR'}}</h3> 
     </div>
 
 

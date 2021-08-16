@@ -1,265 +1,287 @@
-
-
-
-
-
-
-
 <div *ngIf="isAdminLoggedIn == 'true' else myElseBlock">
 
-    <button class="btn btn-primary" (click)="logout()">Logout</button>
+    <ul class="sidebar ul">
+        <li class="logo ">
+            <img src="../../assets/logo.jpg" alt="image">
+            <!-- <h3>L&T Loans</h3> -->
+            <!-- <i class="fas fa-times" id="close"></i> -->
+        </li>
+        <div class="li_container">
+            <li class="active li"><a class="a" ><button class="btn btn-primary custom-button" type="submit"
+                        (click)="getAllLoanDetails()">Dashboard </button></a></li>
+            <li class="li"><a  class="a"><button class="btn btn-primary custom-button " type="submit"
+                        style="margin:10px;" (click)="getAllUserDetails()">Client List</button></a></li>
 
-    <div class="container">
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit"
+                        style="margin:10px;" (click)="getLoanDetailsbyApproval('pending')">Pending List</button></a>
+            </li>
 
-        <div class="row">
-            <div class="col-24 col-md-12">
-               <form>
-                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getAllLoanDetails()">Dashboard </button>
-                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getAllUserDetails()">Client List</button>
-                <button class="btn btn-primary" type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('pending')">Pending List</button>
-                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('yes')">Accepted List</button>
-                <button class="btn btn-primary " type="submit" style="margin:10px;" (click)="getLoanDetailsbyApproval('no')">Rejected List</button>
-                <button class="btn btn-primary" (click)="getFiles()" type="button" style="margin:10px;">View Files</button>
-                </form>
-            </div> 
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit"
+                        style="margin:10px;" (click)="getLoanDetailsbyApproval('yes')">Accepted List</button></a></li>
+
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button " type="submit"
+                        style="margin:10px;" (click)="getLoanDetailsbyApproval('no')">Rejected List</button></a></li>
+
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" (click)="getFiles()"
+                        type="button" style="margin:10px;">View
+                        Files</button></a></li>
+            <!-- <li><a class="contact" href="#">Contact</a></li> -->
         </div>
-        <br>
-        <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId">
-        <button type="button" class="btn btn-primary" (click)="selectLoanDetailByLoanId(getLoanbyLoanId)">Search</button>
-        
+    </ul>
+    <div class="main-area">
+        <div class="navbar_">
+            <div class="navbar_button">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="navbar_list">
+                <div class="nav_item">
+                    <a href="#"><button class="btn btn-primary" (click)="logout()">Logout</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="main-wrapper">
+            <div class="container">
+                <div style="margin-right: auto; text-align: end;">
+                    <input type="text" placeholder="Search by loanId" [(ngModel)]="getLoanbyLoanId">
+                    <button type="button" class="btn btn-primary"
+                        (click)="selectLoanDetailByLoanId(getLoanbyLoanId)">Search</button>
+                </div>
+                <div *ngIf="divOneLoan">
+                    <table *ngIf="getLoanDetail" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Loan Id </th>
+                                <th> Loan ApplyDate </th>
+                                <th>Vehicle Maker</th>
+                                <th>Vehicle Model</th>
+                                <th>On Road Price</th>
+                                <th>Principal</th>
+                                <th>Rate Of Interest</th>
+                                <th>Tenure</th>
+                                <th>Loan Approval</th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{getLoanDetail.loanId}}</td>
+                                <td>{{getLoanDetail.applyDate}}</td>
+                                <td>{{getLoanDetail.carDetail.carMaker.carMaker}}</td>
+                                <td>{{getLoanDetail.carDetail.model}}</td>
+                                <td>{{getLoanDetail.carDetail.onroadPrice}}</td>
+                                <td>{{getLoanDetail.principalAmount}}</td>
+                                <td>{{getLoanDetail.rateOfInterest}}</td>
+                                <td>{{getLoanDetail.tenure}}</td>
+                                <td>{{getLoanDetail.approval}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="selectLoanDetailByLoanId(getLoanDetail.loanId)"
+                                        (click)="viewLoanDetails(getLoanDetail.loanId)">View More</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="approveLoanDetail(getLoanDetail)">Approve</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="rejectLoanDetail(getLoanDetail)">Reject</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!----------------------------------- Table for All Loan Details Button------------------------->
+                <div *ngIf="divAllLoan">
+                    <table *ngIf="allLoanDetails && allLoanDetails.length" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Loan Id</th>
+                                <th>Loan ApplyDate</th>
+                                <th>Vehicle Maker</th>
+                                <th>Vehicle Model</th>
+                                <th>On Road Price</th>
+                                <th>Principal</th>
+                                <th>Rate Of Interest</th>
+                                <th>Tenure</th>
+                                <th>Loan Approval</th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let loan of allLoanDetails">
+                                <td>{{loan.loanId}}</td>
+                                <td>{{loan.applyDate}}</td>
+                                <td>{{loan.carDetail.carMaker.carMaker}}</td>
+                                <td>{{loan.carDetail.model}}</td>
+                                <td>{{loan.carDetail.onroadPrice}}</td>
+                                <td>{{loan.principalAmount}}</td>
+                                <td>{{loan.rateOfInterest}}</td>
+                                <td>{{loan.tenure}}</td>
+                                <td>{{loan.approval}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" (click)="viewLoanDetails(loan.loanId)"
+                                        (click)="selectLoanDetailByLoanId(loan.loanId)">View More</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="approveLoanDetail(loan)">Approve</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="rejectLoanDetail(loan)">Reject</button>
+                                </td>
 
-        <div *ngIf="divOneLoan">
-            <table *ngIf="getLoanDetail" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th> Loan Id </th>
-                        <th> Loan ApplyDate </th>
-                        <th>Vehicle Maker</th>
-                        <th>Vehicle Model</th>
-                        <th>On Road Price</th>                                                     
-                        <th>Principal</th>
-                        <th>Rate Of Interest</th>
-                        <th>Tenure</th>
-                        <th>Loan Approval</th> 
-                        <th>Operation </th>
-                        <th>Operation </th>
-                        <th>Operation </th>
-                    </tr>
-                </thead>
-               
-                <tbody>
-                    <tr>
-                        <td>{{getLoanDetail.loanId}}</td>
-                        <td>{{getLoanDetail.applyDate}}</td>
-                        <td>{{getLoanDetail.carDetail.carMaker.carMaker}}</td>
-                        <td>{{getLoanDetail.carDetail.model}}</td>
-                        <td>{{getLoanDetail.carDetail.onroadPrice}}</td>
-                        <td>{{getLoanDetail.principalAmount}}</td>
-                        <td>{{getLoanDetail.rateOfInterest}}</td>
-                        <td>{{getLoanDetail.tenure}}</td>
-                        <td>{{getLoanDetail.approval}}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary"
-                                (click)="selectLoanDetailByLoanId(getLoanDetail.loanId)"
-                                (click)="viewLoanDetails(getLoanDetail.loanId)">View More</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary"
-                                (click)="approveLoanDetail(getLoanDetail)">Approve</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary"
-                                (click)="rejectLoanDetail(getLoanDetail)">Reject</button>
-                        </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!----------------------------------- Table for View More Button------------------------->
+                <div *ngIf="divViewMore">
+                    <br><br>
 
-                    </tr>
-                </tbody>
-            </table>
+                    <table *ngIf="viewEmploymentDetailByLoanId && viewEmploymentDetailByLoanId.length"
+                        class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>User Id</th>
+                                <th>User Name</th>
+                                <th>Email Id</th>
+                                <th>Type of Employment</th>
+                                <th>Account Type</th>
+                                <th>Annual Salary</th>
+                                <th>Mobile Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let emp of viewEmploymentDetailByLoanId">
+
+
+                                <td>{{emp.userDetail.userId}}</td>
+                                <td>{{emp.userDetail.name}}</td>
+                                <td>{{emp.userDetail.email}}</td>
+                                <td>{{emp.typeOfEmploymentDetail.typeOfEmployment}}</td>
+                                <td>{{emp.accountTypeDetail.accountType}}</td>
+                                <td>{{emp.annualSalary}}</td>
+                                <td>{{emp.userDetail.mobileNumber}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <!-- <label *ngIf="viewAdvancedUserDetailByLoanId "> Aadhar Card : {{viewAdvancedUserDetailByLoanId.aadhaarCard}}</label><br>
+                        <label *ngIf="viewAdvancedUserDetailByLoanId "> Pan Card : {{viewAdvancedUserDetailByLoanId.panCard}}</label><br>
+                        <label *ngIf="viewAdvancedUserDetailByLoanId "> Photo : {{viewAdvancedUserDetailByLoanId.photo}}</label><br>
+                        <label *ngIf="viewAdvancedUserDetailByLoanId "> Salary Slip : {{viewAdvancedUserDetailByLoanId.salarySlip}}</label><br>
+                        -->
+
+                </div>
+
+                <!----------------------------------- Table for Approved and Pending Clients ------------------------->
+
+                <div *ngIf="divAprrovalLoan">
+                    <table *ngIf="approvalLoanDetailArray && approvalLoanDetailArray.length"
+                        class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Loan Id</th>
+                                <th>Loan ApplyDate</th>
+                                <th>Vehicle Maker</th>
+                                <th>Vehicle Model</th>
+                                <th>Principal</th>
+                                <th>Rate Of Interest</th>
+                                <th>Tenure</th>
+                                <th>Loan Approval</th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                                <th>Operation </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let loan of approvalLoanDetailArray">
+                                <td>{{loan.loanId}}</td>
+                                <td>{{loan.applyDate}}</td>
+                                <td>{{loan.carDetail.carMaker.carMaker}}</td>
+                                <td>{{loan.carDetail.model}}</td>
+                                <td>{{loan.principalAmount}}</td>
+                                <td>{{loan.rateOfInterest}}</td>
+                                <td>{{loan.tenure}}</td>
+                                <td>{{loan.approval}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="viewLoanDetails(loan.loanId)">View More</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="approveLoanDetail(loan)">Approve</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="rejectLoanDetail(loan)">Reject</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!----------------------------------- Table for User Details ------------------------->
+
+                <div *ngIf="divUserDetail">
+                    <table *ngIf="allUserDetails && allUserDetails.length" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>User Email</th>
+                                <th>User Name</th>
+                                <th>User Gender</th>
+                                <th>User Age</th>
+                                <th>User Mobile Number</th>
+                                <th>User Address </th>
+                                <th>User City </th>
+                                <th>User State</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of allUserDetails">
+                                <td>{{user.userId}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.gender}}</td>
+                                <td>{{user.age}}</td>
+                                <td>{{user.mobileNumber}}</td>
+                                <td>{{user.addressDetail.address}}</td>
+                                <td>{{user.addressDetail.city.cityName}}</td>
+                                <td>{{user.addressDetail.city.state.stateName}}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <br>
+
+
+            </div>
         </div>
 
 
-        <!----------------------------------- Table for All Loan Details Button------------------------->
-
-    
-        <div *ngIf="divAllLoan">
-            <table *ngIf="allLoanDetails && allLoanDetails.length" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Loan Id</th>
-                        <th>Loan ApplyDate</th>
-                        <th>Vehicle Maker</th>
-                        <th>Vehicle Model</th>
-                        <th>On Road Price</th>
-                        <th>Principal</th>
-                        <th>Rate Of Interest</th>
-                        <th>Tenure</th>
-                        <th>Loan Approval</th> 
-                        <th>Operation </th>
-                        <th>Operation </th>
-                        <th>Operation </th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let loan of allLoanDetails">
-                    <td>{{loan.loanId}}</td>
-                    <td>{{loan.applyDate}}</td>
-                    <td>{{loan.carDetail.carMaker.carMaker}}</td>
-                    <td>{{loan.carDetail.model}}</td>
-                    <td>{{loan.carDetail.onroadPrice}}</td>
-                    <td>{{loan.principalAmount}}</td> 
-                    <td>{{loan.rateOfInterest}}</td>       
-                    <td>{{loan.tenure}}</td>
-                    <td>{{loan.approval}}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary"  (click)="viewLoanDetails(loan.loanId)" (click)="selectLoanDetailByLoanId(loan.loanId)">View More</button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" (click)="approveLoanDetail(loan)"  >Approve</button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(loan)">Reject</button>
-                    </td>
-                    
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!----------------------------------- Table for View More Button------------------------->
 
 
-        <div *ngIf="divViewMore">
-            <br><br>
-            
-            <table *ngIf="viewEmploymentDetailByLoanId && viewEmploymentDetailByLoanId.length" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User Id</th>
-                        <th>User Name</th>
-                        <th>Email Id</th>
-                        <th>Type of Employment</th>
-                        <th>Account Type</th>
-                        <th>Annual Salary</th>
-                        <th>Mobile Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let emp of viewEmploymentDetailByLoanId">
-
-                       
-                        <td>{{emp.userDetail.userId}}</td>
-                        <td>{{emp.userDetail.name}}</td>
-                        <td>{{emp.userDetail.email}}</td>
-                        <td>{{emp.typeOfEmploymentDetail.typeOfEmployment}}</td>
-                        <td>{{emp.accountTypeDetail.accountType}}</td>
-                        <td>{{emp.annualSalary}}</td>
-                        <td>{{emp.userDetail.mobileNumber}}</td>
-
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            
-            <!-- <label *ngIf="viewAdvancedUserDetailByLoanId "> Aadhar Card : {{viewAdvancedUserDetailByLoanId.aadhaarCard}}</label><br>
-            <label *ngIf="viewAdvancedUserDetailByLoanId "> Pan Card : {{viewAdvancedUserDetailByLoanId.panCard}}</label><br>
-            <label *ngIf="viewAdvancedUserDetailByLoanId "> Photo : {{viewAdvancedUserDetailByLoanId.photo}}</label><br>
-            <label *ngIf="viewAdvancedUserDetailByLoanId "> Salary Slip : {{viewAdvancedUserDetailByLoanId.salarySlip}}</label><br>
-            -->
-
-        </div>
-
-        <!----------------------------------- Table for Approved and Pending Clients ------------------------->
-
-        <div *ngIf="divAprrovalLoan">
-            <table *ngIf="approvalLoanDetailArray && approvalLoanDetailArray.length" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Loan Id</th>
-                        <th>Loan ApplyDate</th>
-                        <th>Vehicle Maker</th>
-                        <th>Vehicle Model</th>
-                        <th>Principal</th>
-                        <th>Rate Of Interest</th>
-                        <th>Tenure</th>
-                        <th>Loan Approval</th> 
-                        <th>Operation </th>
-                        <th>Operation </th>
-                        <th>Operation </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let loan of approvalLoanDetailArray">
-                        <td>{{loan.loanId}}</td>
-                        <td>{{loan.applyDate}}</td>
-                        <td>{{loan.carDetail.carMaker.carMaker}}</td>
-                        <td>{{loan.carDetail.model}}</td>
-                        <td>{{loan.principalAmount}}</td> 
-                        <td>{{loan.rateOfInterest}}</td>       
-                        <td>{{loan.tenure}}</td>
-                        <td>{{loan.approval}}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" (click)="viewLoanDetails(loan.loanId)" >View More</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary" (click)="approveLoanDetail(loan)" >Approve</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary" (click)="rejectLoanDetail(loan)">Reject</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <!----------------------------------- Table for User Details ------------------------->
-
-        <div *ngIf="divUserDetail">
-            <table *ngIf="allUserDetails && allUserDetails.length" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>User Email</th>
-                        <th>User Name</th>
-                        <th>User Gender</th>
-                        <th>User Age</th>
-                        <th>User Mobile Number</th>
-                        <th>User Address </th>
-                        <th>User City </th>
-                        <th>User State</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of allUserDetails">
-                        <td>{{user.userId}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.name}}</td>
-                        <td>{{user.gender}}</td>
-                        <td>{{user.age}}</td>
-                        <td>{{user.mobileNumber}}</td>
-                        <td>{{user.addressDetail.address}}</td>
-                        <td>{{user.addressDetail.city.cityName}}</td>
-                        <td>{{user.addressDetail.city.state.stateName}}</td>                      
-                        
-                    </tr>
-                </tbody>
-            </table> 
-        </div>
-
-
-        <br>
-        
 
     </div>
-</div>
 
+    <!-- <div class="footer_">
+            <div class="footer_copyright">&copy;2020 The Black Fox Consulting</div>
+            <div class="footer_signature">Footer content</div>
+        </div> -->
+</div>
 <ng-template #myElseBlock>
     <h1>You are not logged in </h1>
     <h4>To login <a routerLink="/login">Click here.</a> </h4>
 </ng-template>
-
-
-
-
-
