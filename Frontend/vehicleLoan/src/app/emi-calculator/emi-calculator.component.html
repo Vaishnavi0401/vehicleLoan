@@ -15,20 +15,23 @@
 <div class="container">
 
     <form [formGroup]="emiForm">
-
+        
         <div class="form-group">
-          <label for="principal"><strong>Principal</strong></label>
-          <input type="number" formControlName="principal" class="form-control"  name="principalAmount" id="principal" placeholder="Enter the Principal" [(ngModel)]="principalAmount" >         
+            <h1>EMI CALCAULATOR</h1><BR>
+          <label for="principal"><strong>Principal  </strong></label>
+          <input  type="number" formControlName="principal" class="form-control"  name="principalAmount" id="principal" placeholder="Enter the Principal" [(ngModel)]="principalAmount" >         
           <span *ngIf="emiForm.get('principal').hasError('min')" style="color:red;">A Minimum of 300000 is required</span>
           <span *ngIf="emiForm.get('principal').hasError('required')" style="color:red;">Principal required</span>
-        </div> <br> <br>
+        </div> <br> 
+
+        
 
         <div class="form-group">
             <label for="rate"><strong>Rate of Interest</strong></label>
             <input type="number" formControlName="rate" class="form-control" id="rate" name="rate" placeholder="Enter the Rate of Interest" [(ngModel)]="rate">         
             <span *ngIf="emiForm.get('rate').hasError('min')" style="color:red;">A Minimum of 3% is required</span>
             <span *ngIf="emiForm.get('rate').hasError('required')" style="color:red;">Rate required</span>
-        </div><br> <br>
+        </div><br> 
         
         
         <div class="form-group">
@@ -36,13 +39,17 @@
             <input type="number" formControlName="tenure" class="form-control" id="tenure" name="timePeriod" placeholder="Enter the required Tenure" [(ngModel)]="timePeriod">
             <span *ngIf="emiForm.get('tenure').hasError('min')" style="color:red;">A Minimum of 2 years is required</span>
             <span *ngIf="emiForm.get('tenure').hasError('required')" style="color:red;">Tenure required</span>
-        </div><br><br>
+        </div><br>
+        
+        <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI </button>
+        <span> {{emiFinal}}</span>
         
         
-        <button type="submit" class="btn btn-primary" (click)="calculateEMI()" >Calculate EMI</button>
+        
     </form>
+  
 
 </div>
-   
+
 </body>     
 </html>

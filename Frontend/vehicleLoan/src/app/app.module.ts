@@ -27,8 +27,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 // import { Ng5SliderModule } from 'ng5-slider';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

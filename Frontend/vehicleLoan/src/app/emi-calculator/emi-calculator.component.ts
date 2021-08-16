@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmiCalculatorService } from '../emi-calculator.service';
 import { EMICalc } from '../pojos/EMICalculator';
 
-
 @Component({
   selector: 'app-emi-calculator',
   templateUrl: './emi-calculator.component.html',
@@ -42,5 +41,6 @@ export class EmiCalculatorComponent implements OnInit {
     tenure: new FormControl('', [Validators.required, Validators.min(2)])
     })
   }
-
+  
+ 
 }
