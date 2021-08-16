@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-    integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
-    crossorigin="anonymous"></script>
-</head>
-
-<body>
   <div class="card">
     <div class="container">
 
@@ -21,47 +5,49 @@
 
       <form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm)">
 
-        <div class="card" style="background-color: lightskyblue">
+        <!-- ==================================================Vehicle Detail====================================================================== -->
+        <div class="card">
           <div class="container">
 
             <div class="mb-3">
               <p class="text-center"><b>Vehicle Details</b></p>
-              <input type="text" class="form-control" formControlName="carMaker" id="carMaker"
-                placeholder="Enter Car Maker">
-              <span *ngIf="validateForm.get('carMaker').hasError('required')" style="color: red;">
+              <label for="carMaker">Enter Car Maker</label>
+              <input type="text" class="form-control" formControlName="carMaker" id="carMaker">
+              <span *ngIf="validateForm.get('carMaker').hasError('required')" style="color: red;font-size: 12px;">
                 Car Maker is Required
               </span>
-              <span *ngIf="validateForm.get('carMaker').hasError('minlength')" style="color: red;">
+              <span *ngIf="validateForm.get('carMaker').hasError('minlength')" style="color: red;font-size: 12px;">
                 Min Length should be 3
               </span>
               <br><br>
 
-              <input type="text" class="form-control" id="carModel" formControlName="carModel"
-                placeholder="Enter Car Model">
-              <span *ngIf="validateForm.get('carModel').hasError('required')" style="color: red;">
+              <label for="carModel">Enter Car Model</label>
+              <input type="text" class="form-control" id="carModel" formControlName="carModel">
+              <span *ngIf="validateForm.get('carModel').hasError('required')" style="color: red;font-size: 12px;">
                 Car Model is Required
               </span>
-              <span *ngIf="validateForm.get('carModel').hasError('minlength')" style="color: red;">
+              <span *ngIf="validateForm.get('carModel').hasError('minlength')" style="color: red;font-size: 12px;">
                 Min Length should be 3
               </span>
               <br><br>
 
-              <input type="number" class="form-control" id="exShowRoomPrice" formControlName="exShowRoomPrice"
-                placeholder="Enter ExShow Room Price">
-              <span *ngIf="validateForm.get('exShowRoomPrice').hasError('required')" style="color: red;">
+              <label for="exShowRoomPrice">Enter Showroom Price</label>
+              <input type="number" class="form-control" id="exShowRoomPrice" formControlName="exShowRoomPrice">
+              <span *ngIf="validateForm.get('exShowRoomPrice').hasError('required')"
+                style="color: red;font-size: 12px;">
                 Price is Required
               </span>
-              <span *ngIf="validateForm.get('exShowRoomPrice').hasError('min')" style="color: red;">
+              <span *ngIf="validateForm.get('exShowRoomPrice').hasError('min')" style="color: red;font-size: 12px;">
                 Price cannot be negative
               </span>
               <br><br>
 
-              <input type="number" class="form-control" id="onRoadPrice" formControlName="onRoadPrice"
-                placeholder="Enter On Road Price">
-              <span *ngIf="validateForm.get('onRoadPrice').hasError('required')" style="color: red;">
+              <label for="onRoadPrice">Enter On Road Price</label>
+              <input type="number" class="form-control" id="onRoadPrice" formControlName="onRoadPrice">
+              <span *ngIf="validateForm.get('onRoadPrice').hasError('required')" style="color: red;font-size: 12px;">
                 Price is Required
               </span>
-              <span *ngIf="validateForm.get('onRoadPrice').hasError('min')" style="color: red;">
+              <span *ngIf="validateForm.get('onRoadPrice').hasError('min')" style="color: red;font-size: 12px;">
                 Price cannot be negative
               </span>
             </div>
@@ -69,35 +55,38 @@
         </div>
         <br>
 
-        <div class="card" style="background-color: lightskyblue">
+
+        <!-- ==================================================Applicant Detail====================================================================== -->
+
+        <div class="card">
           <div class="container">
             <div class="mb-3">
               <p class="text-center"><b>Applicant Details</b></p>
-              <input type="text" class="form-control" id="Name" formControlName="Name" placeholder="Enter Your Name"
-                [(ngModel)]="Name">
-              <span *ngIf="validateForm.get('Name').hasError('required')" style="color: red;">
+              <label for="Name">Enter Your First Name</label>
+              <input type="text" class="form-control" id="Name" formControlName="Name" [(ngModel)]="Name">
+              <span *ngIf="validateForm.get('Name').hasError('required')" style="color: red;font-size: 12px;">
                 Name is Required
               </span>
-              <span *ngIf="validateForm.get('Name').hasError('minlength')" style="color: red;">
+              <span *ngIf="validateForm.get('Name').hasError('minlength')" style="color: red;font-size: 12px;">
                 Min Name Length should be 3
               </span>
-              <span *ngIf="validateForm.get('Name').hasError('pattern')" style="color: red;">
+              <span *ngIf="validateForm.get('Name').hasError('pattern')" style="color: red;font-size: 12px;">
                 Numbers or Special Characters not allowed
               </span>
 
               <br><br>
 
-
-              <input type="number" class="form-control" id="Age" #A="ngModel" placeholder="Enter Your Age"
-                [(ngModel)]="age" [ngModelOptions]="{standalone: true}">
-              <span *ngIf="(A.untouched)" style="color:red;">
+              <label for="Age">Enter Your Age</label>
+              <input type="number" class="form-control" id="Age" #A="ngModel" [(ngModel)]="age"
+                [ngModelOptions]="{standalone: true}">
+              <span *ngIf="(A.untouched)" style="color:red;font-size: 12px;">
                 Age is required
               </span>
 
               <br>
 
               <br>
-              <label class="form-label"><b>Gender</b></label>
+              <label class="form-label"><b>Select Gender</b></label>
               <div class="form-check">
                 <input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                 <label class="form-check-label" for="flexRadioDefault1"> Male </label>
@@ -112,32 +101,33 @@
 
               <br>
               <div class="mb-3">
-                <label class="form-label" for="Employment"><b>Enter Your Type Of Employment</b></label>
+                <label class="form-label" for="Employment"><b>Select type Of Employment</b></label>
                 <select class="form-select" name="Employment" [(ngModel)]="typeOfEmployment"
                   [ngModelOptions]="{standalone: true}" #T="ngModel">
                   <option value="Salaried">Salaried</option>
                   <option value="Self Employed">Self Employed</option>
                   <option value="Unemployed">Unemployed</option>
                 </select>
-                <span *ngIf="(T.untouched)" style="color:red;">
+                <span *ngIf="(T.untouched)" style="color:red;font-size: 12px;">
                   Type of Employment is required
                 </span>
 
 
               </div>
 
-              <input type="number" class="form-control" id="Salary" #S="ngModel" placeholder="Enter Your Salary"
-                [(ngModel)]="salary" name="Salary" [ngModelOptions]="{standalone: true}">
-              <span *ngIf="(S.untouched)" style="color:red;">
+              <label for="Salary">Enter Your Salary</label>
+              <input type="number" class="form-control" id="Salary" #S="ngModel" [(ngModel)]="salary" name="Salary"
+                [ngModelOptions]="{standalone: true}">
+              <span *ngIf="(S.untouched)" style="color:red;font-size: 12px;">
                 Salary is required
               </span>
 
               <br>
 
-              <input type="number" class="form-control" id="existingEMI" #E="ngModel"
-                placeholder="Enter Your Existing EMI" name="existingEMI" [(ngModel)]="existingEMI"
-                [ngModelOptions]="{standalone: true}">
-              <span *ngIf="(E.untouched)" style="color:red;">
+              <label for="existingEMI">Enter Your Existing EMI</label>
+              <input type="number" class="form-control" id="existingEMI" #E="ngModel" name="existingEMI"
+                [(ngModel)]="existingEMI" [ngModelOptions]="{standalone: true}">
+              <span *ngIf="(E.untouched)" style="color:red;font-size: 12px;">
                 Existing EMI is required(If does not exist put 0)
               </span>
 
@@ -152,28 +142,29 @@
 
         </div><br><br>
 
+        <!-- ==================================================Contact Detail====================================================================== -->
 
-        <div class="card" style="background-color: lightskyblue">
+        <div class="card">
           <div class="container">
 
             <div class="mb-3">
               <p class="text-center"><b>Contact Details</b></p><br>
-              <input type="number" class="form-control" formControlName="mobileNo" id="MobileNo"
-                placeholder="Enter Your Mobile No.">
-              <span *ngIf="validateForm.get('mobileNo').hasError('required')" style="color: red;">
+              <label for="mobileNo">Enter Your Mobile Number</label>
+              <input type="number" class="form-control" formControlName="mobileNo" id="MobileNo">
+              <span *ngIf="validateForm.get('mobileNo').hasError('required')" style="color: red;font-size: 12px;">
                 Mobile No is Required
               </span>
-              <span *ngIf="validateForm.get('mobileNo').hasError('pattern')" style="color: red;">
+              <span *ngIf="validateForm.get('mobileNo').hasError('pattern')" style="color: red;font-size: 12px;">
                 Mobile No is invalid
               </span>
               <br><br>
 
-              <input type="text" class="form-control" formControlName="emailId" id="emailId"
-                placeholder="Enter Your EmailId">
-              <span *ngIf="validateForm.get('emailId').hasError('required')" style="color: red;">
+              <label for="emailId">Enter Your Email ID</label>
+              <input type="text" class="form-control" formControlName="emailId" id="emailId">
+              <span *ngIf="validateForm.get('emailId').hasError('required')" style="color: red;font-size: 12px;">
                 Email is Required
               </span>
-              <span *ngIf="validateForm.get('emailId').hasError('pattern')" style="color: red;">
+              <span *ngIf="validateForm.get('emailId').hasError('pattern')" style="color: red; font-size: 12px;">
                 Email is invalid
               </span>
             </div>
@@ -183,8 +174,7 @@
 
         <div class="text-center">
           <button class="btn btn-primary" type="submit" (click)="testEligibility()"
-            [disabled]="validateForm.invalid">Check
-            Eligibility</button>
+            [disabled]="validateForm.invalid">Check Eligibility</button>
         </div>
         <br>
         <router-outlet></router-outlet>
@@ -192,6 +182,3 @@
       </form>
     </div>
   </div>
-</body>
-
-</html>
