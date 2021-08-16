@@ -74,13 +74,17 @@
             <div class="mb-3">
               <p class="text-center"><b>Applicant Details</b></p>
               <input type="text" class="form-control" id="Name" formControlName="Name" placeholder="Enter Your Name"
-              [(ngModel)]="Name">
+                [(ngModel)]="Name">
               <span *ngIf="validateForm.get('Name').hasError('required')" style="color: red;">
                 Name is Required
               </span>
               <span *ngIf="validateForm.get('Name').hasError('minlength')" style="color: red;">
                 Min Name Length should be 3
               </span>
+              <span *ngIf="validateForm.get('Name').hasError('pattern')" style="color: red;">
+                Numbers or Special Characters not allowed
+              </span>
+
               <br><br>
 
 
@@ -89,6 +93,7 @@
               <span *ngIf="(A.untouched)" style="color:red;">
                 Age is required
               </span>
+
               <br>
 
               <br>
@@ -117,6 +122,8 @@
                 <span *ngIf="(T.untouched)" style="color:red;">
                   Type of Employment is required
                 </span>
+
+
               </div>
 
               <input type="number" class="form-control" id="Salary" #S="ngModel" placeholder="Enter Your Salary"
@@ -124,6 +131,7 @@
               <span *ngIf="(S.untouched)" style="color:red;">
                 Salary is required
               </span>
+
               <br>
 
               <input type="number" class="form-control" id="existingEMI" #E="ngModel"
@@ -131,7 +139,9 @@
                 [ngModelOptions]="{standalone: true}">
               <span *ngIf="(E.untouched)" style="color:red;">
                 Existing EMI is required(If does not exist put 0)
-              </span><br>
+              </span>
+
+              <br>
 
             </div>
 
@@ -170,6 +180,7 @@
           </div>
         </div>
         <br>
+
         <div class="text-center">
           <button class="btn btn-primary" type="submit" (click)="testEligibility()"
             [disabled]="validateForm.invalid">Check

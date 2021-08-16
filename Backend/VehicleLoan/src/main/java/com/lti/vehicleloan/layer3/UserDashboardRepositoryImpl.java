@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer2.exceptions.UserNotFoundException;
 
@@ -16,14 +17,12 @@ public class UserDashboardRepositoryImpl extends BaseRepository implements UserD
 	
 
 	@Transactional
-	public List<UserDetail> selectUserById(int userId) throws UserNotFoundException {
-		
+	public List<LoanDetail> selectUserById(int userId) throws UserNotFoundException {
 		EntityManager entityManager = getEntityManager();
 		Query query = entityManager.createQuery("select loan from UserDetail user, LoanDetail loan where user.userId = loan.userDetail.userId and user.userId = :duserId");
 		query.setParameter("duserId", userId);
-		List<UserDetail> users = query.getResultList();
-		return users;
-		//return entityManager.find(UserDetail.class, userId);
+		List<LoanDetail> loans = query.getResultList();
+		return loans;
 	}
 
 }

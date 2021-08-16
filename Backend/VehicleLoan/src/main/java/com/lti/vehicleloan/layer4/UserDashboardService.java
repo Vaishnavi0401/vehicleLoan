@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.lti.vehicleloan.layer2.LoanDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 
 @Service
 public interface UserDashboardService {
 
-	List<UserDetail> selectUserbyUserIdService(int userId);
+	
+	List<LoanDetail> selectUserbyUserIdService(int userId);
+	
 }
