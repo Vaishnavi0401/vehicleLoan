@@ -99,11 +99,12 @@ public class AdminDashboardRepositoryImpl extends AdminDashboardBaseRepository i
 		return entityManager.find(UserDetail.class, userId);
 		
 	}
-	@Transactional
+	@Transactional   //confirm on postman 
 	public AdvancedUserDetail selectAdvancedUserDetailByUserId(int userId) throws AdvancedUserDetailNotFoundException {
 		
 		EntityManager entityManager=getEntityManager();
-		Query query=entityManager.createQuery("select adv from AdvancedUserDetail adv , UserDetail ud where ud.userId=:userId");
+		//Query query=entityManager.createQuery("select adv from AdvancedUserDetail adv , UserDetail ud where ud.userId=:userId");
+		Query query=entityManager.createQuery("select adv from AdvancedUserDetail adv where adv.userDetail.userId=:userId");
 		query.setParameter("userId", userId);
 		AdvancedUserDetail advancedUserDetail=(AdvancedUserDetail) query.getSingleResult();
 		return advancedUserDetail;

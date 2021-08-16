@@ -6,6 +6,7 @@ import { AdvancedUserDetail } from '../pojos/AdvancedUserDetail';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
 
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -21,7 +22,14 @@ export class AdminDashboardComponent implements OnInit {
   getLoanDetail:AdminDashboardLoanDetail;
   approval:string;
   allUserDetails: UserDetail[]=[];
+
+  viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
+  viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
+  approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
+
   isAdminLoggedIn: string;
+
 
   divAllLoan:boolean=true;
   divViewMore:boolean=true;
@@ -29,7 +37,7 @@ export class AdminDashboardComponent implements OnInit {
   divAprrovalLoan:boolean=true;
   divUserDetail:boolean;
 
-  
+
 
 
   constructor(private adminDashboardService: AdminDashboardService, private router: Router) { }
@@ -89,7 +97,6 @@ export class AdminDashboardComponent implements OnInit {
     },(err)=>{
       console.log(err);
     }
-
     );
   }
 
@@ -171,20 +178,7 @@ export class AdminDashboardComponent implements OnInit {
   } //end of reject
 
 
-  // selectLoanDetailByLoanId(){
-  //   if(this.getLoanbyLoanId==0){
-  //     console.log('loan id chosen is zero'+this.getLoanbyLoanId);
-  //     this.tempLoanDetails=this.allLoanDetails;
-  //   }
-  //   else
-  //   {
-  //     console.log('loan Id chosen is: '+this.getLoanbyLoanId);
-  //     this.tempLoanDetails=this.allLoanDetails.filter(l=>{l.loanId==this.getLoanbyLoanId});
-  //     //this.allLoanDetails=this.tempLoanDetails;
-  //     console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
-  //     
-  //   }
-  // }
+  
   adata:any;
   searched:boolean;
   selectLoanDetailByLoanId(getLoanbyLoanId:number)
@@ -201,8 +195,7 @@ export class AdminDashboardComponent implements OnInit {
     {
       this.getLoanDetail=data;
       console.log(this.getLoanDetail);
-      //this.tempLoanDetails=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
-      //this.getLoanDetailArray=this.allLoanDetails.filter(l=>(l.loanId==this.getLoanbyLoanId));
+      
       console.log('length of getLoanDetailArray'+ this.getLoanDetailArray.length);
       console.log('length of tempLoanDetails: '+this.tempLoanDetails.length);
       console.log('length of allLoanDetails: '+this.allLoanDetails.length);      
@@ -212,15 +205,14 @@ export class AdminDashboardComponent implements OnInit {
     );
   } //end of search
 
-  viewAdvancedUserDetailByLoanId:AdvancedUserDetail;
-  //viewAdvancedUserDetailByLoanIdArray:AdvancedUserDetail[]=[];
-  viewEmploymentDetailByLoanId:EmploymentDetail[]=[];
+  
 
 
   bdata:any;
   viewed:boolean;
   viewLoanDetails(viewAllDetailByLoanId:number)
   {
+    this.selectLoanDetailByLoanId(viewAllDetailByLoanId);
     this.divAllLoan=false;
     this.divViewMore=true;
     this.divOneLoan=true;
@@ -232,11 +224,7 @@ export class AdminDashboardComponent implements OnInit {
     subscribe((data:AdvancedUserDetail)=>
     {
       this.viewAdvancedUserDetailByLoanId=data;
-      
       console.log(this.viewAdvancedUserDetailByLoanId);
-      //this.viewAdvancedUserDetailByLoanIdArray=this.viewAdvancedUserDetailByLoanIdArray.filter(v=>())
-
-
     },(err) => {
       console.log(err + 'error'+this.adata);
       }
@@ -252,8 +240,10 @@ export class AdminDashboardComponent implements OnInit {
       }
     
     );
-  }
-  approvalLoanDetailArray:AdminDashboardLoanDetail[]=[];
+  }  //end of viewLoanDetails
+
+
+  
   cdata:any;
   getLoanDetailsbyApproval(approval:string)
   {    
@@ -277,34 +267,12 @@ export class AdminDashboardComponent implements OnInit {
       console.log(err + 'error'+this.adata);
       }
     );
-    
-    
-  
-  }
-
-
-
-
-
-  viewEmploymentDetailByLoanIdArray:EmploymentDetail[]=[];
+  }  //end of getLoanDetailsbyApproval
 
 
 
 
 
 
- //this.allLoanDetails=this.tempLoanDetails;
-        //   console.log('from searchLoan() '+data);
-      //   console.log(this.tempLoanDetails);
-         
-      //   console.log('Employee Searched'+getLoanbyLoanId);
-      
-      // this.adata=data;
-      // console.log('log is'+ data);
-      // if(data==null)
-      // {
-      //   this.searched=true;
-      
-      // }
 
 }

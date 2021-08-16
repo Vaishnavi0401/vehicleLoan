@@ -45,7 +45,7 @@ import { BaseComponent } from './base/base.component';
     AppRoutingModule,
     // Ng5SliderModule,
     HttpClientModule
- 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

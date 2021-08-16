@@ -25,8 +25,8 @@ export class EmiCalculatorComponent implements OnInit {
     this.emiCalc.rateOfInterest=this.rate;
     this.emiCalc.tenure=this.timePeriod;
     this.getService.emiCalculatorService(this.emiCalc).subscribe(
-      (data: number)=> {this.emiFinal=data;
-      console.log(this.emiFinal);},
+      (data: number)=> {this.emiFinal=data;console.log(this.emiFinal);},
+
       (err)=> {console.log(err);}
     );
     console.log(this.emiCalc);

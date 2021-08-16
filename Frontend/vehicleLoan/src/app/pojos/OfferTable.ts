@@ -3,4 +3,5 @@ export class OfferTable{
     offerAmount: number;
     offerRate: number;
     offerTenure: number;
+    offerEmi:number;
 }
