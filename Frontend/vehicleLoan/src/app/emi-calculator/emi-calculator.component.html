@@ -32,8 +32,10 @@
             <span *ngIf="emiForm.get('tenure').hasError('required')" style="color:red;">Tenure required</span>
         </div><br>
 
-        <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI </button>
-        <span> {{emiFinal}}</span>
+        <button type="submit" class="btn btn-primary" (click)="calculateEMI()">Calculate EMI </button> <BR>
+    <div>
+       <h3>YOUR EMI IS: {{emiFinal}}</h3> 
+    </div>
 
 
 

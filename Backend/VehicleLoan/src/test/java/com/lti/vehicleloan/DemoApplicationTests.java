@@ -29,6 +29,7 @@ import com.lti.vehicleloan.layer2.State;
 import com.lti.vehicleloan.layer2.TypeOfEmploymentDetail;
 import com.lti.vehicleloan.layer2.UserDetail;
 import com.lti.vehicleloan.layer3.ApplicationFormRepositoryImpl;
+import com.lti.vehicleloan.layer3.LoginRepository;
 import com.lti.vehicleloan.layer4.ApplicationFormServiceImpl;
 
 import java.math.BigDecimal;
@@ -63,6 +64,10 @@ class DemoApplicationTests {
 
 	@Autowired
 	LoginService loginService;
+	
+	@Autowired
+	LoginRepository loginRepo;
+	
 	@Autowired
 	EmiCalculatorService calculator;
 
@@ -286,9 +291,10 @@ class DemoApplicationTests {
 	@Test
 	void testLogin() {
 		Login login = new Login();
-		login.setEmailId("jatin@gmail.com");
+		login.setEmailId("vineet@gmail.com");
 		login.setPassword("test1234");
-		assertEquals("Login successfully!", loginService.validateUser(login));
+		UserDetail userDetail = loginRepo.fetchUser(login);
+		assertNotNull(userDetail);
 	}
 
 	//Checking the Conditions of Service
