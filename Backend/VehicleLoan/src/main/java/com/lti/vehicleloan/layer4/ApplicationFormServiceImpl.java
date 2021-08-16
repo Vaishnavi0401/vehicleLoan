@@ -154,7 +154,7 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 		return null;
 	} 
 
-	public String insertApplicationFormService(ApplicationFormDto applicationForm) {
+	public Boolean insertApplicationFormService(ApplicationFormDto applicationForm) {
 		System.out.println("InsertApplication from service called");
 		if(applicationForm != null) {
 			
@@ -180,9 +180,9 @@ public class ApplicationFormServiceImpl implements ApplicationFormService{
 			Integer advancedDetailId = this.insertAdvancedUserDetailService(advancedUserDetail);
 			
 			System.out.println("ALL THE FIELDS HAVE BEEN SUCCESSFULLY ADDED");
-			return "All the details added Successfully!";
+			return true;
 		}
-		return "Failed to add the details";
+		return false;
 	}
 	
 
