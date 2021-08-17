@@ -18,7 +18,7 @@
       <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter Password"
         [(ngModel)]="login.password">
       <span *ngIf="loginForm.get('password').hasError('required')" style="color: red;"> Password required</span>
-      <span *ngIf="loginForm.get('password').hasError('minlength')" style="color: red;"> Min Length should be 8</span>
+      <!-- <span *ngIf="loginForm.get('password').hasError('minlength')" style="color: red;"> Min Length should be 8</span> -->
     </div>
 
     <div>

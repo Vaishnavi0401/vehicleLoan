@@ -7,23 +7,23 @@
             <!-- <i class="fas fa-times" id="close"></i> -->
         </li>
         <div class="li_container">
-            <li class="active li"><a class="a" ><button class="btn btn-primary custom-button" type="submit"
+            <li class="active li"><a class="a"><button class="btn btn-primary custom-button" type="submit"
                         (click)="getAllLoanDetails()">Dashboard </button></a></li>
-            <li class="li"><a  class="a"><button class="btn btn-primary custom-button " type="submit"
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button " type="submit"
                         style="margin:10px;" (click)="getAllUserDetails()">Client List</button></a></li>
 
-            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit"
-                        style="margin:10px;" (click)="getLoanDetailsbyApproval('pending')">Pending List</button></a>
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit" style="margin:10px;"
+                        (click)="getLoanDetailsbyApproval('pending')">Pending List</button></a>
             </li>
 
-            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit"
-                        style="margin:10px;" (click)="getLoanDetailsbyApproval('yes')">Accepted List</button></a></li>
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" type="submit" style="margin:10px;"
+                        (click)="getLoanDetailsbyApproval('yes')">Accepted List</button></a></li>
 
             <li class="li"><a class="a"><button class="btn btn-primary custom-button " type="submit"
                         style="margin:10px;" (click)="getLoanDetailsbyApproval('no')">Rejected List</button></a></li>
 
-            <li class="li"><a class="a"><button class="btn btn-primary custom-button" (click)="getFiles()"
-                        type="button" style="margin:10px;">View
+            <li class="li"><a class="a"><button class="btn btn-primary custom-button" (click)="getFiles()" type="button"
+                        style="margin:10px;">View
                         Files</button></a></li>
             <!-- <li><a class="contact" href="#">Contact</a></li> -->
         </div>
@@ -34,6 +34,9 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="navbar_list">
+                <div class="nav_item">
+                    <a href="#"><button class="btn btn-primary">Home</button></a>
+                </div>
                 <div class="nav_item">
                     <a href="#"><button class="btn btn-primary" (click)="logout()">Logout</button></a>
                 </div>

@@ -7,7 +7,7 @@
             <label for="principal"><strong>Principal </strong></label>
             <input type="number" formControlName="principal" class="form-control" name="principalAmount" id="principal"
                 placeholder="Enter the Principal" [(ngModel)]="principalAmount">
-            <span *ngIf="emiForm.get('principal').hasError('min')" style="color:red;">A Minimum of 300000 is
+            <span *ngIf="emiForm.get('principal').hasError('min')" style="color:red;">A Minimum of 50000 is
                 required</span>
             <span *ngIf="emiForm.get('principal').hasError('required')" style="color:red;">Principal required</span>
         </div> <br>

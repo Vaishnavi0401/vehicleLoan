@@ -35,13 +35,16 @@
             </div>
             <div class="navbar_list">
                 <div class="nav_item">
+                    <a href="#"><button class="btn btn-primary">Home</button></a>
+                </div>
+                <div class="nav_item">
                     <button class="btn btn-primary" (click)="logout()">Logout</button>
                 </div>
             </div>
         </div>
         <div class="main-wrapper">
             <!-- <h1>Main Area</h1> -->
-            <div style="margin: 10px;"> 
+            <div style="margin: 10px;">
                 <h3> Hello, {{ sessionUser.name }}</h3>
             </div>
             <span *ngIf="isLoan">

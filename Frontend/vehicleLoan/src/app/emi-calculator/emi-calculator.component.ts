@@ -36,7 +36,7 @@ export class EmiCalculatorComponent implements OnInit {
   ngOnInit(): void {
 
     this.emiForm = new FormGroup({
-    principal: new FormControl('', [Validators.required, Validators.min(200000)]),
+    principal: new FormControl('', [Validators.required, Validators.min(50000)]),
     rate: new FormControl('', [Validators.required, Validators.min(3)]),
     tenure: new FormControl('', [Validators.required, Validators.min(2)])
     })
