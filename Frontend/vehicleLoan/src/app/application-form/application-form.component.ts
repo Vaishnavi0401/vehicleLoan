@@ -15,6 +15,7 @@ import { CarType } from '../pojos/CarType';
 import { City } from '../pojos/City';
 import { EmploymentDetail } from '../pojos/EmploymentDetail';
 import { LoanDetail } from '../pojos/LoanDetail';
+import { OfferTable } from '../pojos/OfferTable';
 import { State } from '../pojos/State';
 import { TypeOfEmploymentDetail } from '../pojos/TypeOfEmploymentDetail';
 import { UserDetail } from '../pojos/UserDetail';
@@ -28,7 +29,7 @@ import { ApplicationFormService } from './application-form.service';
 })
 export class ApplicationFormComponent implements OnInit {
 
-  IdentityDetailsFormGroup: FormGroup;
+  selectedOffer: OfferTable;
 
   constructor(private appFormService: ApplicationFormService, private uploadService: UploadFilesService ,private router: Router,private formBuilder: FormBuilder) { }
 
@@ -54,6 +55,14 @@ export class ApplicationFormComponent implements OnInit {
     this.loanDetail = new LoanDetail();
     this.applicationFormDTO = new ApplicationFormDTO();
     this.advancedUserDetail = new AdvancedUserDetail();
+
+    this.selectedOffer = JSON.parse(sessionStorage.getItem("offer"));
+
+    this.loanDetail.principalAmount = this.selectedOffer.offerAmount;
+    this.loanDetail.rateOfInterest = this.selectedOffer.offerRate;
+    this.loanDetail.tenure = this.selectedOffer.offerTenure;
+    this.loanDetail.emi = this.selectedOffer.offerEmi;
+
   }
 
   

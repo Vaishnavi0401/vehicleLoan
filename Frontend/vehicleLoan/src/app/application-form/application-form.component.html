@@ -325,7 +325,7 @@
                     <div class="mb-3">
                         <label class="form-label">Loan Amount</label>
                         <input type="number" name="loanAmount" class="form-control" #LOANAMOUNT="ngModel"
-                            [class.is-invalid]="LOANAMOUNT.invalid && LOANAMOUNT.touched" required
+                            [class.is-invalid]="LOANAMOUNT.invalid && LOANAMOUNT.touched" required  readonly
                             [(ngModel)]="loanDetail.principalAmount">
                         <span *ngIf="LOANAMOUNT.invalid && LOANAMOUNT.touched" style="color: red;">
                             Loan Amount is Required
@@ -335,7 +335,8 @@
                     <div class="mb-3">
                         <label class="form-label">Loan Tenure</label>
                         <input type="number" name="loanTennure" class="form-control" #LOANTENNURE="ngModel"
-                            [class.is-invalid]="LOANTENNURE.invalid && LOANTENNURE.touched" required
+                            [class.is-invalid]="LOANTENNURE.invalid && LOANTENNURE.touched" required readonly
+                            
                             [(ngModel)]="loanDetail.tenure">
                         <span *ngIf="LOANTENNURE.invalid && LOANTENNURE.touched" style="color: red;">
                             Loan Tenure is Required
@@ -344,7 +345,7 @@
                     <div class="mb-3">
                         <label class="form-label">Rate of Interest</label>
                         <input type="number" name="rateOfInterest" class="form-control" #RATEOFINTEREST="ngModel"
-                            [class.is-invalid]="RATEOFINTEREST.invalid && RATEOFINTEREST.touched" required
+                            [class.is-invalid]="RATEOFINTEREST.invalid && RATEOFINTEREST.touched" required readonly
                             [(ngModel)]="loanDetail.rateOfInterest">
                         <span *ngIf="RATEOFINTEREST.invalid && RATEOFINTEREST.touched" style="color: red;">
                             Rate of Interest is Required
@@ -353,7 +354,7 @@
                     <div class="mb-3">
                         <label class="form-label">EMI</label>
                         <input type="number" name="emi" class="form-control" #EMI="ngModel" 
-                            [class.is-invalid]="EMI.invalid && EMI.touched" required 
+                            [class.is-invalid]="EMI.invalid && EMI.touched" required readonly
                             [(ngModel)]="loanDetail.emi">
                         <span *ngIf="EMI.invalid && EMI.touched" style="color: red;">
                             EMI is Required
@@ -468,7 +469,7 @@
 
                     <div class="center">
                         <button type="button" class="btn btn-success" (click)="previous()">Previous</button>
-                        <button type="submit" class="btn btn-success ms-3"  [disabled]="IdentityForm.form.invalid">Submit</button>
+                        <button type="submit" class="btn btn-success ms-3"  [disabled]="IdentityForm.form.invalid || identityDetailHasError">Submit</button>
                     </div>
                 </form>
             </div>
