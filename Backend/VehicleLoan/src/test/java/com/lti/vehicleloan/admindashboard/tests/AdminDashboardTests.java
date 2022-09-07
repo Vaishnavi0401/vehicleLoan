@@ -120,6 +120,7 @@ public class AdminDashboardTests {
 		}
 		
 	}
+	
 	@Test                                             			//Test7
 	void selectAdvancedUserDetailByUserIdTest()
 	{
@@ -174,52 +175,8 @@ public class AdminDashboardTests {
 		assertNotNull(userDetails);
 	}
 	
-	//loan offers test
 	
-	
-	
-//=================================Not Working============================================//
 
-	//update
-	//getUserDetailsByLoanId
-	
-	@Test
-	void updateApprovalTest()                //Test
-	{
-		System.out.println("Updating loan details ");
-		try {
-			LoanDetail foundLoanDetail=admRepo.selectLoanDetailbyloanId(501);
-			foundLoanDetail.setApproval("no");
-			
-		} catch (LoanDetailNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-				//selectLoanDetailbyloanId.find(LoanDetail.class, 501 );
-	}
-	
-	@Test 
-	void updateApprovalTest2()
-	{
-		System.out.println("Updating loan details ");
-		try {
-			LoanDetail foundLoanDetail=admRepo.selectLoanDetailbyloanId(502);
-			admRepo.updateApproval(foundLoanDetail);
-		} catch (LoanDetailNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-	
-//	@Test														//Test11
-//	void getAllLoanOffersTest()
-//	{
-//		System.out.println("Getting loan offers");
-//		List<OfferTable> offerTable=loanOfferRepo.getOfferTable(500000.0000000000000000000000);
-//		assertNotNull(offerTable);
-//	}
-	
 	
 	
 	

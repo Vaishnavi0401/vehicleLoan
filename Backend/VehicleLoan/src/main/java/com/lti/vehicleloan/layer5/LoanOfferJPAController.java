@@ -25,8 +25,7 @@ public class LoanOfferJPAController {
 	{
 		System.out.println("LoanOfferJPAController() constructed");
 	}
-	
-	
+
 	
 	@GetMapping
 	@ResponseBody
